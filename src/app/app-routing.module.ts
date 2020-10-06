@@ -43,6 +43,14 @@ const routes: Routes = [
     path: 'printerpage',
     component: PrintComponent,
   },
+  {
+    path: 'landing',
+    component: LandingComponent
+  },
+  {
+    path: 'time-out',
+    component: TimeOutComponent
+  },
   {                                           // comment it to use outside b2c
     path: '',                                 // comment it to use outside b2c
     component: AppComponent,                  // comment it to use outside b2c
@@ -64,15 +72,8 @@ const routes: Routes = [
   {
     path: 'en/nihl/logout',
     component: AuthLogoutComponent
-  },
-  {
-    path: 'landing',
-    component: LandingComponent
-  },
-  {
-    path: 'time-out',
-    component: TimeOutComponent
   }
+ 
 ];
 
 @NgModule({
