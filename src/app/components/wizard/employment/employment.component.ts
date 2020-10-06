@@ -357,7 +357,7 @@ export class EmploymentComponent implements OnInit, OnChanges {
     this.employmentForm.get('isRetired').valueChanges.subscribe(checked => {
       if (checked === 'true') {
         this.employmentForm.get('retirementDate').setValidators(Validators.required);
-
+        this.employmentForm.get('isEmployed').setValidators(null);
         const employed: string = this.employmentForm.get('isEmployed').value;
 
         if (employed === 'true') {
@@ -806,10 +806,10 @@ export class EmploymentComponent implements OnInit, OnChanges {
         this.employmentForm.get('hasInsurance').setValue(this.employmentInfo.selfEmpHasInsurance.toString());
       }
 
-      if (this.employmentInfo.selfEmpHasInsurance || this.employmentInfo.selfEmpHasInsurance.toString() == 'true') {
+      if (this.employmentInfo.selfEmpHasInsurance || this.employmentInfo.selfEmpHasInsurance?.toString() == 'true') {
         this.yourBusinessAddress()
       }
-      if (this.employmentInfo.currentlyEmployed || this.employmentInfo.currentlyEmployed.toString() == 'true') {
+      if (this.employmentInfo.currentlyEmployed || this.employmentInfo.currentlyEmployed?.toString() == 'true') {
         this.currentEmployerAddress()
       }
 

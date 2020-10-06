@@ -59,7 +59,7 @@ export class HeaderComponent implements OnInit {
     if (this.isFrench) {
       this.exitLink = 'https://www.wsib.ca/fr/servicesenligne';
     } else {
-      this.exitLink = 'https://wsib.ca/en/onlineservices';
+      this.exitLink = 'https://www.wsib.ca/en/onlineservices';
     }
     sessionStorage.setItem('currentLang', lang);
     this.localeChanged.emit(lang);
