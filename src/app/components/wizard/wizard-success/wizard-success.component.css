@@ -1,0 +1,11 @@
+::ng-deep .cdk-overlay-pane{
+    text-align: center !important;
+}
+
+::ng-deep h1{
+    text-align: center !important;
+}
+
+p{
+    font-weight: 700;
+}

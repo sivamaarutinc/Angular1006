@@ -1,0 +1,317 @@
+<app-printer-header></app-printer-header>
+
+
+<div class="content" role="main">
+  <div class="content-margin">
+
+
+    <!-- start personalInformation -->
+    <h2 role="heading" class="my-4">{{ "personalInformation.title" | translate }}</h2>
+
+
+    <label class="mt-0">{{ "personalInformation.firstName" | translate }}</label>
+    <p>{{personalInformation?.firstName ? personalInformation.firstName : 'N/A'}}</p>
+    <label class="mt-0">{{ "personalInformation.lastName" | translate }}</label>
+    <p>{{personalInformation?.lastName ? personalInformation.lastName : 'N/A'}}</p>
+    <label class="mt-0">{{ "personalInformation.dateOfBirth" | translate }}</label>
+    <p>{{personalInformation?.dateOfBirth ? personalInformation.dateOfBirth : 'N/A'}}</p>
+
+    <ng-template [ngIf]="personalInformation?.socialInsuranceNumber">
+      <label class="mt-0">{{ "personalInformation.socialInsuranceNumber" | translate }}</label>
+      <p>{{personalInformation?.socialInsuranceNumber }}</p>
+    </ng-template>
+
+    <label class="mt-0">{{ "personalInformation.streetAddress" | translate }}</label>
+    <p>{{personalInformation?.streetAddress ? personalInformation.streetAddress : 'N/A'}}</p>
+
+    <ng-template [ngIf]="personalInformation?.apartment">
+      <label class="mt-0">{{ "personalInformation.apartmentSuite" | translate }}</label>
+      <p>{{personalInformation?.apartment}}</p>
+    </ng-template>
+
+    <label class="mt-0">{{ "personalInformation.city" | translate }}</label>
+    <p>{{personalInformation?.city ? personalInformation.city : 'N/A'}}</p>
+
+    <ng-template [ngIf]="personalInformation?.provinceOrState">
+      <label class="mt-0">{{ "personalInformation.provinceState" | translate }}</label>
+      <p>{{personalInformation.provinceOrState  | translate }}</p>
+    </ng-template>
+
+    <label class="mt-0">{{ "personalInformation.postalCode" | translate }}</label>
+    <p>{{personalInformation?.postalCode ? personalInformation.postalCode : 'N/A'}}</p>
+
+    <label class="mt-0">{{ "personalInformation.country" | translate }}</label>
+    <p>{{personalInformation?.country ? personalInformation.country : 'N/A'}}</p>
+
+    <label class="mt-0">{{ "personalInformation.primaryTelephoneNumber" | translate }}</label>
+    <p>{{personalInformation?.primaryTelephoneNumber ? personalInformation.primaryTelephoneNumber : 'N/A'}}</p>
+
+    <ng-template [ngIf]="personalInformation?.secondaryTelephoneNumber">
+      <label class="mt-0">{{ "personalInformation.secondaryTelephoneNumber" | translate }}</label>
+      <p>{{personalInformation?.secondaryTelephoneNumber}}
+      </p>
+    </ng-template>
+
+    <label class="mt-0">{{ "personalInformation.languagePreference" | translate }}</label>
+    <p translate>
+      {{personalInformation?.languagePreference ? (personalInformation.languagePreference   | translate) : 'N/A'}}</p>
+
+    <ng-template [ngIf]="personalInformation?.otherLanguagePreference">
+      <label class="mt-0">{{ "personalInformation.yourLanguagePreference" | translate }}</label>
+      <p>{{personalInformation?.otherLanguagePreference  | translate}}
+      </p>
+    </ng-template>
+    <app-printer-footer [pageNumber]=1></app-printer-footer>
+    <!-- end personalInformation -->
+
+
+    <!-- start healthCareInfo -->
+    <app-printer-header></app-printer-header>
+    <h2 role="heading" class="my-4">{{ "healthCareInfo.title" | translate }}</h2>
+
+    <label class="mt-0">{{ "healthCareInfo.hearingLossMsg" | translate }}</label>
+    <p>{{healthInfo?.hearingLossNoticedYear ? healthInfo.hearingLossNoticedYear : 'N/A' }}</p>
+
+
+    <ng-template [ngIf]="healthInfo?.hasHearingAid != null">
+      <label class="mt-0">{{ "healthCareInfo.wearHearingAid" | translate }}</label>
+      <p>{{healthInfo?.hasHearingAid.toString() | translate}}</p>
+    </ng-template>
+
+    <ng-template [ngIf]="healthInfo?.hearingAidUsageDate">
+      <label class="mt-0">{{ "healthCareInfo.hearingAidUsageDate" | translate }}</label>
+      <p>{{healthInfo?.hearingAidUsageDate}}</p>
+    </ng-template>
+
+
+    <label class="mt-0">{{ "healthCareInfo.dateOfFirstAudiogram" | translate }}</label>
+    <p>{{healthInfo?.dateOfFirstAudiogram ? healthInfo.dateOfFirstAudiogram : 'N/A' }}</p>
+    <label class="mt-0">{{ "healthCareInfo.audiogramClinicName" | translate }}</label>
+    <p>{{healthInfo?.audiogramClinicName ? healthInfo.audiogramClinicName : 'N/A' }}</p>
+
+    <label class="mt-0">{{ "healthCareInfo.audiogramClinicAddress" | translate }}</label>
+    <p>{{healthInfo?.audiogramClinicAddress ? healthInfo.audiogramClinicAddress : 'N/A' }}</p>
+    <label class="mt-0">{{ "healthCareInfo.audiogramClinicPhone" | translate }}</label>
+    <p>{{healthInfo?.audiogramClinicPhoneNumber ? healthInfo.audiogramClinicPhoneNumber : 'N/A' }}</p>
+
+    <ng-template [ngIf]="healthInfo?.hasVisitedEntSpecialist != null">
+      <label class="mt-0">{{ "healthCareInfo.entVisitQuestion" | translate }}</label>
+      <p>{{healthInfo?.hasVisitedEntSpecialist.toString() | translate }}</p>
+    </ng-template>
+
+    <ng-template [ngIf]="healthInfo?.entAppointmentDate">
+      <label class="mt-0">{{ "healthCareInfo.entAppointmentDate" | translate }}</label>
+      <p>{{healthInfo?.entAppointmentDate}}</p>
+    </ng-template>
+
+    <ng-template [ngIf]="healthInfo?.entSpecialistName">
+      <label class="mt-0">{{ "healthCareInfo.entSpecialistName" | translate }}</label>
+      <p>{{healthInfo?.entSpecialistName}}</p>
+    </ng-template>
+
+    <ng-template [ngIf]="healthInfo?.entSpecialistAddress">
+      <label class="mt-0">{{ "healthCareInfo.entSpecialistAddress" | translate }}</label>
+      <p>{{healthInfo?.entSpecialistAddress}}</p>
+    </ng-template>
+
+    <ng-template [ngIf]="healthInfo?.entSpecialistPhoneNumber">
+      <label class="mt-0">{{ "healthCareInfo.entSpecialistPhone" | translate }}</label>
+      <p>{{healthInfo?.entSpecialistPhoneNumber }}</p>
+    </ng-template>
+
+    <ng-template [ngIf]="healthInfo?.hasRingingInEar != null">
+      <label class="mt-0">{{ "healthCareInfo.experienceRingingQuestion" | translate }}</label>
+      <p>{{healthInfo?.hasRingingInEar.toString() | translate }}</p>
+    </ng-template>
+
+    <ng-template [ngIf]="healthInfo?.ringingEarDuration">
+      <label class="mt-0">{{ "healthCareInfo.experienceRingingForHowLong" | translate }}</label>
+      <p>{{healthInfo?.ringingEarDuration | translate}}</p>
+    </ng-template>
+
+    <ng-template [ngIf]="healthInfo?.hasSevereRingingInEar != null">
+      <label class="mt-0">{{ "healthCareInfo.isRingingSevere" | translate }}</label>
+      <p>{{healthInfo?.hasSevereRingingInEar.toString() | translate }}</p>
+    </ng-template>
+
+    <ng-template [ngIf]="healthInfo?.hasConstantRingingInEar != null">
+      <label class="mt-4">{{ "healthCareInfo.isRingingConstant" | translate }}</label>
+      <p>{{healthInfo.hasConstantRingingInEar.toString() | translate }}</p>
+    </ng-template>
+
+    <app-printer-footer [pageNumber]=2></app-printer-footer>
+    <!-- end healthCareInfo -->
+
+
+    <!-- start Employment -->
+    <app-printer-header></app-printer-header>
+    <h2 role="heading" class="my-4">{{ "employment.title" | translate }}</h2>
+
+    <ng-template [ngIf]="employInfo?.hasRetired != null">
+      <label class="mt-0">{{ "employment.areYouRetired" | translate }}</label>
+      <p>{{employInfo?.hasRetired.toString() | translate}}</p>
+    </ng-template>
+
+    <ng-template [ngIf]="employInfo?.retirementDate">
+      <label class="mt-0">{{ "employment.retirementDate" | translate }}</label>
+      <p>{{employInfo?.retirementDate }}</p>
+    </ng-template>
+
+    <ng-template [ngIf]="employInfo?.currentlyEmployed != null">
+      <label class="mt-0">{{ "employment.currentlyEmployed" | translate }}</label>
+      <p>{{employInfo?.currentlyEmployed.toString() | translate}}</p>
+    </ng-template>
+
+    <!-- <ng-template [ngIf]="employInfo?.currentSituation"> -->
+    <ng-template [ngIf]="employInfo?.currentlyEmployed == false">
+      <label class="mt-0">{{ "employment.currentSituation" | translate }}</label>
+      <p>{{employInfo?.currentSituation}}</p>
+    </ng-template>
+
+    <!-- <ng-template [ngIf]="employInfo?.currentlyEmployed != null"> -->
+    <ng-template [ngIf]="employInfo?.currentlyEmployed == true">
+
+      <ng-template [ngIf]="employInfo?.currentEmployerName">
+        <label class="mt-0">{{ "employment.employerName" | translate }}</label>
+        <p>{{employInfo?.currentEmployerName}}</p>
+      </ng-template>
+
+      <ng-template [ngIf]="employInfo?.currentEmployerAddress">
+        <label class="mt-0">{{ "employment.employerAddress" | translate }}</label>
+        <p>{{employInfo?.currentEmployerAddress}}</p>
+      </ng-template>
+
+      <ng-template [ngIf]="employInfo?.currentEmployerPhoneNumber">
+        <label class="mt-0">{{ "employment.employerPhoneNumber" | translate }}</label>
+        <p>{{employInfo?.currentEmployerPhoneNumber}}</p>
+      </ng-template>
+
+      <ng-template [ngIf]="employInfo?.currentEmployerIsHazardous != null">
+        <label class="mt-0">{{ "employment.hazardousNoiseQuestion" | translate }}</label>
+        <p>{{employInfo?.currentEmployerIsHazardous.toString() | translate}}
+      </ng-template>
+
+    </ng-template>
+
+
+    <ng-template [ngIf]="employInfo?.hasEverBeenSelfEmployed != null">
+      <label class="mt-0">{{ "employment.selfEmployedQuestion" | translate }}</label>
+      <p>{{employInfo?.hasEverBeenSelfEmployed.toString() | translate}}</p>
+    </ng-template>
+
+    <ng-template [ngIf]="employInfo?.selfEmpHasInsurance != null">
+      <label class="mt-0">{{ "employment.personalInsuranceWSIBQuestion" | translate }}</label>
+      <p>{{employInfo?.selfEmpHasInsurance.toString() | translate}}</p>
+    </ng-template>
+
+    <ng-template [ngIf]="employInfo?.selfEmpBusinessName">
+      <label class="mt-0">{{ "employment.businessName" | translate }}</label>
+      <p>{{employInfo?.selfEmpBusinessName}}</p>
+    </ng-template>
+
+    <ng-template [ngIf]="employInfo?.selfEmpBusinessAddress">
+      <label class="mt-0">{{ "employment.businessAddress" | translate }}</label>
+      <p>{{employInfo?.selfEmpBusinessAddress}}</p>
+    </ng-template>
+
+    <ng-template [ngIf]="employInfo?.selfEmpStartDate">
+
+      <label class="mt-0">{{ "employment.selfEmployedDates" | translate }}</label>
+      <label class="mt-0">{{ "employment.from" | translate }}</label>
+      <p>{{employInfo?.selfEmpStartDate}}</p>
+    </ng-template>
+
+    <ng-template [ngIf]="employInfo?.selfEmpEndDate">
+      <label class="mt-0">{{ "employment.to" | translate }}</label>
+      <p>{{employInfo?.selfEmpEndDate }}</p>
+    </ng-template>
+
+    <ng-template [ngIf]="employInfo?.hasUsedNoisyEquipmentOutOfWork != null">
+      <label class="mt-0">{{ "employment.noisyMachineryOffwork" | translate }}</label>
+      <p>{{employInfo?.hasUsedNoisyEquipmentOutOfWork.toString() | translate}}</p>
+    </ng-template>
+
+    <ng-template [ngIf]="employInfo?.noisyEquipmentDetails">
+      <label class="mt-0">{{ "employment.usedNoisyMachinery" | translate }}</label>
+      <p>{{employInfo?.noisyEquipmentDetails}}</p>
+    </ng-template>
+
+    <label class="mt-0">{{ "employment.pastEmployment" | translate }}</label>
+    <!-- insert table here -->
+    <div class="table-responsive-sm" *ngIf="pastEmployInfo?.length">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th class="table-header-set" scope="col">{{ "employment.employerNameAndContact" | translate }}</th>
+            <th class="table-header-set" scope="col">{{ "employment.employerInBusiness" | translate }}</th>
+            <th class="table-header-set" scope="col">{{ "employment.occupation" | translate }}</th>
+            <th class="table-header-set" scope="col">{{ "employment.date" | translate }}</th>
+            <th class="table-header-set" scope="col">{{ "employment.toolsUsageInfo" | translate }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let pastEmployer of pastEmployInfo">
+            <td>
+              <li>{{pastEmployer.employerName}}</li>
+              <li>{{pastEmployer.employerAddress}}</li>
+              <li>{{pastEmployer.provinceOrState}}, {{pastEmployer.country}}</li>
+            </td>
+            <td>{{pastEmployer.employerInBusiness.toString() | translate}}</td>
+            <td>{{pastEmployer.jobTitle}}</td>
+            <td>
+              <li>{{ "employment.from" | translate }} {{pastEmployer.employmentStartDate}}</li>
+              <li>{{ "employment.to" | translate }} {{pastEmployer.employmentEndDate}}</li>
+            </td>
+            <td>
+              <li *ngFor="let toolsUsedList of pastEmployer.toolsUsedList">
+                {{toolsUsedList.toolName}}: {{toolsUsedList.hoursUsed}} {{ "employerModal.hoursPerDay" | translate }}
+              </li>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <app-printer-footer [pageNumber]=3></app-printer-footer>
+    <!-- end Employment -->
+
+
+
+    <!-- start Support Docs -->
+    <app-printer-header></app-printer-header>
+    <h2 class="my-4" role="heading">{{ "supportingDocuments.title" | translate }}</h2>
+    <label class="mt-4">{{ "review.audiogram" | translate }} :</label><br>
+    <ng-container *ngFor="let document of audiogramDocumentsList">
+      <p class="info" *ngIf="document?.fileName" attr.aria-label="{{ document?.fileName}}">
+        {{document?.fileName ? document?.fileName: 'N/A'}}
+      </p>
+    </ng-container>
+
+    <label class="mt-4">{{"employment.title" | translate }} :</label><br>
+    <ng-container *ngFor="let document of newclaimDocumentsList">
+      <p class="info" *ngIf="document?.fileName" attr.aria-label="{{ document?.fileName}}">
+        {{document?.fileName ? document?.fileName: 'N/A'}}</p>
+    </ng-container>
+
+    <app-printer-footer [pageNumber]=4></app-printer-footer>
+    <!-- end Support Docs -->
+
+  </div>
+</div>
+
+<a target="_blank" aria-label="Feedback link opens in a new window" href="{{feedbackurl}}"
+  onclick="trackSurveyAccepted_NoiseInducedHearingLoss_EN();" class="feedbackLink">
+  <div class="feedbackButton"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 13 12.21">
+      <title>Chat Icon</title>
+      <g id="Layer_2" data-name="Layer 2">
+        <g id="Layer_1-2" data-name="Layer 1">
+          <path style="fill:#fff;"
+            d="M2.59,12.21a.65.65,0,0,1-.31-.08.66.66,0,0,1-.35-.58V9.87H1.37A1.37,1.37,0,0,1,0,8.49V1.37A1.37,1.37,0,0,1,1.37,0H11.63A1.37,1.37,0,0,1,13,1.37V8.49a1.37,1.37,0,0,1-1.37,1.37H6.1L3,12.09A.7.7,0,0,1,2.59,12.21Z">
+          </path>
+        </g>
+      </g>
+    </svg>
+    <div class="feedbackLabel">Feedback</div>
+  </div>
+</a>

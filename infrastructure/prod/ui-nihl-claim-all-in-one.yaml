@@ -1,0 +1,84 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ui-nihl-claim
+  namespace: nihl
+spec:
+  type: ClusterIP
+  ports:
+  - port: 3000
+    targetPort: httpport
+  selector:
+    svc: ui-nihl-claim
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ui-nihl-claim
+  namespace: nihl
+  labels:
+    svc: ui-nihl-claim
+spec:
+  selector:
+    matchLabels:
+      svc: ui-nihl-claim
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        svc: ui-nihl-claim
+    spec:
+      imagePullSecrets:
+      - name: regcred
+      containers:
+      - name: ui-nihl-claim
+        image: ${IMAGE_NAME}:${IMAGE_TAG}
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 3000
+          name: httpport
+        env:
+          - name: PORT
+            value: "3000"
+          - name: APIURL
+            value: "http://service-nihl-claim:8080"
+          - name: SCAN_API_URL
+            value: "http://wsib-nihl-clamav-rest:8765"
+          - name: FRONTEND_URL
+            value: "https://hearing-loss-claim.wsib.ca"
+          - name: AUTHORITY_START
+            value: "https://wsibb2c.b2clogin.com/wsibb2c.onmicrosoft.com/B2C_1A_NIHL_start_submission/v2.0"
+          - name: AUTHORITY_CONTINUE
+            value: "https://wsibb2c.b2clogin.com/wsibb2c.onmicrosoft.com/B2C_1A_NIHL_continue_submission/v2.0"
+          - name: CLIENT_ID
+            value: "604d5ae0-1028-4bae-8af3-16a7b589d4dd"
+          - name: REDIRECT_URI
+            value: "https://hearing-loss-claim.wsib.ca/auth-callback"
+          - name: REDIRECT_RESUME_URI
+            value: "https://hearing-loss-claim.wsib.ca/auth-resume-callback"
+          - name: POST_LOGOUT_URI
+            value: "https://hearing-loss-claim.wsib.ca/en/nihl/logout"
+          - name: SCOPE
+            value: "openid offline_access https://wsibb2c.onmicrosoft.com/nihlapi/apiaccess"
+          - name: TIMEOUT
+            value: "14"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          periodSeconds: 60
+          failureThreshold: 3
+          initialDelaySeconds: 90
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          periodSeconds: 60
+          failureThreshold: 3
+          initialDelaySeconds: 90
+      nodeSelector:
+        agentpool: nihl
+---

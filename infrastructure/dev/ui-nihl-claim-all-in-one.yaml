@@ -1,0 +1,74 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ui-nihl-claim
+  namespace: nihl
+spec:
+  type: ClusterIP
+  ports:
+  - port: 3000
+    targetPort: httpport
+  selector:
+    svc: ui-nihl-claim
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ui-nihl-claim
+  namespace: nihl
+  labels:
+    svc: ui-nihl-claim
+spec:
+  selector:
+    matchLabels:
+      svc: ui-nihl-claim
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        svc: ui-nihl-claim
+    spec:
+      imagePullSecrets:
+      - name: regcred
+      containers:
+      - name: ui-nihl-claim
+        image: ${IMAGE_NAME}:${IMAGE_TAG}
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 3000
+          name: httpport
+        env:
+          - name: ENV
+            value: "dev"
+          - name: PORT
+            value: "3000"
+          - name: APIURL
+            value: "http://service-nihl-claim:8080"
+          - name: SCAN_API_URL
+            value: "http://wsib-nihl-clamav-rest:8765"
+          - name: FRONTEND_URL
+            value: "https://dev.nihl.wsib.ca"
+          - name: FEEDBACK_URL
+            value: "http://survey.forumresearch.com/SE/Test/?st=5c%2frSqmBrE3%2fwg1VIAHcS2XMtN%2beypniDOWBpH9p1w4%3d&tui=auto"
+          - name: AUTHORITY_START
+            value: "https://wsibdev1.b2clogin.com/wsibdev1.onmicrosoft.com/B2C_1A_NIHL_start_submission/v2.0"
+          - name: AUTHORITY_CONTINUE
+            value: "https://wsibdev1.b2clogin.com/wsibdev1.onmicrosoft.com/B2C_1A_NIHL_continue_submission/v2.0"
+          - name: CLIENT_ID
+            value: "c8cfd969-74ab-4e54-ae1a-6abf793d75fb"
+          - name: REDIRECT_URI
+            value: "https://dev.nihl.wsib.ca/auth-callback"
+          - name: REDIRECT_RESUME_URI
+            value: "https://dev.nihl.wsib.ca/auth-resume-callback"
+          - name: POST_LOGOUT_URI
+            value: "https://dev.nihl.wsib.ca/auth-logout"
+          - name: SCOPE
+            value: "openid offline_access https://wsibdev1.onmicrosoft.com/nihlapi/apiaccess"
+          - name: TIMEOUT
+            value: "14"
+          - name: TESTD
+            value: "09182020"
+---

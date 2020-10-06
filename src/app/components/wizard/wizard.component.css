@@ -1,0 +1,134 @@
+::ng-deep div.mat-stepper-horizontal-line.ng-star-inserted.ng-tns-c4-0 {
+  display: none;
+}
+
+::ng-deep .mat-icon-button{
+  line-height: 20px !important;
+  color: #333333;
+}
+
+.allow {
+  color :#003359 !important;
+  /* font-weight: 700; */
+}
+
+::ng-deep .mat-step-header .mat-step-icon {
+  background-color: #767676;
+}
+
+::ng-deep .mat-step-header .mat-step-icon-selected {
+  background-color: #003359 !important; 
+}
+
+::ng-deep .mat-step-header .mat-step-icon-state-edit {
+  background-color: #fff !important; 
+  color: #003359 !important; 
+  border: 2px solid #003359;
+}
+
+.fontsizestepper {
+  /* font-family: 'Muli', sans-serif;
+  font-weight: bold;
+  font-style: normal; */
+  font-size: 16px;
+  /* color: #003359 !important;
+  text-align: left; */
+  font-family: 'Muli Bold', 'Muli Regular', 'Muli', sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.confirmation {
+  color: #333333 !important;
+}
+
+::ng-deep .mat-stepper-horizontal-line {
+   border-top-width: 0px !important; 
+   border-top-style: none !important; 
+  flex: auto !important;
+  height: 0 !important;
+  margin: 0 -10px !important;
+  min-width: 0px !important
+}
+
+::ng-deep .mat-step-header[aria-labelledby="disabled_af"] {
+  pointer-events: none !important;
+  cursor: not-allowed;
+  /* opacity: 0.6; */
+  color: #333333; /* remove this line when in prod. Its just there to prove the concept*/
+}
+
+.feedbackButton {
+  display: block;
+  overflow: hidden;
+  background-color: #D90000;
+  visibility: visible;
+  font-family: Muli, Arial, sans-serif;
+  width: 90px;
+  height: 35px;
+  box-shadow: 2px 2px 2px #767676;
+  border-radius: 5px;
+        float: right;
+        position: fixed;
+    top: 30vh;
+  right: -20px;
+  transform: rotate(270deg);
+}
+.feedbackButton svg {
+  width: 22px;
+  padding-left: 8px;
+        padding-top: 12px;
+  float: left;
+}
+    .feedbackButton:hover{
+        text-decoration: underline white;
+    }
+    .feedbackLink:focus .feedbackButton {
+        text-decoration: underline white;
+        border:1px solid black;
+    }
+    .feedbackLink:focus .feedbackButton:hover {
+        border:0px;
+    }
+.feedbackLabel {
+  line-height: 35px;
+        font-size: 12px;
+  text-align: center;
+  padding-right: 5px;
+  text-decoration: none;
+  color: white;
+}
+
+a.skip-main {
+  left: -999px;
+  position: absolute;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  z-index: -999;
+}
+
+a.skip-main:focus, a.skip-main:active {
+  color: #003359 !important;
+  background-color: #ffffff;
+  left: auto;
+  top: auto;
+  width: 30%;
+  height: auto;
+  overflow: auto;
+  margin: 10px 35%;
+  padding: 5px;
+  border-radius: 15px;
+  text-align: center;
+  z-index: 999;
+}
+
+::ng-deep .mat-step-icon.mat-step-icon-state-done {
+  background-color: #ffffff !important;
+  border: 1px solid #003359 !important;
+}
+
+::ng-deep .mat-step-icon.mat-step-icon-state-done > .mat-step-icon-content {
+  color:  #003359 !important;
+}

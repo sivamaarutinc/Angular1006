@@ -1,0 +1,579 @@
+<div class="content">
+
+
+  <app-field-error-display [displayError]="!!confirmationError" errorMsg="{{confirmationError}}">
+  </app-field-error-display>
+
+  <p class="mt-3">
+    <span class="info"
+      attr.aria-label="{{ 'personalInformation.allFieldsMandatory' | translate }}">{{ "personalInformation.allFieldsMandatory" | translate }}</span>
+    <!-- <br>
+    {{ "personalInformation.saveFileMsg" | translate }} -->
+  </p>
+
+
+
+  <p attr.aria-label="{{ 'personalInformation.referenceNumber' | translate }} {{referenceNumber}}">
+    {{ "personalInformation.referenceNumber" | translate }} {{referenceNumber}}</p>
+
+
+  <app-field-error-display *ngIf="iscommonerrormsg" id="commonerrormsgid" tabindex="0" role="alert" [displayError]="iscommonerrormsg"
+    errorMsg="{{ 'errors.commonerrormsg' | translate }}">
+  </app-field-error-display>
+
+  <h2 role="heading" attr.aria-label="{{ 'review.title' | translate }}">{{ "review.title" | translate }}</h2>
+
+  <p class="info" attr.aria-label="{{ 'review.reviewMessage' | translate }}">{{ "review.reviewMessage" | translate }}
+  </p>
+
+  <!-- start personalInformation -->
+  <h3 role="heading" class="my-4" attr.aria-label="{{ 'personalInformation.title' | translate }}">
+    {{ "personalInformation.title" | translate }}</h3>
+
+  <label class="mt-4"
+    attr.aria-label="{{ 'personalInformation.firstName' | translate }}">{{ "personalInformation.firstName" | translate }}</label>
+  <p attr.aria-label="{{ personalInformation?.firstName }}">
+    {{personalInformation?.firstName ? personalInformation.firstName : 'N/A'}}</p>
+  <label class="mt-4"
+    attr.aria-label="{{ 'personalInformation.lastName' | translate }}">{{ "personalInformation.lastName" | translate }}</label>
+  <p attr.aria-label="{{ personalInformation?.lastName }}">
+    {{personalInformation?.lastName ? personalInformation.lastName : 'N/A'}}</p>
+  <label class="mt-4"
+    attr.aria-label="{{ 'personalInformation.dateOfBirth' | translate }}">{{ "personalInformation.dateOfBirth" | translate }}</label>
+  <p attr.aria-label="{{ personalInformation?.dateOfBirth }}">
+    {{personalInformation?.dateOfBirth ? personalInformation.dateOfBirth : 'N/A'}}</p>
+  <label class="mt-4"
+    attr.aria-label="{{ 'personalInformation.socialInsuranceNumber' | translate }}">{{ "personalInformation.socialInsuranceNumber" | translate }}</label>
+  <p attr.aria-label="{{ personalInformation?.socialInsuranceNumber }}">
+    {{personalInformation?.socialInsuranceNumber ? personalInformation.socialInsuranceNumber : 'N/A'}}</p>
+  <label class="mt-4"
+    attr.aria-label="{{ 'personalInformation.streetAddress' | translate }}">{{ "personalInformation.streetAddress" | translate }}</label>
+  <p attr.aria-label="{{ personalInformation?.streetAddress }}">
+    {{personalInformation?.streetAddress ? personalInformation.streetAddress : 'N/A'}}</p>
+  <label class="mt-4"
+    attr.aria-label="{{ 'personalInformation.apartmentSuite' | translate }}">{{ "personalInformation.apartmentSuite" | translate }}</label>
+  <p attr.aria-label="{{ personalInformation?.apartment }}">
+    {{personalInformation?.apartment ? personalInformation.apartment : 'N/A'}}</p>
+  <label class="mt-4"
+    attr.aria-label="{{ 'personalInformation.city' | translate }}">{{ "personalInformation.city" | translate }}</label>
+  <p attr.aria-label="{{ personalInformation?.city }}">
+    {{personalInformation?.city ? personalInformation.city : 'N/A'}}</p>
+  <label class="mt-4"
+    attr.aria-label="{{ 'personalInformation.provinceState' | translate }}">{{ "personalInformation.provinceState" | translate }}</label>
+  <p attr.aria-label="{{ personalInformation?.provinceOrState }}">
+    {{personalInformation?.provinceOrState ? (personalInformation.provinceOrState | translate) : 'N/A'}}</p>
+  <label class="mt-4"
+    attr.aria-label="{{ 'personalInformation.postalCode' | translate }}">{{ "personalInformation.postalCode" | translate }}</label>
+  <p attr.aria-label="{{ personalInformation?.postalCode }}">
+    {{personalInformation?.postalCode ? personalInformation.postalCode : 'N/A'}}</p>
+  <label class="mt-4"
+    attr.aria-label="{{ 'personalInformation.country' | translate }}">{{ "personalInformation.country" | translate }}</label>
+  <p attr.aria-label="{{ personalInformation?.country }}">
+    {{personalInformation?.country ? personalInformation.country : 'N/A'}}</p>
+  <label class="mt-4"
+    attr.aria-label="{{ 'personalInformation.primaryTelephoneNumber' | translate }}">{{ "personalInformation.primaryTelephoneNumber" | translate }}</label>
+  <p attr.aria-label="{{ personalInformation?.primaryTelephoneNumber }}">
+    {{personalInformation?.primaryTelephoneNumber ? personalInformation.primaryTelephoneNumber : 'N/A'}}</p>
+  <label class="mt-4"
+    attr.aria-label="{{ 'personalInformation.secondaryTelephoneNumber' | translate }}">{{ "personalInformation.secondaryTelephoneNumber" | translate }}</label>
+  <p attr.aria-label="{{ personalInformation?.secondaryTelephoneNumber }}">
+    {{personalInformation?.secondaryTelephoneNumber ? personalInformation.secondaryTelephoneNumber : 'N/A'}}</p>
+  <label class="mt-4"
+    attr.aria-label="{{ 'personalInformation.languagePreference' | translate }}">{{ "personalInformation.languagePreference" | translate }}</label>
+  <p attr.aria-label="{{ personalInformation?.languagePreference }}">
+    {{personalInformation?.languagePreference ? (personalInformation.languagePreference | translate) : 'N/A'}}</p>
+
+  <ng-template [ngIf]="personalInformation?.otherLanguagePreference">
+    <label class="mt-4"
+      attr.aria-label="{{ 'personalInformation.yourLanguagePreference' | translate }}">{{ "personalInformation.yourLanguagePreference" | translate }}</label>
+    <p attr.aria-label="{{ personalInformation?.otherLanguagePreference }}">
+      {{personalInformation?.otherLanguagePreference  | translate}}</p>
+  </ng-template>
+
+
+
+  <button role="button" class="btn-wizard btn pl-0 info" attr.aria-label="{{ 'review.editMyInfoBtn' | translate }}"
+    (click)="editMyInfo()">{{ "review.editMyInfoBtn" | translate }}</button>
+  <!-- end personalInformation -->
+
+
+  <!-- start healthCareInfo -->
+  <h3 role="heading" class="my-4" attr.aria-label="{{ 'healthCareInfo.title' | translate }}">
+    {{ "healthCareInfo.title" | translate }}
+  </h3>
+
+  <label class="mt-4"
+    attr.aria-label="{{ 'healthCareInfo.hearingLossMsg' | translate }}">{{ "healthCareInfo.hearingLossMsg" | translate }}</label>
+  <p attr.aria-label="{{ healthInfo?.hearingLossNoticedYear }}">
+    {{healthInfo?.hearingLossNoticedYear ? healthInfo.hearingLossNoticedYear : 'N/A' }}</p>
+
+  <label class="mt-4"
+    attr.aria-label="{{ 'healthCareInfo.wearHearingAid' | translate }}">{{ "healthCareInfo.wearHearingAid" | translate }}</label>
+
+  <p attr.aria-label="{{ healthInfo?.hasHearingAid?.toString() | translate}}">
+    {{healthInfo?.hasHearingAid ==null ? 'N/A' : healthInfo.hasHearingAid.toString() | translate }}</p>
+
+  <ng-template [ngIf]="healthInfo?.hearingAidUsageDate">
+    <label class="mt-4"
+      attr.aria-label="{{ 'healthCareInfo.hearingAidUsageDate' | translate }}">{{ "healthCareInfo.hearingAidUsageDate" | translate }}</label>
+    <p attr.aria-label="{{ healthInfo?.hearingAidUsageDate}}">{{healthInfo?.hearingAidUsageDate }}</p>
+  </ng-template>
+
+
+
+  <label class="mt-4"
+    attr.aria-label="{{ 'healthCareInfo.dateOfFirstAudiogram' | translate }}">{{ "healthCareInfo.dateOfFirstAudiogram" | translate }}</label>
+  <p attr.aria-label="{{ healthInfo?.dateOfFirstAudiogram}}">
+    {{healthInfo?.dateOfFirstAudiogram ? healthInfo.dateOfFirstAudiogram : 'N/A' }}</p>
+  <label class="mt-4"
+    attr.aria-label="{{ 'healthCareInfo.audiogramClinicName' | translate }}">{{ "healthCareInfo.audiogramClinicName" | translate }}</label>
+  <p attr.aria-label="{{ healthInfo?.audiogramClinicName}}">
+    {{healthInfo?.audiogramClinicName ? healthInfo.audiogramClinicName : 'N/A' }}</p>
+  <label class="mt-4"
+    attr.aria-label="{{ 'healthCareInfo.audiogramClinicAddress' | translate }}">{{ "healthCareInfo.audiogramClinicAddress" | translate }}</label>
+  <p attr.aria-label="{{ healthInfo?.audiogramClinicAddress}}">
+    {{healthInfo?.audiogramClinicAddress ? healthInfo.audiogramClinicAddress : 'N/A' }}</p>
+  <label class="mt-4"
+    attr.aria-label="{{ 'healthCareInfo.audiogramClinicPhone' | translate }}">{{ "healthCareInfo.audiogramClinicPhone" | translate }}</label>
+  <p>{{healthInfo?.audiogramClinicPhoneNumber ? healthInfo.audiogramClinicPhoneNumber : 'N/A' }}</p>
+
+  <label class="mt-4"
+    attr.aria-label="{{ 'healthCareInfo.entVisitQuestion' | translate }}">{{ "healthCareInfo.entVisitQuestion" | translate }}</label>
+  <p attr.aria-label="{{ healthInfo?.hasVisitedEntSpecialist?.toString() | translate}}">
+    {{healthInfo?.hasVisitedEntSpecialist == null ? 'N/A' : healthInfo.hasVisitedEntSpecialist.toString() | translate}}
+  </p>
+
+
+  <ng-template [ngIf]="healthInfo?.entAppointmentDate">
+    <label class="mt-4"
+      attr.aria-label="{{ 'healthCareInfo.entAppointmentDate' | translate }}">{{ "healthCareInfo.entAppointmentDate" | translate }}</label>
+    <p attr.aria-label="{{ healthInfo?.entAppointmentDate}}">{{healthInfo?.entAppointmentDate}}</p>
+  </ng-template>
+
+  <ng-template [ngIf]="healthInfo?.entSpecialistName">
+    <label class="mt-4"
+      attr.aria-label="{{ 'healthCareInfo.entSpecialistName' | translate }}">{{ "healthCareInfo.entSpecialistName" | translate }}</label>
+    <p attr.aria-label="{{ healthInfo?.entSpecialistName}}">{{healthInfo?.entSpecialistName }}</p>
+  </ng-template>
+
+  <ng-template [ngIf]="healthInfo?.entSpecialistAddress">
+    <label class="mt-4"
+      attr.aria-label="{{ 'healthCareInfo.entSpecialistAddress' | translate }}">{{ "healthCareInfo.entSpecialistAddress" | translate }}</label>
+    <p attr.aria-label="{{ healthInfo?.entSpecialistAddress}}">{{healthInfo?.entSpecialistAddress}}</p>
+  </ng-template>
+
+  <ng-template [ngIf]="healthInfo?.entSpecialistPhoneNumber">
+    <label class="mt-4"
+      attr.aria-label="{{ 'healthCareInfo.entSpecialistPhone' | translate }}">{{ "healthCareInfo.entSpecialistPhone" | translate }}</label>
+    <p attr.aria-label="{{ healthInfo?.entSpecialistPhoneNumber}}">{{healthInfo?.entSpecialistPhoneNumber}}</p>
+  </ng-template>
+
+  <label class="mt-4"
+    attr.aria-label="{{ 'healthCareInfo.experienceRingingQuestion' | translate }}">{{ "healthCareInfo.experienceRingingQuestion" | translate }}</label>
+  <p attr.aria-label="{{ healthInfo?.hasRingingInEar?.toString() | translate}}">
+    {{healthInfo?.hasRingingInEar == null ? 'N/A': healthInfo.hasRingingInEar.toString() | translate}}</p>
+
+  <ng-template [ngIf]="healthInfo?.ringingEarDuration">
+    <label class="mt-4"
+      attr.aria-label="{{ 'healthCareInfo.experienceRingingForHowLong' | translate }}">{{ "healthCareInfo.experienceRingingForHowLong" | translate }}</label>
+    <p attr.aria-label="{{ healthInfo?.ringingEarDuration}}">{{healthInfo?.ringingEarDuration | translate}}</p>
+  </ng-template>
+
+  <ng-template [ngIf]="healthInfo?.hasSevereRingingInEar != null">
+    <label class="mt-4"
+      attr.aria-label="{{ 'healthCareInfo.isRingingSevere' | translate }}">{{ "healthCareInfo.isRingingSevere" | translate }}</label>
+    <p attr.aria-label="{{ healthInfo?.hasSevereRingingInEar?.toString() | translate}}">
+      {{healthInfo.hasSevereRingingInEar.toString() | translate }}
+    </p>
+  </ng-template>
+
+  <ng-template [ngIf]="healthInfo?.hasConstantRingingInEar != null">
+    <label class="mt-4"
+      attr.aria-label="{{ 'healthCareInfo.isRingingConstant' | translate }}">{{ "healthCareInfo.isRingingConstant" | translate }}</label>
+    <p attr.aria-label="{{ healthInfo?.hasConstantRingingInEar?.toString() | translate}}">
+      {{healthInfo.hasConstantRingingInEar.toString() | translate }}</p>
+  </ng-template>
+
+
+  <button role="button" class="btn-wizard btn pl-0 info" attr.aria-label="{{ 'review.editHealthBtn' | translate }}"
+    (click)="editHealth()">{{ "review.editHealthBtn" | translate }}</button>
+  <!-- end healthCareInfo -->
+
+
+  <!-- start Employment -->
+  <h3 role="heading" class="my-4" attr.aria-label="{{ 'employment.title' | translate }}">
+    {{ "employment.title" | translate }}</h3>
+
+  <label class="mt-4"
+    attr.aria-label="{{ 'employment.areYouRetired' | translate }}">{{ "employment.areYouRetired" | translate }}</label>
+  <p attr.aria-label="{{ employInfo?.hasRetired?.toString() | translate}}">
+    {{employInfo?.hasRetired == null ? 'N/A' : employInfo?.hasRetired.toString() | translate}}</p>
+
+  <ng-template [ngIf]="employInfo?.retirementDate">
+    <label class="mt-4"
+      attr.aria-label="{{ 'employment.retirementDate' | translate }}">{{ "employment.retirementDate" | translate }}</label>
+    <p attr.aria-label="{{ employInfo?.retirementDate}}">{{employInfo?.retirementDate}}</p>
+  </ng-template>
+
+  <ng-template [ngIf]="employInfo?.currentlyEmployed != null">
+    <label class="mt-4"
+      attr.aria-label="{{ 'employment.currentlyEmployed' | translate }}">{{ "employment.currentlyEmployed" | translate }}</label>
+    <p attr.aria-label="{{ employInfo?.currentlyEmployed?.toString() | translate}}">
+      {{employInfo?.currentlyEmployed.toString() | translate}}</p>
+  </ng-template>
+
+  <!-- <ng-template [ngIf]="employInfo?.currentSituation"> -->
+  <ng-template [ngIf]="employInfo?.currentlyEmployed == false">
+    <label class="mt-4"
+      attr.aria-label="{{ 'employment.currentSituation' | translate }}">{{ "employment.currentSituation" | translate }}</label>
+    <p attr.aria-label="{{ employInfo?.currentSituation}}">{{employInfo?.currentSituation}}</p>
+  </ng-template>
+
+  <!-- <ng-template [ngIf]="employInfo?.currentlyEmployed != null"> -->
+  <ng-template [ngIf]="employInfo?.currentlyEmployed == true">
+
+    <ng-template [ngIf]="employInfo?.currentEmployerName">
+      <label class="mt-4"
+        attr.aria-label="{{ 'employment.employerName' | translate }}">{{ "employment.employerName" | translate }}</label>
+      <p attr.aria-label="{{ employInfo?.currentEmployerName}}">{{employInfo?.currentEmployerName}}</p>
+    </ng-template>
+
+    <ng-template [ngIf]="employInfo?.currentEmployerAddress">
+      <label class="mt-4"
+        attr.aria-label="{{ 'employment.employerAddress' | translate }}">{{ "employment.employerAddress" | translate }}</label>
+      <p attr.aria-label="{{ employInfo?.currentEmployerAddress}}">{{employInfo?.currentEmployerAddress}}</p>
+    </ng-template>
+
+    <ng-template [ngIf]="employInfo?.currentEmployerPhoneNumber">
+      <label class="mt-4"
+        attr.aria-label="{{ 'employment.employerPhoneNumber' | translate }}">{{ "employment.employerPhoneNumber" | translate }}</label>
+      <p attr.aria-label="{{ employInfo?.currentEmployerPhoneNumber}}">{{employInfo?.currentEmployerPhoneNumber}}</p>
+    </ng-template>
+
+    <ng-template [ngIf]="employInfo?.currentEmployerIsHazardous != null">
+      <label class="mt-4"
+        attr.aria-label="{{ 'employment.hazardousNoiseQuestion' | translate }}">{{ "employment.hazardousNoiseQuestion" | translate }}</label>
+      <p attr.aria-label="{{ employInfo?.currentEmployerIsHazardous?.toString() | translate}}">
+        {{employInfo?.currentEmployerIsHazardous.toString() | translate}}
+      </p>
+    </ng-template>
+
+  </ng-template>
+
+  <ng-template [ngIf]="employInfo?.hasEverBeenSelfEmployed != null">
+    <label class="mt-4"
+      attr.aria-label="{{ 'employment.selfEmployedQuestion' | translate }}">{{ "employment.selfEmployedQuestion" | translate }}</label>
+    <p attr.aria-label="{{ employInfo?.hasEverBeenSelfEmployed?.toString() | translate}}">
+      {{employInfo?.hasEverBeenSelfEmployed.toString() | translate}}</p>
+  </ng-template>
+
+  <ng-template [ngIf]="employInfo?.selfEmpHasInsurance != null">
+    <label class="mt-4"
+      attr.aria-label="{{ 'employment.personalInsuranceWSIBQuestion' | translate }}">{{ "employment.personalInsuranceWSIBQuestion" | translate }}</label>
+    <p attr.aria-label="{{ employInfo?.selfEmpHasInsurance?.toString() | translate}}">
+      {{ employInfo?.selfEmpHasInsurance.toString() | translate}}</p>
+  </ng-template>
+
+  <ng-template [ngIf]="employInfo?.selfEmpBusinessName">
+    <label class="mt-4"
+      attr.aria-label="{{ 'employment.businessName' | translate }}">{{ "employment.businessName" | translate }}</label>
+    <p attr.aria-label="{{ employInfo?.selfEmpBusinessName}}">{{employInfo?.selfEmpBusinessName}}</p>
+  </ng-template>
+
+  <ng-template [ngIf]="employInfo?.selfEmpBusinessAddress">
+    <label class="mt-4"
+      attr.aria-label="{{ 'employment.businessAddress' | translate }}">{{ "employment.businessAddress" | translate }}</label>
+    <p attr.aria-label="{{ employInfo?.selfEmpBusinessAddress}}">{{employInfo?.selfEmpBusinessAddress}}</p>
+  </ng-template>
+
+  <ng-template [ngIf]="employInfo?.selfEmpStartDate">
+    <label class="mt-4"
+      attr.aria-label="{{ 'employment.selfEmployedDates' | translate }}">{{ "employment.selfEmployedDates" | translate }}</label>
+    <br>
+    <label class="mt-0"
+      attr.aria-label="{{ 'employment.from' | translate }}">{{ "employment.from" | translate }}</label>
+    <p attr.aria-label="{{ employInfo?.selfEmpStartDate}}">{{employInfo?.selfEmpStartDate}}</p>
+  </ng-template>
+
+  <ng-template [ngIf]="employInfo?.selfEmpEndDate">
+    <label class="mt-4" attr.aria-label="{{ 'employment.to' | translate }}">{{ "employment.to" | translate }}</label>
+    <p attr.aria-label="{{ employInfo?.selfEmpEndDate}}">{{employInfo?.selfEmpEndDate}}</p>
+  </ng-template>
+
+
+  <label class="mt-4"
+    attr.aria-label="{{ 'employment.noisyMachineryOffwork' | translate }}">{{ "employment.noisyMachineryOffwork" | translate }}</label>
+  <p attr.aria-label="{{ employInfo?.hasUsedNoisyEquipmentOutOfWork?.toString() | translate}}">
+    {{employInfo?.hasUsedNoisyEquipmentOutOfWork == null ? 'N/A' : employInfo?.hasUsedNoisyEquipmentOutOfWork.toString() | translate }}
+  </p>
+
+  <ng-template [ngIf]="employInfo?.noisyEquipmentDetails">
+    <label class="mt-4"
+      attr.aria-label="{{ 'employment.usedNoisyMachinery' | translate }}">{{ "employment.usedNoisyMachinery" | translate }}</label>
+    <p attr.aria-label="{{ employInfo?.noisyEquipmentDetails}}">{{employInfo?.noisyEquipmentDetails }}</p>
+  </ng-template>
+
+  <!-- insert table here -->
+
+  <label class="mt-4"
+    attr.aria-label="{{ 'employment.pastEmployment' | translate }}">{{ "employment.pastEmployment" | translate }}</label>
+
+  <div class="table-responsive-sm" *ngIf="pastEmployInfo?.length">
+    <table class="table table-striped" role="table" attr.aria-label="{{ 'employment.pastEmployment' | translate }}">
+      <caption class="hide-element">{{ 'review.employmentTable' | translate }}</caption>
+      <thead role="rowgroup">
+        <tr role="row">
+          <th tabindex="0" class="table-header-set" role="columnheader" aria-sort="none"
+            attr.aria-label="{{ 'employment.employerNameAndContact' | translate }}">
+            {{ "employment.employerNameAndContact" | translate }}</th>
+          <th tabindex="0" class="table-header-set" role="columnheader" aria-sort="none"
+            attr.aria-label="{{ 'employment.employerInBusiness' | translate }}">
+            {{ "employment.employerInBusiness" | translate }}</th>
+          <th tabindex="0" class="table-header-set" role="columnheader" aria-sort="none"
+            attr.aria-label="{{ 'employment.occupation' | translate }}">
+            {{ "employment.occupation" | translate }}</th>
+          <th tabindex="0" class="table-header-set" role="columnheader" aria-sort="none"
+            attr.aria-label="{{ 'employment.date' | translate }}">
+            {{ "employment.date" | translate }}</th>
+          <th tabindex="0" class="table-header-set" role="columnheader" aria-sort="none"
+            attr.aria-label="{{ 'employment.toolsUsageInfo' | translate }}">
+            {{ "employment.toolsUsageInfo" | translate }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr role="row" tabindex="0" *ngFor="let pastEmployer of pastEmployInfo">
+          <td role="cell">
+            <li attr.aria-label="{{ pastEmployer?.employerName}}">{{pastEmployer.employerName}}</li>
+            <li attr.aria-label="{{ pastEmployer?.employerAddress}}">{{pastEmployer.employerAddress}}</li>
+          </td>
+          <td role="cell" attr.aria-label="{{ pastEmployer?.employerInBusiness?.toString() | translate}}">
+            {{pastEmployer.employerInBusiness?.toString() | translate}}</td>
+          <td attr.aria-label="{{ pastEmployer?.jobTitle}}">{{pastEmployer.jobTitle}}</td>
+          <td role="cell">
+            <li attr.aria-label="{{ 'employment.from' | translate }} {{ pastEmployer?.employmentStartDate}}">
+              {{ "employment.from" | translate }} {{pastEmployer.employmentStartDate}}</li>
+            <li attr.aria-label="{{ 'employment.to' | translate }} {{ pastEmployer?.employmentEndDate}}">
+              {{ "employment.to" | translate }} {{pastEmployer.employmentEndDate}}</li>
+          </td>
+          <td role="cell">
+            <li *ngFor="let toolsUsedList of pastEmployer.toolsUsedList">
+              {{toolsUsedList.toolName}}: {{toolsUsedList.hoursUsed}}
+              {{ "employerModal.hoursPerDay" | translate }}</li>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- <div class="table-responsive-sm" *ngIf="pastEmployInfo?.length">
+    <table class="table table-striped">
+      <caption style="color: white;">{{ 'review.employmentTable' }}</caption>
+      <thead>
+        <tr>
+          <th class="table-header-set" scope="col"
+            attr.aria-label="{{ 'employment.employerNameAndContact' | translate }}">
+            {{ "employment.employerNameAndContact" | translate }}</th>
+          <th class="table-header-set" scope="col" attr.aria-label="{{ 'employment.employerInBusiness' | translate }}">
+            {{ "employment.employerInBusiness" | translate }}</th>
+          <th class="table-header-set" scope="col" attr.aria-label="{{ 'employment.occupation' | translate }}">
+            {{ "employment.occupation" | translate }}</th>
+          <th class="table-header-set" scope="col" attr.aria-label="{{ 'employment.date' | translate }}">
+            {{ "employment.date" | translate }}</th>
+          <th class="table-header-set" scope="col" attr.aria-label="{{ 'employment.toolsUsageInfo' | translate }}">
+            {{ "employment.toolsUsageInfo" | translate }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pastEmployer of pastEmployInfo">
+          <td>
+            <li attr.aria-label="{{ pastEmployer?.employerName}}">{{pastEmployer.employerName}}</li>
+            <li attr.aria-label="{{ pastEmployer?.employerAddress}}">{{pastEmployer.employerAddress}}</li>
+          </td>
+          <td attr.aria-label="{{ pastEmployer?.employerInBusiness.toString() | translate}}">
+            {{pastEmployer.employerInBusiness.toString() | translate}}</td>
+          <td attr.aria-label="{{ pastEmployer?.jobTitle}}">{{pastEmployer.jobTitle}}</td>
+          <td>
+            <li attr.aria-label="{{ 'employment.from' | translate }} {{ pastEmployer?.employmentStartDate}}">
+              {{ "employment.from" | translate }} {{pastEmployer.employmentStartDate}}</li>
+            <li attr.aria-label="{{ 'employment.to' | translate }} {{ pastEmployer?.employmentEndDate}}">
+              {{ "employment.to" | translate }} {{pastEmployer.employmentEndDate}}</li>
+          </td>
+          <td>
+            <li *ngFor="let toolsUsedList of pastEmployer.toolsUsedList">
+              {{toolsUsedList.toolName}}: {{toolsUsedList.hoursUsed}}
+              {{ "employerModal.hoursPerDay" | translate }}</li>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div> -->
+  <!-- insert table here -->
+  <!-- =======-->
+  <!--<button role="button" class="btn-wizard btn pl-0 info" attr.aria-label="{{ 'review.editEmployBtn' | translate }}"
+      (click)="editeditEmploy()">{{ "review.editEmployBtn" | translate }}</button>-->
+  <!-- end Employment -->
+  <!-->>>>>>> master-->
+
+  <button role="button" class="btn-wizard btn pl-0 info" attr.aria-label="{{ 'review.editEmployBtn' | translate }}"
+    (click)="editeditEmploy()">{{ "review.editEmployBtn" | translate }}</button>
+  <!-- end Employment -->
+
+  <!-- start Support Docs -->
+
+  <h3 role="heading" class="my-4" attr.aria-label="{{ 'supportingDocuments.title' | translate }}">
+    {{ "supportingDocuments.title" | translate }}</h3>
+
+  <label class="mt-4"
+    attr.aria-label="{{ 'review.audiogram' | translate }}">{{ "review.audiogram" | translate }}:</label><br>
+  <ng-template [ngIf]="audiogramDocumentsList?.length">
+
+
+    <!-- <p>{{healthInfo?.audiogramClinicName}}</p>
+  <p>{{healthInfo?.audiogramClinicAddress}}</p>
+  <p>{{healthInfo?.audiogramClinicPhoneNumber}}</p> -->
+    <ng-container *ngFor="let document of audiogramDocumentsList">
+      <p class="info" *ngIf="document?.fileName" attr.aria-label="{{ document?.fileName}}">
+        {{document?.fileName ? document?.fileName: 'N/A'}}
+      </p>
+    </ng-container>
+
+  </ng-template>
+  <label class="mt-4"
+    attr.aria-label="{{ 'employment.title' | translate }}">{{ "employment.title" | translate }}:</label> <br>
+  <!-- <ng-container *ngFor="let pastEmp of pastEmployInfo">
+    <label class="mt-4" attr.aria-label="{{ pastEmp?.employerName}}">{{pastEmp?.employerName}}</label>
+    <p attr.aria-label="{{ pastEmp?.employerAddress}}">{{pastEmp?.employerAddress ? pastEmp?.employerAddress : 'N/A'}}
+    </p>
+    <p attr.aria-label="{{ pastEmp?.employerPhoneNumber}}">
+      {{pastEmp?.employerPhoneNumber ? pastEmp?.employerPhoneNumber : 'N/A'}}</p>
+    <ng-container *ngFor="let document of newclaimDocumentsList">
+      <p class="info" *ngIf="document?.fileName" attr.aria-label="{{ document?.fileName}}">
+        {{document?.fileName ? document?.fileName: 'N/A'}}</p>
+    </ng-container>
+  </ng-container> -->
+
+
+  <ng-container *ngFor="let document of newclaimDocumentsList">
+    <p class="info" *ngIf="document?.fileName" attr.aria-label="{{ document?.fileName}}">
+      {{document?.fileName ? document?.fileName: 'N/A'}}</p>
+  </ng-container>
+
+  <button role="button" class="btn-wizard btn pl-0 info" attr.aria-label="{{ 'review.editSuppDocBtn' | translate }}"
+    (click)="editSuppDoc()">{{ "review.editSuppDocBtn" | translate }}</button>
+  <!-- end Support Docs -->
+
+
+  <!-- end Confirmation -->
+  <h2 role="heading" class="mt-4 mb-2" attr.aria-label="{{ 'review.emailConfirmation' | translate }}">
+    {{"review.emailConfirmation"| translate}}</h2>
+  <form [formGroup]="reviewForm" focusInvalidInput role="form">
+    <fieldset>
+
+
+      <label for="emailConfirmationLabel"
+      >{{"review.emailConfirmationLabel" | translate}}</label>
+      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 pl-0" [ngClass]="displayFieldCss(reviewForm, 'email')">
+        <input type="text" formControlName="email" title="email"  
+        attr.aria-label="{{ 'review.emailConfirmationLabel' | translate }}"
+        name="emailConfirmationLabel" aria-invalid="isFieldTouched(reviewForm, 'email')">
+      </div>
+      <!-- <app-field-error-display [displayError]="isFieldTouched(reviewForm, 'email')" role="alert"
+        errorMsg="{{'claim.continueEmail' | translate}}">
+      </app-field-error-display> -->
+
+
+      <app-field-error-display [displayError]="isFieldTouched(reviewForm, 'email',true)" role="alert"
+        errorMsg="{{ 'errors.required' | translate }} {{ 'claim.email' | translate }}">
+      </app-field-error-display>
+
+      <app-field-error-display [displayError]="isFieldTouched(reviewForm, 'email',false)" role="alert"
+        errorMsg="{{ 'claim.continueEmail' | translate }}">
+      </app-field-error-display>
+
+
+      <h2 role="heading" class="mt-5" attr.aria-label="{{ 'review.declaration' | translate }}">
+        {{"review.declaration" | translate}}
+      </h2>
+
+      <ul class="pl-5">
+        <li style="list-style-type: disc;" attr.aria-label="{{ 'review.declarationLine1' | translate }}">
+          {{"review.declarationLine1" | translate}}</li>
+        <li style="list-style-type: disc;" attr.aria-label="{{ 'review.declarationLine2' | translate }}">
+          {{"review.declarationLine2" | translate}}</li>
+        <li style="list-style-type: disc;" attr.aria-label="{{ 'review.declarationLine3' | translate }}">
+          {{"review.declarationLine3" | translate}}</li>
+        <li style="list-style-type: disc;" attr.aria-label="{{ 'review.declarationLine4' | translate }}">
+          {{"review.declarationLine4" | translate}}</li>
+      </ul>
+
+      <p attr.aria-label="{{ 'review.signatureLabel' | translate }}">{{"review.signatureLabel" | translate}}</p>
+
+      <!-- <label class="" for="signature"
+        attr.aria-label="{{ 'review.signature' | translate }}">{{"review.signature"| translate}}</label>
+      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 pl-0" [ngClass]="displayFieldCss(reviewForm, 'signature')">
+        <input type="text" formControlName="signature" title="signature" name="signature" aria-required="true"
+        aria-invalid="isFieldTouched(reviewForm, 'signature')">
+      </div>
+      <app-field-error-display [displayError]="isFieldTouched(reviewForm, 'signature')"
+        role="alert"
+        errorMsg="{{ 'errors.reviewSignature' | translate }}">
+      </app-field-error-display> -->
+
+      <label class="" for="signature"
+       >{{"review.signature"| translate}}</label>
+      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 pl-0" [ngClass]="displayFieldCss(reviewForm, 'signature')">
+        <input type="text" formControlName="signature" title="declaration" name="signature" aria-required="true"
+          attr.aria-label="{{ 'review.signature' | translate }}" aria-required="true"
+          attr.aria-invalid="(isFieldTouched(reviewForm, 'signature'))">
+      </div>
+      <app-field-error-display [displayError]="isFieldTouched(reviewForm, 'signature')" role="alert"
+        errorMsg="{{ 'errors.reviewSignature' | translate }}">
+      </app-field-error-display>
+
+    </fieldset>
+
+    <p attr.aria-label="{{ 'review.workplace' | translate }}">{{"review.workplace" | translate}}</p>
+
+
+
+    <h2 role="heading" class="mt-5" attr.aria-label="{{ 'review.infoProtectionLabel' | translate }}">
+      {{"review.infoProtectionLabel" | translate}}</h2>
+
+    <p attr.aria-label="{{ 'review.infoProtectionP1' | translate }}">{{"review.infoProtectionP1" | translate}}</p>
+
+    <!--<<<<<<< vp-21sept
+    <div class="form-group position-relative">
+      <div #recaptcha></div>
+      <input type="hidden" name="recaptcha" aria-invalid="isSubmit && !isCaptcha">
+      <app-field-error-display [displayError]="isSubmit && !isCaptcha" errorMsg="{{ 'errors.captchaErr' | translate }}"
+      role="alert">
+      </app-field-error-display>
+    </div>
+======= -->
+    <p
+      attr.aria-label="{{ 'review.infoProtectionBeforeLink' | translate }} www.wsib.ca or by  {{'review.infoProtectionAfterLink' | translate}}">
+      {{"review.infoProtectionBeforeLink" | translate}} <a   target="_blank" href="{{ 'review.link' | translate }}">www.wsib.ca</a> or by
+      {{"review.infoProtectionAfterLink" | translate}}</p>
+
+
+    <!-- <div class="form-group position-relative" [ngClass]="{'d-none':!isrecaptcha}">
+      <div #recaptcha></div>
+      <input type="hidden" name="recaptcha">
+      <app-field-error-display [displayError]="isSubmit && !isCaptcha  && isrecaptcha"
+        errorMsg="{{ 'errors.captchaErr' | translate }}">
+      </app-field-error-display>
+    </div> -->
+
+    <div class="d-flex mt-5">
+      <button role="button" attr.aria-label="{{ 'review.previous' | translate }}" class="btn-wizard btn"
+        matStepperPrevious><em class="fa fa-angle-left" aria-hidden="true"></em>
+        <b>
+          {{"review.previous" | translate}}</b><span class="ml-4">|</span></button>
+      <button role="button" class="btn btn-wsib" attr.aria-label="{{ 'review.submit' | translate }}"
+        (click)="submitClaim()">{{"review.submit"| translate}}</button>
+    </div>
+  </form>
+
+</div>
+
+<!-- end Confirmation -->

@@ -1,0 +1,14 @@
+<div role="contentinfo">
+    <h1 mat-dialog-title *ngIf="data">
+        {{ "success.saved" | translate }}</h1>
+    <div mat-dialog-content *ngIf="data">
+        <h2 style="font-weight: normal;">{{ "success.confirm" | translate }}</h2>
+    </div>
+    <div mat-dialog-content *ngIf="!data">
+        <p>{{ "success.confirm" | translate }}</p>
+    </div>
+    <div mat-dialog-actions *ngIf="data">
+        <button class="btn btn-wsib" (click)="clkok()"
+            attr.aria-label="{{ 'success.confirm' | translate }}">{{ "success.ok" | translate }}</button>
+    </div>
+</div>

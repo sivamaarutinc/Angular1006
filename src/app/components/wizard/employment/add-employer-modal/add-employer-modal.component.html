@@ -1,0 +1,359 @@
+<main role="main">
+  <h2 role="heading" class="text-center" attr.aria-label="{{ 'employerModal.title' | translate }}">
+    {{ "employerModal.title" | translate }}</h2>
+
+  <form [formGroup]="employerForm" focusInvalidInput role="form">
+    <fieldset>
+      <label class="mt-4" for="abc">{{ "employerModal.employerName" | translate }} :
+      </label>
+     
+      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 pl-0"
+        [ngClass]="displayFieldCss(employerForm, 'employerName')&& issubmitForm">
+        <input type="text" maxlength="250" formControlName="employerName" title="{{ 'employerModal.employerName' | translate }}"
+          (blur)="trimpaces('employerName')" aria-required="true" name="employerName" autofocus>
+      </div>
+     
+      <app-field-error-display [displayError]="isFieldTouched(employerForm, 'employerName' ,true) && issubmitForm"
+        role="alert" errorMsg="{{ 'errors.required' | translate }} {{ 'employerModal.employerName' | translate }}"
+        attr.aria-label="{{ 'errors.required' | translate }} {{ 'employerModal.employerName' | translate }}">
+      </app-field-error-display>
+     
+      <app-field-error-display [displayError]="isFieldTouched(employerForm, 'employerName',false)" role="alert"
+        errorMsg="{{ 'errors.charactersError' | translate }}  {{ 'employerModal.employerName' | translate }}"
+        attr.aria-label="{{ 'errors.charactersError' | translate }} {{ 'employerModal.employerName' | translate }}">
+      </app-field-error-display>
+
+      <label class="mt-4" for="employerAddress"
+        attr.aria-label="{{'employerModal.employerAddress' | translate }}">{{ "employerModal.employerAddress" | translate }}
+      </label>
+
+      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 pl-0">
+
+        <textarea matInput type="text" formControlName="employerAddress" maxlength="250" autocorrect="off"
+          autocapitalize="off" spellcheck="off" #employerAddress title="{{'employerModal.employerAddress' | translate }}"
+          (keyup.enter)="myinuptcountrylist.focus()" aria-required="false" name="employerAddress">
+        </textarea>
+
+        <label class="mt-4" for="country"
+          attr.aria-label="{{'personalInformation.country' | translate }}">{{ "personalInformation.country" | translate }} :
+        </label>
+
+      </div>
+      
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 pl-0" [ngClass]="displayFieldCss(employerForm, 'country')">
+          <select formControlName="country" (change)=checkCountry() #myinuptcountrylist aria-required="true"
+            aria-invalid="isFieldTouched(employerForm, 'country')" name="country" title="{{'personalInformation.country' | translate }}">
+            <option *ngFor="let country of countryList" [ngValue]="country.id">{{country.countryName}}</option>
+          </select>
+        </div>
+
+        <app-field-error-display [displayError]="isFieldTouched(employerForm, 'country')" role="alert"
+          errorMsg="{{ 'errors.required' | translate }} {{ 'personalInformation.country' | translate }}"
+          attr.aria-label="{{ 'errors.required' | translate }} {{ 'personalInformation.country' | translate }}">
+        </app-field-error-display>
+
+        <label class="mt-4" *ngIf="isCanadaOrUsa" for="provinceState"
+          attr.aria-label="{{'personalInformation.provinceState' | translate }}">{{ "personalInformation.provinceState" | translate }} :
+        </label>
+
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 pl-0" *ngIf="isCanadaOrUsa"
+          [ngClass]="displayFieldCss(employerForm, 'provinceState')">
+          <select formControlName="provinceState" title="{{'personalInformation.provinceState' | translate }}" name="provinceState" aria-required="true"
+            aria-invalid="isFieldTouched(employerForm, 'provinceState',true)">
+            <option *ngFor="let province of provinceList" [ngValue]="province.id">{{province.provinceName}}
+            </option>
+          </select>
+        </div>
+
+        <app-field-error-display [displayError]="isFieldTouched(employerForm, 'provinceState',true)" role="alert"
+          errorMsg="{{ 'errors.required' | translate }} {{ 'personalInformation.provinceState' | translate }}"
+          attr.aria-label="{{ 'errors.required' | translate }} {{ 'personalInformation.provinceState' | translate }}">
+        </app-field-error-display>
+
+        <app-field-error-display [displayError]="isFieldTouched(employerForm, 'provinceState',false)" role="alert"
+          errorMsg="{{ 'errors.invalidProvinceState' | translate }}">
+        </app-field-error-display>
+
+
+        <label class="mt-4" for="employerPhoneNumber"
+          attr.aria-label="{{'employerModal.employerPhone' | translate }}">{{ "employerModal.employerPhone" | translate }}
+        </label>
+
+      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 pl-0" 
+        [ngClass]="displayFieldCss(employerForm, 'employerPhoneNumber')">
+        <app-intl-tel-input [cssClass]="'custom'" [enableAutoCountrySelect]="false" [enablePlaceholder]="true"
+          [searchCountryFlag]="true" [selectFirstCountry]="false" [maxLength]="15" [phoneValidation]="true"
+          [inputId]="'employerPhoneNumber'" name="employerPhoneNumber" title="{{'employerModal.employerPhone' | translate }}"
+          aria-invalid="isFieldTouched(employerForm, 'employerPhoneNumber')"
+          [selectedCountryISO]="this.employerForm.get('country')?.value" formControlName="employerPhoneNumber">
+        </app-intl-tel-input>
+      </div>
+
+      <app-field-error-display [displayError]="isFieldTouched(employerForm, 'employerPhoneNumber')" role="alert"
+        errorMsg="{{ 'errors.invalidPhone' | translate }}" attr.aria-label="{{ 'errors.invalidPhone' | translate }}">
+      </app-field-error-display>
+
+      <label class="mt-4">{{ "employerModal.employerStillInBusiness" | translate }}</label>
+
+      <div role="group" attr.aria-label="{{ 'employerModal.employerStillInBusiness' | translate }}">
+        <ul class="mb-0" [ngClass]="displayFieldCss(employerForm, 'stillInBusiness')">
+          <li>
+            <label for="stillInBusinessYes">
+              <input type="radio" id="stillInBusinessYes" name="stillInBusiness" [value]="true"
+                formControlName="stillInBusiness" attr.aria-label="{{ 'employerModal.yes' | translate }}"
+                aria-required="true" aria-invalid="isFieldTouched(employerForm, 'stillInBusiness')">
+              {{ "employerModal.yes" | translate }}
+            </label>
+          </li>
+          <li>
+            <label for="stillInBusinessNo">
+              <input type="radio" id="stillInBusinessNo" name="stillInBusiness" [value]="false"
+                formControlName="stillInBusiness" attr.aria-label="{{ 'employerModal.no' | translate }}"
+                aria-required="true" aria-invalid="isFieldTouched(employerForm, 'stillInBusiness')">
+              {{ "employerModal.no" | translate }}
+            </label>
+          </li>
+        </ul>
+      </div>
+      <app-field-error-display [displayError]="isFieldTouched(employerForm, 'stillInBusiness')" role="alert"
+        errorMsg="{{ 'errors.required' | translate }} {{ 'employerModal.employerStillInBusiness' | translate }}"
+        attr.aria-label="{{ 'errors.required' | translate }} {{ 'employerModal.employerStillInBusiness' }}">
+      </app-field-error-display>
+
+      <label class="mt-4" for="jobTitle"
+        attr.aria-label="{{'employerModal.occupation' | translate }}">{{ "employerModal.occupation" | translate }}
+        :</label>
+      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 pl-0" [ngClass]="displayFieldCss(employerForm, 'jobTitle')">
+        <input type="text" maxlength="50" formControlName="jobTitle" title="{{'employerModal.occupation' | translate }}" (blur)="trimpaces('jobTitle')"
+          aria-required="true" name="jobTitle" aria-invalid="isFieldTouched(employerForm, 'jobTitle',true)">
+      </div>
+      <app-field-error-display [displayError]="isFieldTouched(employerForm, 'jobTitle',true)" role="alert"
+        errorMsg="{{ 'errors.required' | translate }} {{ 'employerModal.occupation' | translate }}"
+        attr.aria-label="{{ 'errors.required' | translate }} {{ 'employerModal.occupation' | translate }}">
+      </app-field-error-display>
+
+      <app-field-error-display [displayError]="isFieldTouched(employerForm, 'jobTitle',false)" role="alert"
+        errorMsg="{{ 'errors.charactersError' | translate }}  {{ 'employerModal.occupation' | translate }}"
+        attr.aria-label="{{ 'errors.charactersError' | translate }} {{ 'employerModal.occupation' | translate }}">
+      </app-field-error-display>
+
+      <label class="mt-4 mb-0" for="employedFrom"
+        attr.aria-label="{{'employerModal.employedFrom' | translate }}">{{ "employerModal.employedFrom" | translate }}
+        :</label><br>
+      <label class="hint"
+        attr.aria-label="{{ 'employerModal.datePlaceHolder' | translate }}">{{ "employerModal.datePlaceHolder" | translate }}</label>
+
+
+      <div class="d-flex col-xl-6 col-lg-6 col-md-12 col-sm-12 pl-0">
+        <input [matDatepicker]="employedFrom" (dateChange)="toDateCheck($event,'from')" [max]="maxDate"
+          formControlName="employedFrom" type="text" style="margin-right: -40px;" title="{{'employerModal.employedFrom' | translate }}"
+          (input)="checkDate($event.target.value, 'employedFrom')"
+          aria-invalid="isFieldTouched(employerForm, 'employedFrom') && !datevalue1"
+          (focusout)="validateFutureDate($event, 'employedFrom')" aria-required="true" name="employedFrom">
+        <mat-datepicker-toggle matSuffix [for]="employedFrom"></mat-datepicker-toggle>
+        <mat-datepicker #employedFrom startView="year"></mat-datepicker>
+      </div>
+
+      <app-field-error-display [displayError]="isFieldTouched(employerForm, 'employedFrom') && !datevalue1" role="alert"
+        errorMsg="{{ 'errors.required' | translate }} {{ 'employerModal.employedFrom' | translate }}">
+      </app-field-error-display>
+
+      <app-field-error-display role="alert"
+        [displayError]="isfromdate && employerForm.get('employedFrom').valid && employerForm.get('employedFrom').touched && datevalue1 && !futureDateErrorFrom"
+        errorMsg="{{ 'employment.employedFromCheck' | translate }}">
+      </app-field-error-display>
+
+      <app-field-error-display [displayError]="datevalue1 && futureDateErrorFrom && validemployedFrom"
+        errorMsg="{{ 'errors.invalidFutureFrom' | translate }}">
+      </app-field-error-display>
+
+      <app-field-error-display role="alert"
+        [displayError]="!validemployedFrom && datevalue1 && isFieldTouched(employerForm, 'employedFrom')" 
+        errorMsg="{{ 'errors.invalidDateFormat' | translate }} {{ 'employerModal.employedFrom' | translate }}">
+      </app-field-error-display>
+
+
+      <label class="mt-2 mb-0" for="employedTo"
+        attr.aria-label="{{'employerModal.employedTo' | translate }}">{{ "employerModal.employedTo" | translate }}
+        :</label><br>
+      <label class="hint"
+        attr.aria-label="{{ 'employerModal.datePlaceHolder' | translate }}">{{ "employerModal.datePlaceHolder" | translate }}</label>
+
+      <div class="d-flex col-xl-6 col-lg-6 col-md-12 col-sm-12 pl-0">
+        <input [matDatepicker]="employedTo" (dateChange)="toDateCheck($event,'to')" [min]="employedToMinimumDate"
+          [max]="maxDate" formControlName="employedTo" type="text" style="margin-right: -40px;" title="{{'employerModal.employedTo' | translate }}"
+          (input)="checkDate($event.target.value, 'employedTo')" (focusout)="validateFutureDate($event, 'employedTo')"
+          aria-invalid="isFieldTouched(employerForm, 'employedTo') && !datevalue2" aria-required="true"
+          name="employedTo">
+        <mat-datepicker-toggle matSuffix [for]="employedTo"></mat-datepicker-toggle>
+        <mat-datepicker #employedTo startView="year"></mat-datepicker>
+      </div>
+      <app-field-error-display [displayError]="isFieldTouched(employerForm, 'employedTo',true) && !datevalue2" role="alert"
+        errorMsg="{{ 'errors.required' | translate }} {{ 'employerModal.employedTo' | translate }}">
+      </app-field-error-display>
+
+      <app-field-error-display [displayError]="isFieldTouched(employerForm, 'employedTo',false) && !dateCheck && datevalue2"
+        role="alert" errorMsg="{{ 'employment.employerToCheck' | translate }}">
+      </app-field-error-display>
+
+      <app-field-error-display role="alert"
+        [displayError]="!validemployedTo && datevalue2 && isFieldTouched(employerForm, 'employedTo',false)"
+        errorMsg="{{ 'errors.invalidDateFormat' | translate }} {{ 'employerModal.employedTo' | translate }}">
+      </app-field-error-display>
+
+      <app-field-error-display
+        [displayError]=" isFieldTouched(employerForm, 'employedTo',false) && dateCheck && datevalue2 && futureDateErrorTo && validemployedTo"
+        errorMsg="{{ 'errors.invalidFutureTo' | translate }}">
+      </app-field-error-display>
+
+
+      <ng-container *ngTemplateOutlet="toolsList"></ng-container>
+
+      <div class="row justify-content-center mt-5">
+
+        <!-- <button class="btn btn-wsib" data-dismiss="modal" -->
+        <button class="btn btn-wsib" [disabled]="!istoolform || greterthantwentyfor || lowerthanZero || isNumber"
+          attr.aria-label="{{ 'employerModal.ok' | translate }}"
+          (click)="addOrUpdatePastEmploymentInfo();">{{ "employerModal.ok" | translate }}</button>
+
+      </div>
+      <div class="row justify-content-center my-5">
+        <button class="btn btn-wizard " #cancelBtn (click)="cancelEmploymentInfo()"
+          attr.aria-label="{{ 'employerModal.title' | translate }} {{ 'employerModal.cancel' | translate }}"
+          data-dismiss="modal"><b>{{ "employerModal.cancel" | translate }}</b></button>
+      </div>
+    </fieldset>
+  </form>
+
+
+  <ng-template #toolsList>
+
+    <label class="mt-4"
+      attr.aria-label="{{ 'employerModal.listOfToolsUsed' | translate }}">{{ "employerModal.listOfToolsUsed" | translate }}</label>
+
+    <div class="table-responsive-sm mb-n2">
+      <table class="table">
+        <caption style="color: white;">{{ 'employerModal.toolsTable' }}</caption>
+        <thead>
+          <tr>
+            <th class="table-header-set" scope="col" width="50%"
+              attr.aria-label="{{ 'employerModal.toolsUsed' | translate }}">{{ "employerModal.toolsUsed" | translate }}
+            </th>
+            <th class="table-header-set" scope="col" width="25%"
+              attr.aria-label="{{ 'employerModal.toolHoursPerDay' | translate }}">
+              {{ "employerModal.toolHoursPerDay" | translate }}</th>
+            <th class="table-header-set" scope="col" width="25%"
+              attr.aria-label="{{ 'employerModal.action' | translate }}">{{ "employerModal.action" | translate }}</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+
+    <div class="d-flex" *ngFor="let item of tools ">
+
+
+      <div class="col-xl-7 col-lg-7 col-md-12 col-sm-12 pl-0">
+        <p class="bordered-label tool-name" attr.aria-label="{{ item.toolName }}">{{item.toolName}}</p>
+      </div>
+
+      <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 pl-0 ml-n2">
+        <p class="bordered-label tool-hours" attr.aria-label="{{ item.hoursUsed }}">
+          {{item.hoursUsed }}
+        </p>
+      </div>
+
+      <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 my-auto">
+        <button class="btn btn-wizard" role="button" (click)="onToolsListdelete(item)"
+          attr.aria-label="{{ 'employerModal.listOfToolsUsed' | translate }} {{ 'employerModal.remove' | translate }}">{{ "employerModal.remove" | translate }}</button>
+      </div>
+    </div>
+
+    <form [formGroup]="toolsForm" (ngSubmit)="onToolsListSubmit()" role="form" focusInvalidInput>
+
+      <fieldset *ngIf="tools?.length <= 9">
+
+        <div class="row">
+          <div class="ml-3">
+
+            <!-- <mat-form-field floatLabel="never" class="tool-name">
+                <input type="text" matInput [formControl]="toolInput" (input)="isInvalidtool($event.target.value)"
+                  [matAutocomplete]="auto" maxlength="100" formControlName="toolName">
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option *ngFor="let tool of filteredOptions | async" [value]="tool">
+                    {{ tool }}
+                  </mat-option>
+                </mat-autocomplete>
+  
+                <app-field-error-display [displayError]="!toolsForm.get('toolName').valid && issubmit"
+                  errorMsg="{{ 'errors.toolName' | translate }}">
+                </app-field-error-display>
+  
+              </mat-form-field> -->
+
+            <label for="toolsEquipmentUsed">
+              <mat-form-field class="example-full-width" class="tool-name">
+                <input type="text" attr.aria-label="{{ 'employerModal.toolsUsed' | translate }}" id="toolsEquipmentUsed"
+                  matInput [formControl]="toolInput" (input)="isInvalidtool($event.target.value)" maxlength="250"
+                  [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete" aria-required="true">
+                  <mat-option *ngFor="let tool of filteredOptions | async" [value]="tool" class="wrap-text">
+                    {{ tool }}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+              <span class="hide-element">{{ "employerModal.toolsUsed" | translate }}</span>
+            </label>
+          </div>
+
+          <div class="hour-margin">
+
+            <mat-form-field class="tool-hours">
+              <input type="text" matInput maxlength="5" (input)="isInValidHrs($event.target.value)"
+                formControlName="hoursUsed" aria-required="true" title="{{'employerModal.toolHoursPerDay' | translate}}"
+                attr.aria-label="{{ 'employerModal.toolHoursPerDay' | translate }}"
+                aria-invalid="isFieldTouched(toolsForm, 'hoursUsed') && isNumber">
+
+              <!-- [ngClass]="displayFieldCss(toolsForm, 'hoursUsed')" -->
+
+              <app-field-error-display [displayError]="(!toolsForm.get('hoursUsed').valid && issubmit)" role="alert"
+                errorMsg="{{ 'errors.hoursUsed' | translate }}" attr.aria-label="{{ 'errors.hoursUsed' | translate }}">
+              </app-field-error-display>
+
+              <!-- <app-field-error-display [displayError]="isFieldTouched(toolsForm, 'hoursUsed') && isNumber" role="alert"
+                errorMsg="{{ 'errors.invalidNumberinHour' | translate }}"
+                attr.aria-label="{{ 'errors.invalidNumberinHour' | translate }}">
+              </app-field-error-display> -->
+
+              <app-field-error-display [displayError]="isNumber" role="alert"
+                errorMsg="{{ 'errors.invalidNumberinHour' | translate }}"
+                attr.aria-label="{{ 'errors.invalidNumberinHour' | translate }}">
+              </app-field-error-display>
+
+              <app-field-error-display [displayError]="greterthantwentyfor" role="alert"
+                errorMsg="{{  'errors.valueGrater' | translate }}"
+                attr.aria-label="{{ 'errors.valueGrater' | translate }}">
+              </app-field-error-display>
+              <app-field-error-display [displayError]="lowerthanZero" errorMsg="{{  'errors.valueLower' | translate }}"
+                role="alert" attr.aria-label="{{ 'errors.valueLower' | translate }}">
+              </app-field-error-display>
+            </mat-form-field>
+
+          </div>
+
+        </div>
+        <app-field-error-display [displayError]="toolListOverLimit" errorMsg="{{ 'errors.maxTools' | translate }}"
+          role="alert" attr.aria-label="{{ 'errors.maxTools' | translate }}">
+        </app-field-error-display>
+
+        <hr>
+        <!-- [ngClass]="(10 >= this.tools.length) ? 'd-none' : ''" -->
+        <div class="row" *ngIf="tools?.length < 9">
+          <button class="btn btn-wizard" type="submit" role="button"
+            attr.aria-label="{{ 'employerModal.listOfToolsUsed' | translate }} {{ 'employerModal.add' | translate }}"><b>{{ "employerModal.add" | translate }}</b></button>
+        </div>
+
+      </fieldset>
+
+    </form>
+
+  </ng-template>

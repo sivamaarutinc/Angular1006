@@ -1,0 +1,14 @@
+.has-error {
+    border: 2px solid #D90000;
+    padding-right: 0;
+}
+
+textarea{
+  border: 1px solid #5E6A71 !important;
+  border-radius: 3px;
+}
+
+legend{
+  font-weight: 700 !important; 
+  font-size: inherit !important;
+}

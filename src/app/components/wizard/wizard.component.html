@@ -1,0 +1,215 @@
+<app-header (showSuccess)="showSuccess($event)" (saveDataonExit)="saveDataonExit('exit')"
+  (localeChanged)="localeChanged($event)" [saveonExitfromChild1]="saveonExitfromChild"></app-header>
+
+<div class="content" role="main">
+  <div class="content-margin">
+    <div class="col-xl-12 col-lg-11 col-md-11 col-sm-11 mx-auto">
+      <h1 role="heading" class="mt-5 mx-2">{{ "wizard.submitClaim" | translate }}</h1>
+
+      <ng-container *ngIf="isLargeScreen">
+        <div id="main-content">
+
+          <mat-horizontal-stepper linear labelPosition="end" #stepper (animationDone)="onTabClick()"
+            (selectionChange)="saveOnTabClick($event)">
+            <ng-template matStepperIcon="edit">
+              <mat-icon>check</mat-icon>
+            </ng-template>
+
+            <mat-step [stepControl]="myInformation.myInformationForm" [editable]="editable"
+              [aria-labelledby]="selectedIndex==5 ? 'disabled_af' : null">
+              <ng-template matStepLabel>
+                <span class="fontsizestepper" [ngClass]="{'allow': selectedIndex != 5}">
+                  {{ "wizard.myInformation" | translate }}
+                </span>
+              </ng-template>
+
+              <app-my-information #myInformation [resultofSaveonExit]="saveonExittoChild + 'myInfo'"
+                [personalInfo]="claim?.personalInformation" [referenceNumber]="claim.referenceNumber"
+                [claimId]="claim?.claimId" [locale]="locale" (showSuccess)="showSuccess($event)" (next)="next()"
+                (saveDataonExit1)="saveDataonExit1('exit')">
+                <!-- (formStatus)="checkMyInformationComplete($event)" (showSuccess)="showSuccess($event)" (next)="next()"> -->
+              </app-my-information>
+            </mat-step>
+            <mat-step label="step 2" [stepControl]="healthCare.continueHealthCareForm" [editable]="editable"
+              [aria-labelledby]="selectedIndex==5 ? 'disabled_af' : null">
+              <ng-template matStepLabel>
+                <span class="fontsizestepper" [ngClass]="{'allow': selectedIndex != 5}">
+                  {{ "wizard.healthCare" | translate }}
+                </span>
+              </ng-template>
+              <app-health-care #healthCare [resultofSaveonExit]="saveonExittoChild + 'healthcare'"
+                [healthCareProviderInfo]="claim?.healthCareProviderInformation"
+                [referenceNumber]="claim.referenceNumber" [claimId]="claim?.claimId"
+                [personalInformation]="claim?.personalInformation" (showSuccess)="showSuccess($event)"
+                (previous)="previous()" (next)="next()" (saveDataonExit1)="saveDataonExit1('exit')">
+                <!-- [personalInformation]="claim?.personalInformation" (formStatus)="checkHealthCareComplete($event)"
+              (showSuccess)="showSuccess($event)" (next)="next()" (previous)="previous()"> -->
+
+            </app-health-care>
+          </mat-step>
+          <mat-step [stepControl]="employment.employmentForm" [editable]="editable"
+            [aria-labelledby]="selectedIndex==5 ? 'disabled_af' : null">
+            <ng-template matStepLabel>
+
+              <span class="fontsizestepper" [ngClass]="{'allow': selectedIndex != 5}">
+                {{ "wizard.employment" | translate }}
+              </span>
+            </ng-template>
+            <app-employment #employment [resultofSaveonExit]="saveonExittoChild + 'employment'"
+              [employmentInfo]="claim?.employmentInformation" [referenceNumber]="claim.referenceNumber"
+              [claimId]="claim.claimId" (employmentSaved)="employmentSaved($event)" (showSuccess)="showSuccess($event)"
+              (next)="next()" (saveDataonExit1)="saveDataonExit1('exit')">
+              <!-- (employmentSaved)="employmentSaved($event)" (formStatus)="checkEmploymentComplete($event)"> -->
+            </app-employment>
+          </mat-step>
+          <mat-step [editable]="editable" [aria-labelledby]="selectedIndex==5 ? 'disabled_af' : null">
+            <ng-template matStepLabel>
+
+              <span class="fontsizestepper" [ngClass]="{'allow': selectedIndex != 5}">
+                {{ "wizard.supportingDocuments" | translate }}
+              </span>
+            </ng-template>
+            <app-supporting-documents #supportingDocuments [resultofSaveonExit]="saveonExittoChild + 'supportingdoc'"
+              [claimId]="claim.claimId" [claimDocumentsList]="claim?.claimDocumentsList"
+              [employmentInfo]="claim?.employmentInformation" [referenceNumber]="claim.referenceNumber" (next)="next()"
+              (previous)="previous()" (showSuccess)="showSuccess($event)"></app-supporting-documents>
+          </mat-step>
+          <mat-step [completed]="false" [stepControl]="review" [editable]="editable"
+            [aria-labelledby]="selectedIndex==5 ? 'disabled_af' : null">
+            <ng-template matStepLabel>
+
+              <span class="fontsizestepper" [ngClass]="{'allow': selectedIndex != 5}">
+                {{ "wizard.review" | translate }}
+              </span>
+            </ng-template>
+            <app-review [resultofSaveonExit]="saveonExittoChild + 'review'" [claimId]="claim?.claimId"
+              [currentPosition]="stepper" [checkChanges]="emitChanges" (next)="next()"
+              (setTabindex)="setTabindex($event)">
+            </app-review>
+          </mat-step>
+          <mat-step [stepControl]="confirmation" [editable]="!editable"
+            [aria-labelledby]="selectedIndex==5 ?  null : 'disabled_af'">
+            <ng-template matStepLabel>
+              <span class="fontsizestepper confirmation">
+                {{ "wizard.confirmation" | translate }}
+              </span>
+            </ng-template>
+            <app-confirmation *ngIf="selectedIndex === 5"></app-confirmation>
+          </mat-step>
+        </mat-horizontal-stepper>
+      
+     
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="!isLargeScreen">
+        <div id="main-content">
+          <mat-vertical-stepper linear labelPosition="end" #stepper (animationDone)="onTabClick()"
+            (selectionChange)="saveOnTabClick($event)">
+
+
+            <mat-step [stepControl]="myInformation.myInformationForm" [editable]="editable"
+              [aria-labelledby]="selectedIndex==5 ? 'disabled_af' : null">
+
+              <ng-template matStepLabel>
+                <span class="fontsizestepper" [ngClass]="{'allow': selectedIndex != 5}">
+                  {{ "wizard.myInformation" | translate }}
+                </span>
+              </ng-template>
+              <app-my-information #myInformation [resultofSaveonExit]="saveonExittoChild + 'myInfo'"
+                [personalInfo]="claim?.personalInformation" [referenceNumber]="claim.referenceNumber"
+                [claimId]="claim?.claimId" [locale]="locale" (formStatus)="checkMyInformationComplete($event)"
+                (showSuccess)="showSuccess($event)" (next)="next()" (saveDataonExit1)="saveDataonExit1('exit')">
+              </app-my-information>
+            </mat-step>
+
+            <mat-step [stepControl]="healthCare.continueHealthCareForm" [editable]="editable"
+              [aria-labelledby]="selectedIndex==5 ? 'disabled_af' : null">
+              <ng-template matStepLabel>
+                <span class="fontsizestepper" [ngClass]="{'allow': selectedIndex != 5}">
+                  {{ "wizard.healthCare" | translate }}
+                </span>
+              </ng-template>
+              <app-health-care #healthCare [resultofSaveonExit]="saveonExittoChild + 'healthcare'"
+                [healthCareProviderInfo]="claim?.healthCareProviderInformation"
+                [referenceNumber]="claim.referenceNumber" [claimId]="claim?.claimId"
+                [personalInformation]="claim?.personalInformation" (formStatus)="checkHealthCareComplete($event)"
+                (showSuccess)="showSuccess($event)" (next)="next()" (previous)="previous()"
+                (saveDataonExit1)="saveDataonExit1('exit')">
+              </app-health-care>
+            </mat-step>
+
+
+            <mat-step [stepControl]="employment.employmentForm" [editable]="editable"
+              [aria-labelledby]="selectedIndex==5 ? 'disabled_af' : null">
+              <ng-template matStepLabel>
+                <span class="fontsizestepper" [ngClass]="{'allow': selectedIndex != 5}">
+                  {{ "wizard.employment" | translate }}
+                </span>
+              </ng-template>
+              <app-employment #employment [resultofSaveonExit]="saveonExittoChild + 'employment'"
+                [employmentInfo]="claim?.employmentInformation" [referenceNumber]="claim.referenceNumber"
+                [claimId]="claim.claimId" (employmentSaved)="employmentSaved($event)"
+                (formStatus)="checkEmploymentComplete($event)" (saveDataonExit1)="saveDataonExit1('exit')">
+              </app-employment>
+            </mat-step>
+
+            <mat-step [editable]="editable" [aria-labelledby]="selectedIndex==5 ? 'disabled_af' : null">
+              <ng-template matStepLabel>
+                <span class="fontsizestepper" [ngClass]="{'allow': selectedIndex != 5}">
+                  {{ "wizard.supportingDocuments" | translate }}
+                </span>
+              </ng-template>
+              <app-supporting-documents [resultofSaveonExit]="saveonExittoChild + 'supportingdoc'"
+                [claimId]="claim.claimId" [claimDocumentsList]="claim?.claimDocumentsList"
+                [employmentInfo]="claim?.employmentInformation" [referenceNumber]="claim.referenceNumber"
+                (next)="next()" (previous)="previous()" (showSuccess)="showSuccess($event)"></app-supporting-documents>
+            </mat-step>
+
+            <mat-step [stepControl]="review" [editable]="editable"
+              [aria-labelledby]="selectedIndex==5 ? 'disabled_af' : null">
+              <ng-template matStepLabel>
+
+                <span class="fontsizestepper" [ngClass]="{'allow': selectedIndex != 5}">
+                  {{ "wizard.review" | translate }}
+                </span>
+              </ng-template>
+              <app-review [resultofSaveonExit]="saveonExittoChild + 'review'" [claimId]="claim?.claimId"
+                [currentPosition]="stepper" [checkChanges]="emitChanges" (next)="next()"
+                (setTabindex)="setTabindex($event)">
+              </app-review>
+            </mat-step>
+
+            <mat-step [stepControl]="confirmation" [editable]="!editable"
+              [aria-labelledby]="selectedIndex==5 ?  null : 'disabled_af'">
+              <ng-template matStepLabel>
+                <span class="fontsizestepper">
+                  {{ "wizard.confirmation" | translate }}
+                </span>
+              </ng-template>
+              <app-confirmation *ngIf="selectedIndex === 5"></app-confirmation>
+            </mat-step>
+          </mat-vertical-stepper>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>
+
+
+<a target="_blank" aria-label="Feedback link opens in a new window" href="{{feedbackurl}}"
+  onclick="trackSurveyAccepted_NoiseInducedHearingLoss_EN();" class="feedbackLink">
+  <div class="feedbackButton"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 13 12.21">
+      <title>Chat Icon</title>
+      <g id="Layer_2" data-name="Layer 2">
+        <g id="Layer_1-2" data-name="Layer 1">
+          <path style="fill:#fff;"
+            d="M2.59,12.21a.65.65,0,0,1-.31-.08.66.66,0,0,1-.35-.58V9.87H1.37A1.37,1.37,0,0,1,0,8.49V1.37A1.37,1.37,0,0,1,1.37,0H11.63A1.37,1.37,0,0,1,13,1.37V8.49a1.37,1.37,0,0,1-1.37,1.37H6.1L3,12.09A.7.7,0,0,1,2.59,12.21Z">
+          </path>
+        </g>
+      </g>
+    </svg>
+    <div class="feedbackLabel">Feedback</div>
+  </div>
+</a>

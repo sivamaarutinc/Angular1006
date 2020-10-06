@@ -1,0 +1,671 @@
+<div class="content">
+  <div class="content-margin">
+
+    <p class="info mt-3" attr.aria-label="{{ 'healthCareInfo.fieldsMandatory' | translate }}">
+      {{ "healthCareInfo.fieldsMandatory" | translate }}</p>
+
+    <p attr.aria-label="{{ 'healthCareInfo.referenceNumber' | translate }} {{referenceNumber}}">
+      {{ "healthCareInfo.referenceNumber" | translate }} {{referenceNumber}}<br>
+      {{ "healthCareInfo.saveFileMsg" | translate }}</p>
+
+    <h2 id="main-content" attr.aria-label="{{ 'healthCareInfo.title' | translate }}">
+      {{ "healthCareInfo.title" | translate }}</h2>
+
+
+
+      <app-field-error-display *ngIf="iscommonerrormsg" id="commonerrormsgid" tabindex="0" role="alert" [displayError]="iscommonerrormsg"
+        errorMsg="{{ 'errors.commonerrormsg' | translate }}">
+      </app-field-error-display>
+      <!-- <h2 role="heading" attr.aria-label="{{ 'healthCareInfo.title' | translate }}">
+        {{ "healthCareInfo.title" | translate }}</h2> -->
+
+
+    <form [formGroup]="continueHealthCareForm" focusInvalidInput role="form">
+      <!-- start of Year you first noticed hearing loss: -->
+      <label class="mt-4" for="hearingLossNoticedYear">{{ "healthCareInfo.hearingLossMsg" | translate }}:</label><br>
+      <label class="hint">{{ "healthCareInfo.yearPlaceHolder" | translate }}</label>
+      <div class="d-flex">
+        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 pl-0"
+          [ngClass]="displayFieldCss(continueHealthCareForm, 'hearingLossNoticedYear')">
+          <input formControlName="hearingLossNoticedYear" type="text" minlength="4" maxlength="4"
+            (keyup)="validateYear($event)" style="margin-right: -40px;" name="hearingLossNoticedYear"
+            title="Year you first noticed hearing loss" aria-required="true"
+            attr.aria-label="{{ 'healthCareInfo.hearingLossMsg' | translate }} {{ 'healthCareInfo.yearPlaceHolder' | translate }}"
+            aria-invalid="isFieldTouched(continueHealthCareForm, 'hearingLossNoticedYear',true)">
+        </div>
+      </div>
+
+      <app-field-error-display [displayError]="isFieldTouched(continueHealthCareForm, 'hearingLossNoticedYear',true)"
+        role="alert" errorMsg="{{ 'errors.required' | translate }} {{ 'healthCareInfo.hearingLossMsg' | translate }}">
+      </app-field-error-display>
+      <app-field-error-display
+        [displayError]="isFieldTouched(continueHealthCareForm, 'hearingLossNoticedYear',false) && continueHealthCareForm.get('hearingLossNoticedYear')?.value.length < 4"
+        role="alert" errorMsg="{{ 'errors.invalidYear' | translate }}">
+      </app-field-error-display>
+
+      <app-field-error-display
+        [displayError]="isFieldTouched(continueHealthCareForm, 'hearingLossNoticedYear',false) && (continueHealthCareForm.get('hearingLossNoticedYear')?.value.length === 4 && invalidFutureYear)"
+        role="alert" errorMsg="{{ 'errors.invalidFutureYear' | translate }}">
+      </app-field-error-display>
+
+      <app-field-error-display
+        [displayError]="isFieldTouched(continueHealthCareForm, 'hearingLossNoticedYear',false) && (continueHealthCareForm.get('hearingLossNoticedYear')?.value.length === 4 && invalidPastYear)"
+        role="alert" errorMsg="{{ 'errors.invalidPastYear' | translate }}">
+      </app-field-error-display>
+      <!-- <app-field-error-display [displayError]="yearErrormessage" errorMsg="{{yearErrormessage}}">
+      </app-field-error-display> -->
+      <!-- end of Year you first noticed hearing loss: -->
+
+      <!-- start of Are you wearing a hearing aid? -->
+
+
+      <fieldset class="mt-4">
+        <legend id='wearHearingAid'>{{ "healthCareInfo.wearHearingAid" | translate }}</legend>
+        <ul aria-labelledby='wearHearingAid' role='radiogroup' class="no-bullets"
+          [ngClass]="displayFieldCss(continueHealthCareForm, 'hasHearingAid')">
+          <li>
+            <label for="wearHearingAidyes">
+              <input type="radio" id="wearHearingAidyes" name="hasHearingAid" [value]="true"
+                formControlName="hasHearingAid" (change)="hasHearingAidChange()" aria-required="true"
+                attr.aria-label="{{ 'healthCareInfo.yes' | translate }}"
+                aria-invalid="isFieldTouched(continueHealthCareForm, 'hasHearingAid')">
+              {{ "healthCareInfo.yes" | translate }}
+            </label>
+          </li>
+          <li>
+            <label for="wearHearingAidno">
+              <input type="radio" id="wearHearingAidno" name="hasHearingAid" [value]="false"
+                formControlName="hasHearingAid" (change)="hasHearingAidChange()" aria-required="true"
+                aria-invalid="isFieldTouched(continueHealthCareForm, 'hasHearingAid')"
+                attr.aria-label="{{ 'healthCareInfo.no' | translate }}">
+              {{ "healthCareInfo.no" | translate }}
+            </label>
+          </li>
+        </ul>
+        <app-field-error-display [displayError]="isFieldTouched(continueHealthCareForm, 'hasHearingAid')" role="alert"
+          errorMsg="{{ 'errors.required' | translate }} {{ 'healthCareInfo.wearHearingAid' | translate }}">
+        </app-field-error-display>
+      </fieldset>
+
+
+      <!-- 
+        <label class="mt-4">{{ "healthCareInfo.wearHearingAid" | translate }}</label>
+        <ul [ngClass]="displayFieldCss(continueHealthCareForm, 'hasHearingAid')" role="radiogroup"
+          attr.aria-label="{{ 'healthCareInfo.wearHearingAid' | translate }}">
+          <li>
+            <input type="radio" name="hasHearingAid" [value]="true" formControlName="hasHearingAid"
+              (change)="hasHearingAidChange()" id="hasHearingAid"  
+              aria-required="true" attr.aria-label="{{ 'healthCareInfo.yes' | translate }}"
+              aria-invalid="isFieldTouched(continueHealthCareForm, 'hasHearingAid')">
+            {{ "healthCareInfo.yes" | translate }}
+          </li>
+          <li>
+            <input type="radio" name="hasHearingAid" [value]="false" formControlName="hasHearingAid"
+              (change)="hasHearingAidChange()"   aria-required="true"
+              aria-invalid="isFieldTouched(continueHealthCareForm, 'hasHearingAid')"
+              attr.aria-label="{{ 'healthCareInfo.no' | translate }}">
+            {{ "healthCareInfo.no" | translate }}
+          </li>
+        </ul>
+
+        <app-field-error-display [displayError]="isFieldTouched(continueHealthCareForm, 'hasHearingAid')" role="alert"
+          errorMsg="{{ 'errors.required' | translate }} {{ 'healthCareInfo.wearHearingAid' | translate }}">
+        </app-field-error-display> -->
+      <!-- end of Are you wearing a hearing aid? -->
+
+      <!-- start of When did you start wearing your hearing aid? -->
+      <ng-container *ngIf="continueHealthCareForm.get('hasHearingAid')?.value">
+        <label class="mt-4 mb-0"
+          for="hearingAidUsageDate">{{ "healthCareInfo.hearingAidUsageDate" | translate }}</label><br>
+        <label class="hint"
+          attr.aria-label="{{ 'healthCareInfo.datePlaceHolder' | translate }}">{{ "healthCareInfo.datePlaceHolder" | translate }}</label>
+        <div class="d-flex">
+          <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 pl-0"
+            [ngClass]="displayFieldCss(continueHealthCareForm, 'hearingAidUsageDate')">
+            <input [matDatepicker]="hearingAidUsageDate" [max]="maxDate"
+              (input)="checkDate($event.target.value, 'hearingAidUsageDate')" formControlName="hearingAidUsageDate"
+              type="text" style="margin-right: -40px;" title="hearingAidUsageDate" name="hearingAidUsageDate"
+              (focusout)="focusOutonDate($event.target.value, 'hearingAidUsageDate')" aria-required="true"
+              attr.aria-label="{{ 'healthCareInfo.hearingAidUsageDate' | translate }}"
+              aria-invalid="isFieldTouched(continueHealthCareForm, 'hearingAidUsageDate',true) && !datevalue1">
+            <mat-datepicker-toggle matSuffix [for]="hearingAidUsageDate"></mat-datepicker-toggle>
+            <mat-datepicker #hearingAidUsageDate startView="year"></mat-datepicker>
+          </div>
+        </div>
+
+        <app-field-error-display
+          [displayError]="isFieldTouched(continueHealthCareForm, 'hearingAidUsageDate',true) && !datevalue1"
+          role="alert"
+          errorMsg="{{ 'errors.required' | translate }} {{ 'healthCareInfo.hearingAidUsageDate' | translate }}">
+        </app-field-error-display>
+
+        <app-field-error-display
+          [displayError]="!validhearingAidUsageDate && datevalue1 && isFieldTouched(continueHealthCareForm, 'hearingAidUsageDate',true)"
+          role="alert"
+          errorMsg="{{ 'errors.invalidDateFormat' | translate }} {{ 'healthCareInfo.hearingAidUsageDate' | translate }}">
+        </app-field-error-display>
+
+        <app-field-error-display
+          [displayError]="validhearingAidUsageDate && datevalue1 && isFieldTouched(continueHealthCareForm, 'hearingAidUsageDate',false)"
+          role="alert" errorMsg="{{ 'healthCareInfo.hearingAidUsageinvalidDate' | translate }}">
+        </app-field-error-display>
+
+      </ng-container>
+      <!-- end of When did you start wearing your hearing aid? -->
+
+
+      <label class="mt-4 mb-0"
+        for="dateOfFirstAudiogram">{{ "healthCareInfo.dateOfFirstAudiogram" | translate }}:</label><br>
+      <label class="hint"
+        attr.aria-label="{{ 'healthCareInfo.datePlaceHolder' | translate }}">{{ "healthCareInfo.datePlaceHolder" | translate }}</label>
+      <div class="d-flex">
+        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 pl-0"
+          [ngClass]="displayFieldCss(continueHealthCareForm, 'dateOfFirstAudiogram')">
+          <input [matDatepicker]="dateOfFirstAudiogram" formControlName="dateOfFirstAudiogram" type="text"
+            style="margin-right: -40px;" (input)="checkDate($event.target.value, 'dateOfFirstAudiogram')"
+            (focusout)="focusOutonDate($event.target.value, 'dateOfFirstAudiogram')" title="dateOfFirstAudiogram"
+            name="dateOfFirstAudiogram" aria-required="true"
+            attr.aria-label="{{ 'healthCareInfo.dateOfFirstAudiogram' | translate }}"
+            aria-invalid="isFieldTouched(continueHealthCareForm, 'dateOfFirstAudiogram',true) && !datevalue2">
+          <mat-datepicker-toggle matSuffix [for]="dateOfFirstAudiogram"></mat-datepicker-toggle>
+          <mat-datepicker #dateOfFirstAudiogram startView="year"></mat-datepicker>
+        </div>
+      </div>
+
+
+      <app-field-error-display
+        [displayError]="isFieldTouched(continueHealthCareForm, 'dateOfFirstAudiogram',true) && !datevalue2" role="alert"
+        errorMsg="{{ 'errors.required' | translate }} {{ 'healthCareInfo.dateOfFirstAudiogram' | translate }}">
+      </app-field-error-display>
+
+      <app-field-error-display
+        [displayError]="!validdateOfFirstAudiogram && datevalue2 && isFieldTouched(continueHealthCareForm, 'dateOfFirstAudiogram',true)"
+        role="alert"
+        errorMsg="{{ 'errors.invalidDateFormat' | translate }} {{ 'healthCareInfo.dateOfFirstAudiogram' | translate }}">
+      </app-field-error-display>
+
+
+      <label class="mt-4" for="audiogramClinicName">{{ "healthCareInfo.audiogramClinicName" | translate }}:</label>
+      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 pl-0"
+        [ngClass]="displayFieldCss(continueHealthCareForm, 'audiogramClinicName')">
+        <input type="text" maxlength="250" formControlName="audiogramClinicName"
+          (input)="replaceSpaces('audiogramClinicName')" (blur)="trimpaces('audiogramClinicName')"
+          title="audiogramClinicName" name="audiogramClinicName" aria-required="true"
+          attr.aria-label="{{ 'healthCareInfo.audiogramClinicName' | translate }}"
+          aria-invalid="isFieldTouched(continueHealthCareForm, 'audiogramClinicName',true)">
+      </div>
+      <app-field-error-display [displayError]="isFieldTouched(continueHealthCareForm, 'audiogramClinicName',true)"
+        role="alert"
+        errorMsg="{{ 'errors.required' | translate }} {{ 'healthCareInfo.audiogramClinicName' | translate }}">
+      </app-field-error-display>
+
+      <app-field-error-display [displayError]="isFieldTouched(continueHealthCareForm, 'audiogramClinicName',false)"
+        role="alert"
+        errorMsg="{{ 'errors.removespecialcharacters' | translate }} {{ 'healthCareInfo.audiogramClinicName' | translate }} {{ 'errors.validname' | translate }}">
+      </app-field-error-display>
+
+      <label class="mt-4"
+        for="audiogramClinicAddress">{{ "healthCareInfo.audiogramClinicAddress" | translate }}:</label>
+      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 pl-0"
+        [ngClass]="displayFieldCss(continueHealthCareForm, 'audiogramClinicAddress')">
+
+
+        <textarea rows="5" cols="60" formControlName="audiogramClinicAddress" autocorrect="off" autocapitalize="off"
+          spellcheck="off" maxlength="250" #audiogramClinicAddress (input)="replaceSpaces('audiogramClinicAddress')"
+          (blur)="trimpaces('audiogramClinicAddress')"
+          attr.aria-label="{{ 'healthCareInfo.audiogramClinicAddress' | translate }}" title="audiogramClinicAddress"
+          name="audiogramClinicAddress" aria-required="true"
+          aria-invalid="isFieldTouched(continueHealthCareForm, 'audiogramClinicAddress',true)">
+        </textarea>
+
+        <!-- <textarea rows="5" cols="60" formControlName="audiogramClinicAddress" ngx-google-places-autocomplete
+          (onAddressChange)="addressChange($event, 0)" maxlength="250" (input)="replaceSpaces('audiogramClinicAddress')"
+          (blur)="trimpaces('audiogramClinicAddress')"
+          attr.aria-label="{{ 'healthCareInfo.audiogramClinicAddress' | translate }}" title="audiogramClinicAddress"
+          name="audiogramClinicAddress" aria-required="true"
+          aria-invalid="isFieldTouched(continueHealthCareForm, 'audiogramClinicAddress',true)">
+        </textarea> -->
+      </div>
+      <app-field-error-display [displayError]="isFieldTouched(continueHealthCareForm, 'audiogramClinicAddress',true)"
+        role="alert"
+        errorMsg="{{ 'errors.required' | translate }} {{ 'healthCareInfo.audiogramClinicAddress' | translate }}">
+      </app-field-error-display>
+      <app-field-error-display [displayError]="isFieldTouched(continueHealthCareForm, 'audiogramClinicAddress',false)"
+        role="alert" errorMsg="{{ 'errors.invalidAddress' | translate }}">
+      </app-field-error-display>
+
+      <label class="mt-4"
+        for="audiogramClinicPhoneNumber">{{ "healthCareInfo.audiogramClinicPhone" | translate }}:</label>
+      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 pl-0"
+        [ngClass]="displayFieldCss(continueHealthCareForm, 'audiogramClinicPhoneNumber')">
+        <input type="text" formControlName="audiogramClinicPhoneNumber" minlength="10" maxlength="30"
+          (keyup)="checkPhone($event, 'adClinic')" name="audiogramClinicPhoneNumber" title="audiogramClinicPhoneNumber"
+          aria-required="true" attr.aria-label="{{ 'healthCareInfo.audiogramClinicPhone' | translate }}"
+          aria-invalid="isFieldTouched(continueHealthCareForm, 'audiogramClinicPhoneNumber')" />
+      </div>
+
+      <app-field-error-display [displayError]="isFieldTouched(continueHealthCareForm, 'audiogramClinicPhoneNumber')"
+        role="alert"
+        errorMsg="{{ 'errors.required' | translate }} {{ 'healthCareInfo.audiogramClinicPhone' | translate }}">
+      </app-field-error-display>
+      <!-- <app-field-error-display [displayError]="isFieldTouched(continueHealthCareForm, 'audiogramClinicPhoneNumber')"
+        errorMsg="Please enter a phone number">
+      </app-field-error-display> -->
+
+
+
+      <fieldset class="mt-4">
+        <legend id='hasVisitedEntSpecialist'>{{ "healthCareInfo.entVisitQuestion" | translate }}</legend>
+        <ul aria-labelledby='hasVisitedEntSpecialist' role='radiogroup' class="no-bullets"
+          [ngClass]="displayFieldCss(continueHealthCareForm, 'hasVisitedEntSpecialist')">
+          <li>
+            <label for="hasVisitedEntSpecialistyes">
+              <input type="radio" id="hasVisitedEntSpecialistyes" [value]="true" name="hasVisitedEntSpecialist"
+                formControlName="hasVisitedEntSpecialist" (change)="hasVisitedEntSpecialistChange()"
+                attr.aria-label="{{ 'healthCareInfo.yes' | translate }}" aria-required="true"
+                aria-invalid="isFieldTouched(continueHealthCareForm, 'hasVisitedEntSpecialist')">
+              {{ "healthCareInfo.yes" | translate }}
+            </label>
+          </li>
+          <li>
+            <label for="hasVisitedEntSpecialistno">
+              <input type="radio" id="hasVisitedEntSpecialistno" [value]="false" name="hasVisitedEntSpecialist"
+                formControlName="hasVisitedEntSpecialist" (change)="hasVisitedEntSpecialistChange()"
+                aria-required="true" attr.aria-label="{{ 'healthCareInfo.no' | translate }}"
+                aria-invalid="isFieldTouched(continueHealthCareForm, 'hasVisitedEntSpecialist')">
+              {{ "healthCareInfo.no" | translate }}
+            </label>
+          </li>
+        </ul>
+        <app-field-error-display [displayError]="isFieldTouched(continueHealthCareForm, 'hasVisitedEntSpecialist')"
+          role="alert"
+          errorMsg="{{ 'errors.required' | translate }} {{ 'healthCareInfo.entVisitQuestion' | translate }}">
+        </app-field-error-display>
+      </fieldset>
+
+
+      <!-- 
+      <label class="mt-4">{{ "healthCareInfo.entVisitQuestion" | translate }}</label>
+
+      <ul role="radiogroup" attr.aria-label="{{ 'healthCareInfo.entVisitQuestion' | translate }}"
+        [ngClass]="displayFieldCss(continueHealthCareForm, 'hasVisitedEntSpecialist')">
+        <li>
+          <input type="radio" [value]="true" name="hasVisitedEntSpecialist" formControlName="hasVisitedEntSpecialist"
+            (change)="hasVisitedEntSpecialistChange()" attr.aria-label="{{ 'healthCareInfo.yes' | translate }}"
+              aria-required="true"
+            aria-invalid="isFieldTouched(continueHealthCareForm, 'hasVisitedEntSpecialist')">
+          {{ "healthCareInfo.yes" | translate }}
+        </li>
+        <li>
+          <input type="radio" [value]="false" name="hasVisitedEntSpecialist" formControlName="hasVisitedEntSpecialist"
+            (change)="hasVisitedEntSpecialistChange()"  
+            aria-required="true" attr.aria-label="{{ 'healthCareInfo.no' | translate }}"
+            aria-invalid="isFieldTouched(continueHealthCareForm, 'hasVisitedEntSpecialist')">
+          {{ "healthCareInfo.no" | translate }}
+        </li>
+      </ul>
+
+
+      <app-field-error-display [displayError]="isFieldTouched(continueHealthCareForm, 'hasVisitedEntSpecialist')"
+        role="alert" errorMsg="{{ 'errors.required' | translate }} {{ 'healthCareInfo.entVisitQuestion' | translate }}">
+      </app-field-error-display> -->
+
+      <ng-container *ngIf="continueHealthCareForm.get('hasVisitedEntSpecialist')?.value">
+
+        <label class="mt-4 mb-0"
+          for="entAppointmentDate">{{ "healthCareInfo.entAppointmentDate" | translate }}:</label><br>
+        <label class="hint"
+          attr.aria-label="{{ 'healthCareInfo.datePlaceHolder' | translate }}">{{ "healthCareInfo.datePlaceHolder" | translate }}</label>
+
+        <div class="d-flex">
+          <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 pl-0"
+            [ngClass]="displayFieldCss(continueHealthCareForm, 'entAppointmentDate')">
+            <input [matDatepicker]="entAppointmentDate" formControlName="entAppointmentDate" type="text"
+              style="margin-right: -40px;" (input)="checkDate($event.target.value, 'entAppointmentDate')"
+              (focusout)="focusOutonDate($event.target.value, 'entAppointmentDate')" name="entAppointmentDate"
+              title="entAppointmentDate" aria-required="true"
+              attr.aria-label="{{ 'healthCareInfo.entAppointmentDate' | translate }}"
+              aria-invalid="isFieldTouched(continueHealthCareForm, 'entAppointmentDate',true) && !datevalue3">
+            <mat-datepicker-toggle matSuffix [for]="entAppointmentDate"></mat-datepicker-toggle>
+            <mat-datepicker #entAppointmentDate startView="year"></mat-datepicker>
+          </div>
+        </div>
+
+        <app-field-error-display
+          [displayError]="isFieldTouched(continueHealthCareForm, 'entAppointmentDate',true) && !datevalue3" role="alert"
+          errorMsg="{{ 'errors.required' | translate }} {{ 'healthCareInfo.entAppointmentDate' | translate }}">
+        </app-field-error-display>
+
+        <app-field-error-display
+          [displayError]="!validentAppointmentDate && datevalue3 && isFieldTouched(continueHealthCareForm, 'entAppointmentDate',true)"
+          role="alert"
+          errorMsg="{{ 'errors.invalidDateFormat' | translate }} {{ 'healthCareInfo.entAppointmentDate' | translate }}">
+        </app-field-error-display>
+
+
+        <label class="mt-4" for="entSpecialistName">{{ "healthCareInfo.entSpecialistName" | translate }}:</label>
+        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 pl-0"
+          [ngClass]="displayFieldCss(continueHealthCareForm, 'entSpecialistName')">
+          <input type="text" maxlength="35" formControlName="entSpecialistName"
+            (input)="replaceSpaces('entSpecialistName')" (blur)="trimpaces('entSpecialistName')"
+            name="entSpecialistName" title="entSpecialistName" aria-required="true"
+            attr.aria-label="{{ 'healthCareInfo.entSpecialistName' | translate }}"
+            aria-invalid="isFieldTouched(continueHealthCareForm, 'entSpecialistName',true)">
+        </div>
+
+        <app-field-error-display [displayError]="isFieldTouched(continueHealthCareForm, 'entSpecialistName',true)"
+          role="alert"
+          errorMsg="{{ 'errors.required' | translate }} {{ 'healthCareInfo.entSpecialistName' | translate }}">
+        </app-field-error-display>
+        <app-field-error-display [displayError]="isFieldTouched(continueHealthCareForm, 'entSpecialistName',false)"
+          role="alert"
+          errorMsg="{{ 'errors.removespecialcharacters' | translate }} {{ 'healthCareInfo.entSpecialistName' | translate }} {{ 'errors.validname' | translate }}">
+        </app-field-error-display>
+        <!-- <app-field-error-display [displayError]="isFieldTouched(continueHealthCareForm, 'entSpecialistName')"
+          errorMsg="Please enter a valid name">
+        </app-field-error-display> -->
+
+
+        <label class="mt-4" for="entSpecialistAddress">{{ "healthCareInfo.entSpecialistAddress" | translate }}:</label>
+        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 pl-0"
+          [ngClass]="displayFieldCss(continueHealthCareForm, 'entSpecialistAddress')">
+
+
+
+
+          <textarea rows="5" cols="60" formControlName="entSpecialistAddress" autocorrect="off" autocapitalize="off"
+            spellcheck="off" #entSpecialistAddress maxlength="250" (input)="replaceSpaces('entSpecialistAddress')"
+            (blur)="trimpaces('entSpecialistAddress')" name="entSpecialistAddress" title="entSpecialistAddress"
+            aria-required="true" attr.aria-label="{{ 'healthCareInfo.entSpecialistAddress' | translate }}"
+            aria-invalid="isFieldTouched(continueHealthCareForm, 'entSpecialistAddress',true)">
+         </textarea>
+
+
+          <!-- <textarea rows="5" cols="60" formControlName="entSpecialistAddress" ngx-google-places-autocomplete
+            (onAddressChange)="addressChange($event, 1)" maxlength="250" (input)="replaceSpaces('entSpecialistAddress')"
+            (blur)="trimpaces('entSpecialistAddress')" name="entSpecialistAddress" title="entSpecialistAddress"
+            aria-required="true" attr.aria-label="{{ 'healthCareInfo.entSpecialistAddress' | translate }}"
+            aria-invalid="isFieldTouched(continueHealthCareForm, 'entSpecialistAddress',true)">
+          </textarea> -->
+        </div>
+
+        <app-field-error-display [displayError]="isFieldTouched(continueHealthCareForm, 'entSpecialistAddress',true)"
+          role="alert"
+          errorMsg="{{ 'errors.required' | translate }} {{ 'healthCareInfo.entSpecialistAddress' | translate }}">
+        </app-field-error-display>
+        <app-field-error-display [displayError]="isFieldTouched(continueHealthCareForm, 'entSpecialistAddress',false)"
+          role="alert" errorMsg="{{ 'errors.invalidAddress' | translate }}">
+        </app-field-error-display>
+
+
+        <label class="mt-4"
+          for="entSpecialistPhoneNumber">{{ "healthCareInfo.entSpecialistPhone" | translate }}:</label>
+        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 pl-0"
+          [ngClass]="displayFieldCss(continueHealthCareForm, 'entSpecialistPhoneNumber')">
+          <input type="text" formControlName="entSpecialistPhoneNumber" minlength="10" maxlength="30"
+            (keyup)="checkPhone($event, 'entSpecialist')" name="entSpecialistPhoneNumber"
+            title="entSpecialistPhoneNumber" aria-required="true"
+            attr.aria-label="{{ 'healthCareInfo.entSpecialistPhone' | translate }}"
+            aria-invalid="isFieldTouched(continueHealthCareForm, 'entSpecialistPhoneNumber')" />
+        </div>
+        <app-field-error-display [displayError]="isFieldTouched(continueHealthCareForm, 'entSpecialistPhoneNumber')"
+          role="alert"
+          errorMsg="{{ 'errors.required' | translate }} {{ 'healthCareInfo.entSpecialistPhone' | translate }}">
+        </app-field-error-display>
+
+      </ng-container>
+
+
+
+
+      <fieldset class="mt-4">
+        <legend id='experienceRingingQuestion'>{{ "healthCareInfo.experienceRingingQuestion" | translate }}</legend>
+        <ul aria-labelledby='experienceRingingQuestion' role='radiogroup' class="no-bullets"
+          [ngClass]="displayFieldCss(continueHealthCareForm, 'hasRingingInEar')">
+          <li>
+            <label for="experienceRingingQuestionyes">
+              <input type="radio" id="experienceRingingQuestionyes" name="hasRingingInEar" [value]="true"
+                formControlName="hasRingingInEar" (change)="hasRingingInEarChange()" aria-required="true"
+                attr.aria-label="{{ 'healthCareInfo.yes' | translate }}"
+                aria-invalid="isFieldTouched(continueHealthCareForm, 'hasRingingInEar')">
+              {{ "healthCareInfo.yes" | translate }}
+            </label>
+          </li>
+          <li>
+            <label for="experienceRingingQuestionno">
+              <input type="radio" id="experienceRingingQuestionno" name="hasRingingInEar" [value]="false"
+                formControlName="hasRingingInEar" (change)="hasRingingInEarChange()" aria-required="true"
+                aria-invalid="isFieldTouched(continueHealthCareForm, 'hasRingingInEar')"
+                attr.aria-label="{{ 'healthCareInfo.no' | translate }}">
+              {{ "healthCareInfo.no" | translate }}
+            </label>
+          </li>
+        </ul>
+        <app-field-error-display [displayError]="isFieldTouched(continueHealthCareForm, 'hasRingingInEar')" role="alert"
+          errorMsg="{{ 'errors.required' | translate }} {{ 'healthCareInfo.experienceRingingQuestion' | translate }}">
+        </app-field-error-display>
+      </fieldset>
+
+
+      <!-- <label class=" mt-4">{{ "healthCareInfo.experienceRingingQuestion" | translate }}</label>
+
+      <ul role="radiogroup" attr.aria-label="{{ 'healthCareInfo.experienceRingingQuestion' | translate }}"
+        [ngClass]="displayFieldCss(continueHealthCareForm, 'hasRingingInEar')">
+        <li>
+          <input type="radio" name="hasRingingInEar" [value]="true" formControlName="hasRingingInEar"
+            (change)="hasRingingInEarChange()"  aria-required="true"
+            attr.aria-label="{{ 'healthCareInfo.yes' | translate }}" 
+            aria-invalid="isFieldTouched(continueHealthCareForm, 'hasRingingInEar')">
+          {{ "healthCareInfo.yes" | translate }}
+        </li>
+        <li>
+          <input type="radio" name="hasRingingInEar" [value]="false" formControlName="hasRingingInEar"
+            (change)="hasRingingInEarChange()"  aria-required="true" 
+            aria-invalid="isFieldTouched(continueHealthCareForm, 'hasRingingInEar')"
+            attr.aria-label="{{ 'healthCareInfo.no' | translate }}">
+          {{ "healthCareInfo.no" | translate }}
+        </li>
+      </ul>
+      <app-field-error-display [displayError]="isFieldTouched(continueHealthCareForm, 'hasRingingInEar')" role="alert"
+        errorMsg="{{ 'errors.required' | translate }} {{ 'healthCareInfo.experienceRingingQuestion' | translate }}">
+      </app-field-error-display> -->
+
+
+      <ng-container *ngIf="continueHealthCareForm.get('hasRingingInEar')?.value">
+
+
+
+        <fieldset class="mt-4">
+          <legend id='experienceRingingForHowLong'>{{ "healthCareInfo.experienceRingingForHowLong" | translate }}
+          </legend>
+          <ul aria-labelledby='experienceRingingForHowLong' role='radiogroup' class="no-bullets"
+            [ngClass]="displayFieldCss(continueHealthCareForm, 'ringingEarDuration')">
+            <li>
+              <label for="ringingEarDurationyes">
+                <input type="radio" id="ringingEarDurationyes" name="ringingEarDuration" value="Less than 2 years"
+                  formControlName="ringingEarDuration" aria-required="true"
+                  aria-invalid="isFieldTouched(continueHealthCareForm, 'ringingEarDuration')"
+                  attr.aria-label="{{ 'healthCareInfo.lessThanTwoYears' | translate }}">
+                {{ "healthCareInfo.lessThanTwoYears" | translate }}
+              </label>
+            </li>
+            <li>
+              <label for="ringingEarDurationno">
+                <input type="radio" id="ringingEarDurationno" name="ringingEarDuration" value="More than 2 years"
+                  formControlName="ringingEarDuration" aria-required="true"
+                  aria-invalid="isFieldTouched(continueHealthCareForm, 'ringingEarDuration')"
+                  attr.aria-label="{{ 'healthCareInfo.moreThanTwoYears' | translate }}">
+                {{ "healthCareInfo.moreThanTwoYears" | translate }}
+              </label>
+            </li>
+          </ul>
+          <app-field-error-display [displayError]="isFieldTouched(continueHealthCareForm, 'ringingEarDuration')"
+            role="alert"
+            errorMsg="{{ 'errors.required' | translate }} {{ 'healthCareInfo.experienceRingingForHowLong' | translate }}">
+          </app-field-error-display>
+
+        </fieldset>
+
+
+
+        <!-- <label class="mt-4">{{ "healthCareInfo.experienceRingingForHowLong" | translate }}</label>
+
+        <ul role="radiogroup" attr.aria-label="{{ 'healthCareInfo.experienceRingingForHowLong' | translate }}"
+          [ngClass]="displayFieldCss(continueHealthCareForm, 'ringingEarDuration')">
+          <li>
+            <input type="radio" name="ringingEarDuration" value="Less than 2 years" formControlName="ringingEarDuration"
+               aria-required="true"
+              aria-invalid="isFieldTouched(continueHealthCareForm, 'ringingEarDuration')"
+              attr.aria-label="{{ 'healthCareInfo.lessThanTwoYears' | translate }}" >
+            {{ "healthCareInfo.lessThanTwoYears" | translate }}
+          </li>
+          <li>
+            <input type="radio" name="ringingEarDuration" value="More than 2 years" formControlName="ringingEarDuration"
+               aria-required="true"
+              aria-invalid="isFieldTouched(continueHealthCareForm, 'ringingEarDuration')"
+              attr.aria-label="{{ 'healthCareInfo.moreThanTwoYears' | translate }}" >
+            {{ "healthCareInfo.moreThanTwoYears" | translate }}
+          </li>
+        </ul>
+         <app-field-error-display [displayError]="isFieldTouched(continueHealthCareForm, 'ringingEarDuration')"
+          errorMsg="Please select an option">
+        </app-field-error-display>
+
+        <app-field-error-display [displayError]="isFieldTouched(continueHealthCareForm, 'ringingEarDuration')"
+          role="alert"
+          errorMsg="{{ 'errors.required' | translate }} {{ 'healthCareInfo.experienceRingingForHowLong' | translate }}">
+        </app-field-error-display> -->
+
+
+
+
+        <!-- start of Is the ringing in your ears severe? -->
+
+        <fieldset class="mt-4">
+          <legend id='isRingingSevere'>{{ "healthCareInfo.isRingingSevere" | translate }}</legend>
+          <ul aria-labelledby='isRingingSevere' role='radiogroup' class="no-bullets"
+            [ngClass]="displayFieldCss(continueHealthCareForm, 'hasSevereRingingInEar')">
+            <li>
+              <label for="hasSevereRingingInEaryes">
+                <input type="radio" id="hasSevereRingingInEaryes" name="hasSevereRingingInEar" [value]="true"
+                  formControlName="hasSevereRingingInEar" aria-required="true"
+                  attr.aria-label="{{ 'healthCareInfo.yes' | translate }}"
+                  aria-invalid="isFieldTouched(continueHealthCareForm, 'hasSevereRingingInEar')">
+                {{ "healthCareInfo.yes" | translate }}
+              </label>
+            </li>
+            <li>
+              <label for="hasSevereRingingInEarno">
+                <input type="radio" id="hasSevereRingingInEarno" name="hasSevereRingingInEar" [value]="false"
+                  formControlName="hasSevereRingingInEar" aria-required="true"
+                  attr.aria-label="{{ 'healthCareInfo.no' | translate }}"
+                  aria-invalid="isFieldTouched(continueHealthCareForm, 'hasSevereRingingInEar')">
+                {{ "healthCareInfo.no" | translate }}
+              </label>
+            </li>
+          </ul>
+          <app-field-error-display [displayError]="isFieldTouched(continueHealthCareForm, 'hasSevereRingingInEar')"
+            role="alert"
+            errorMsg="{{ 'errors.required' | translate }} {{ 'healthCareInfo.isRingingSevere' | translate }}">
+          </app-field-error-display>
+
+        </fieldset>
+
+
+
+        <!-- <label class="mt-4">{{ "healthCareInfo.isRingingSevere" | translate }}</label>
+        <ul role="radiogroup" attr.aria-label="{{ 'healthCareInfo.isRingingSevere' | translate }}"
+          [ngClass]="displayFieldCss(continueHealthCareForm, 'hasSevereRingingInEar')">
+          <li>
+            <input type="radio" name="hasSevereRingingInEar" [value]="true" formControlName="hasSevereRingingInEar"
+               aria-required="true"
+              attr.aria-label="{{ 'healthCareInfo.yes' | translate }}" 
+              aria-invalid="isFieldTouched(continueHealthCareForm, 'hasSevereRingingInEar')">
+            {{ "healthCareInfo.yes" | translate }}
+          </li>
+          <li>
+            <input type="radio" name="hasSevereRingingInEar" [value]="false" formControlName="hasSevereRingingInEar"
+               aria-required="true" 
+              attr.aria-label="{{ 'healthCareInfo.no' | translate }}"
+              aria-invalid="isFieldTouched(continueHealthCareForm, 'hasSevereRingingInEar')">
+            {{ "healthCareInfo.no" | translate }}
+          </li>
+        </ul>
+
+
+        <app-field-error-display [displayError]="isFieldTouched(continueHealthCareForm, 'hasSevereRingingInEar')"
+          role="alert"
+          errorMsg="{{ 'errors.required' | translate }} {{ 'healthCareInfo.isRingingSevere' | translate }}">
+        </app-field-error-display> -->
+        <!-- end of Is the ringing in your ears severe? -->
+
+        <!-- start of Is the ringing in your ears constant? -->
+
+        <fieldset class="mt-4">
+          <legend id='isRingingConstant'>{{ "healthCareInfo.isRingingConstant" | translate }}</legend>
+          <ul aria-labelledby='isRingingConstant' role='radiogroup' class="no-bullets"
+            [ngClass]="displayFieldCss(continueHealthCareForm, 'hasConstantRingingInEar')">
+            <li>
+              <label for="isRingingConstantyes">
+                <input type="radio" id="isRingingConstantyes" name="hasConstantRingingInEar" [value]="true"
+                  formControlName="hasConstantRingingInEar" aria-required="true"
+                  attr.aria-label="{{ 'healthCareInfo.yes' | translate }}"
+                  aria-invalid="isFieldTouched(continueHealthCareForm, 'hasConstantRingingInEar')">
+                {{ "healthCareInfo.yes" | translate }}
+              </label>
+            </li>
+            <li>
+              <label for="isRingingConstantno">
+                <input type="radio" id="isRingingConstantno" name="hasConstantRingingInEar" [value]="false"
+                  attr.aria-label="{{ 'healthCareInfo.no' | translate }}" formControlName="hasConstantRingingInEar"
+                  aria-required="true" aria-invalid="isFieldTouched(continueHealthCareForm, 'hasConstantRingingInEar')">
+                {{ "healthCareInfo.no" | translate }}
+              </label>
+            </li>
+          </ul>
+          <app-field-error-display [displayError]="isFieldTouched(continueHealthCareForm, 'hasConstantRingingInEar')"
+            role="alert"
+            errorMsg="{{ 'errors.required' | translate }} {{ 'healthCareInfo.isRingingConstant' | translate }}">
+          </app-field-error-display>
+
+        </fieldset>
+
+
+        <!-- <label class="mt-4">{{ "healthCareInfo.isRingingConstant" | translate }}</label>
+        <ul role="radiogroup" attr.aria-label="{{ 'healthCareInfo.isRingingConstant' | translate }}"
+          [ngClass]="displayFieldCss(continueHealthCareForm, 'hasConstantRingingInEar')">
+          <li>
+            <input type="radio" name="hasConstantRingingInEar" [value]="true" formControlName="hasConstantRingingInEar"
+              aria-required="true"
+              attr.aria-label="{{ 'healthCareInfo.yes' | translate }}" 
+              aria-invalid="isFieldTouched(continueHealthCareForm, 'hasConstantRingingInEar')">
+            {{ "healthCareInfo.yes" | translate }}
+          </li>
+          <li>
+            <input type="radio" name="hasConstantRingingInEar" [value]="false"
+              attr.aria-label="{{ 'healthCareInfo.no' | translate }}" formControlName="hasConstantRingingInEar"
+               aria-required="true"
+              aria-invalid="isFieldTouched(continueHealthCareForm, 'hasConstantRingingInEar')">
+            {{ "healthCareInfo.no" | translate }}
+          </li>
+        </ul>
+
+        <app-field-error-display [displayError]="isFieldTouched(continueHealthCareForm, 'hasConstantRingingInEar')"
+          role="alert"
+          errorMsg="{{ 'errors.required' | translate }} {{ 'healthCareInfo.isRingingConstant' | translate }}">
+        </app-field-error-display> -->
+      </ng-container>
+      <!-- end of Is the ringing in your ears constant? -->
+      <div class="d-flex mt-5">
+        <button class="btn-wizard btn-bold btn pl-0" role="button"
+          (click)="addOrUpdateHealthCareProviderInfo(true,false,false)"><b>{{ "healthCareInfo.save" | translate }}</b></button>
+        <button class="btn-wizard btn-bold btn" matStepperPrevious role="button"
+          (click)="addOrUpdateHealthCareProviderInfo(false,true,false)"><i class="fa fa-angle-left"></i><b>
+            {{ "healthCareInfo.previous" | translate }}</b><span class="ml-4">|</span></button>
+        <button class="btn-wizard btn-bold btn" role="button"
+          (click)="addOrUpdateHealthCareProviderInfo(false,false,true)"><b>{{ "healthCareInfo.next" | translate }}
+          </b><i class="fa fa-angle-right"></i></button>
+      </div>
+    </form>
+  </div>
+</div>

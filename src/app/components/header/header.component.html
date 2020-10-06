@@ -1,0 +1,36 @@
+
+<header role="banner">
+  <div class="logo-table">
+    <div class="logoWrap">
+      <div class="row mt-3 mb-n3">
+        <!-- <a href="./#main-content" class="visually-hidden focusable skip-link">
+          Skip to main content
+        </a> -->
+        <app-skip-to-main></app-skip-to-main>
+      </div>
+      <div class="toggle row">
+        <button mat-raised-button *ngIf="isFrench" id="langToggleLink" class="nav bumpRS linkActive"
+          attr.aria-label="{{ 'header.languageDesc' | translate }}" (click)="switchLanguage('en')">
+          {{ "header.siteLanguageEnglish" | translate }}
+        </button>
+        <button mat-raised-button *ngIf="isEnglish" id="langToggleLink" class="nav bumpRS linkActive"
+          attr.aria-label="{{ 'header.languageDesc' | translate }}" (click)="switchLanguage('fr')">
+          {{ "header.siteLanguageFrench" | translate }}
+        </button>
+        <button mat-raised-button id="langToggleLink" class="nav linkActive" (click)="navigateNewtoURI()"
+          title="WSIB Exit" attr.aria-label="{{ 'header.exit' | translate }}">
+          {{ "header.exit" | translate }}
+        </button>
+      </div>
+      <div class="logo-div">
+        <h2 style="line-height: 83px;">
+
+          <a href="http://www.wsib.ca" target="_blank" aria-describedby="WSIB logo" class="logoLink"
+            attr.aria-label="{{ 'header.onlineServices' | translate }}" title="WSIB Home">WSIB</a>
+          <span class="header-text-online-services">{{ "header.onlineServices" | translate }}</span>
+        </h2>
+      </div>
+    </div>
+  </div>
+</header>
+

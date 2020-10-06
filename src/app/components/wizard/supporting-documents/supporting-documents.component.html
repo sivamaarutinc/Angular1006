@@ -1,0 +1,294 @@
+<div class="content">
+  <!-- <app-field-error-display [displayError]="canNavigate"
+    errorMsg="{{ 'supportingDocuments.uploadInprogressMessage' | translate }}">
+  </app-field-error-display> -->
+
+  <p class="info mt-3" attr.aria-label="{{ 'supportingDocuments.fieldsMandatory' | translate }}">
+    {{ "supportingDocuments.fieldsMandatory" | translate }}</p>
+
+  <p attr.aria-label="{{ 'supportingDocuments.youMustComplete' | translate }}">
+    {{ "supportingDocuments.youMustComplete" | translate }} </p>
+
+  <p  attr.aria-label="{{ 'supportingDocuments.referenceNumber' | translate }}">
+    {{ "supportingDocuments.referenceNumber" | translate }} {{referenceNumber}}</p>
+    
+  <!-- <p attr.aria-label="{{ 'supportingDocuments.saveAndexistMessage' | translate }}">
+    {{ "supportingDocuments.saveAndexistMessage" | translate }} </p> -->
+
+  <h2 role="heading" attr.aria-label="{{ 'supportingDocuments.title' | translate }}">
+    {{ "supportingDocuments.title" | translate }}</h2>
+
+  <p class="info mt-3" attr.aria-label="{{ 'supportingDocuments.supportingDocumentation' | translate }}">
+    {{ "supportingDocuments.supportingDocumentation" | translate }}</p>
+
+  <h2 role="heading" class="mt-3" attr.aria-label="{{ 'supportingDocuments.healthCare' | translate }}">
+    {{ "supportingDocuments.healthCare" | translate }}</h2>
+  <p class="info mb-0" attr.aria-label="{{ 'supportingDocuments.attachAudiogramMsg' | translate }}">
+    {{ "supportingDocuments.attachAudiogramMsg" | translate }}</p>
+  <p attr.aria-label="{{ 'supportingDocuments.attachAudiogramWarning' | translate }}">
+    {{ "supportingDocuments.attachAudiogramWarning" | translate }}</p>
+
+  <!-- start drag & drop audiogram -->
+
+  <app-field-error-display [displayError]="healthcareErrormessage == 'maxfileupload'" role="alert"
+    errorMsg='{{ "supportingDocuments.maxfileupload" | translate }}'
+    attr.aria-label="{{ 'supportingDocuments.maxfileupload' | translate }}">
+  </app-field-error-display>
+  <app-field-error-display [displayError]="healthcareErrormessage == 'validation'" role="alert"
+    errorMsg='{{"supportingDocuments.validation" | translate }}'
+    attr.aria-label="{{ 'supportingDocuments.validation' | translate }}">
+  </app-field-error-display>
+  <app-field-error-display [displayError]="healthcareErrormessage == 'file'" role="alert"
+    errorMsg='{{ "supportingDocuments.file" | translate }}'
+    attr.aria-label="{{ 'supportingDocuments.file' | translate }}">
+  </app-field-error-display>
+  <app-field-error-display [displayError]="healthcareErrormessage == 'name'" role="alert"
+    errorMsg='{{ "supportingDocuments.name" | translate }}'
+    attr.aria-label="{{ 'supportingDocuments.name' | translate }}">
+  </app-field-error-display>
+  <app-field-error-display [displayError]="healthcareErrormessage == 'lesssize'" role="alert"
+    errorMsg='{{ "supportingDocuments.lesssize" | translate }}'>
+  </app-field-error-display>
+  <app-field-error-display [displayError]="healthcareErrormessage == 'greatersize'" role="alert"
+    errorMsg='{{ "supportingDocuments.greatersize" | translate }}'>
+  </app-field-error-display>
+
+  <app-field-error-display [displayError]="healthcareErrormessage == 'virus'" role="alert"
+    errorMsg='{{ "supportingDocuments.virus" | translate }}'
+    attr.aria-label="{{ 'supportingDocuments.virus' | translate }}">
+  </app-field-error-display>
+  <app-field-error-display [displayError]="healthcareErrormessage == 'max'" role="alert"
+    errorMsg='{{ "supportingDocuments.max" | translate }}'
+    attr.aria-label="{{ 'supportingDocuments.max' | translate }}">
+  </app-field-error-display>
+
+  <app-field-error-display [displayError]="healthcareErrormessage == 'uploadfileerr'" role="alert"
+    errorMsg='{{"supportingDocuments.uploadfileerr" | translate }}'
+    attr.aria-label="{{ 'supportingDocuments.uploadfileerr' | translate }} {{ fileNameerrorname }}">
+  </app-field-error-display>
+  <app-field-error-display [displayError]="healthcareErrormessage == 'virusFileErroraudiogram' " role="alert"
+    errorMsg='{{"supportingDocuments.uploadfileerrvirus" | translate }} {{ fileNameerrorname }}'
+    attr.aria-label="{{ 'supportingDocuments.uploadfileerrvirus' | translate }} {{ fileNameerrorname }}">
+  </app-field-error-display>
+
+  <app-field-error-display role="alert"
+    [displayError]="healthcareErrormessage == 'maxfileupload' ||
+  healthcareErrormessage == 'validation' || healthcareErrormessage == 'file' || healthcareErrormessage == 'name'
+  || healthcareErrormessage == 'lesssize' || healthcareErrormessage == 'greatersize'
+   || healthcareErrormessage == 'virus' || healthcareErrormessage == 'max' || healthcareErrormessage == 'uploadfileerr'" errorMsg='{{fileNameerrorname }}'>
+  </app-field-error-display>
+  <!-- upload virus file error info -->
+  <app-field-error-display [displayError]="healthcareErrormessage == 'virusFileErroraudiogram'" role="alert"
+    errorMsg='{{"supportingDocuments.uploadfileerrinfo1" | translate }}'
+    attr.aria-label="{{ 'supportingDocuments.uploadfileerrinfo1' | translate }} {{ fileNameerrorname }}">
+  </app-field-error-display>
+  <app-field-error-display [displayError]="healthcareErrormessage == 'virusFileErroraudiogram'" role="alert"
+    errorMsg='{{"supportingDocuments.uploadfileerrinfo2" | translate }}'
+    attr.aria-label="{{ 'supportingDocuments.uploadfileerrinfo2' | translate }} {{ fileNameerrorname }}">
+  </app-field-error-display>
+  <app-field-error-display [displayError]="healthcareErrormessage == 'virusFileErroraudiogram'" role="alert"
+    errorMsg='{{"supportingDocuments.uploadfileerrinfo3" | translate }}'
+    attr.aria-label="{{ 'supportingDocuments.uploadfileerrinfo3' | translate }} {{ fileNameerrorname }}">
+  </app-field-error-display>
+  <app-field-error-display [displayError]="healthcareErrormessage == 'virusFileErroraudiogram'" role="alert"
+    errorMsg='{{"supportingDocuments.uploadfileerrinfo4" | translate }}'
+    attr.aria-label="{{ 'supportingDocuments.uploadfileerrinfo4' | translate }} {{ fileNameerrorname }}">
+  </app-field-error-display>
+
+  <div class="uploadfilecontainer mt-5" for="fileupload" aria-controls="filename" cdkTrapFocus cdkTrapFocusAutoCapture
+    [ngClass]="{'uploadfilecontainer_inprogress':audiogramFilesProgress}"
+    (click)="fileInput.click()" appDragDropFile (filedropped)="uploadFile($event,null, null, null, fileInput)">
+
+    <input hidden type="file" [disabled]="audiogramFilesProgress" #fileInput title="uploadAudiogram"
+      accept=".docx, .jpeg, .jpg, .tiff, .tif, .pdf, .doc, .DOCX, .JPEG, .JPG, .TIFF, .TIF, .DOC"
+      (change)="uploadFile($event.target.files,null, null, null, fileInput)">
+      <span tabindex="0" class="btn btn-small btn-file btn-wizard info p-0 attach-msg" style="margin-top: -5rem;"
+      role="button" attr.aria-label="{{ 'supportingDocuments.attachMsgAria' | translate }}" >{{ "supportingDocuments.attachMsg" | translate }}</span>
+
+  </div>
+
+  <!-- upload virus file error info end -->
+  <div class="files-list mt-3" *ngFor="let file of audiogramFiles;let i=index">
+    <div class="row justify-content-between mx-2 mt-2">
+      <span>{{file.fileName}} <span class="ml-3">{{file.fileSize | filesize}}</span></span>
+      <button class="delete-file" (click)="deleteAttachment(i,'',file.documentId)">
+        <span class="btn btn-small btn-file btn-wizard info p-0"
+          attr.aria-label="{{ 'supportingDocuments.remove' | translate }}">{{ "supportingDocuments.remove" | translate }}</span>
+      </button>
+    </div>
+    <p class="info mx-2" attr.aria-label="{{ 'supportingDocuments.uploadProgress' | translate }}">
+      {{ "supportingDocuments.uploadProgress" | translate }} <span class="ml-3">100%</span></p>
+    <!-- It's going to be a reportProgress: true in the HttpRequest -->
+    <mat-progress-bar mode="determinate" value="100"></mat-progress-bar>
+  </div>
+  <!-- end drag & drop audiogram -->
+
+
+
+  <h2 role="heading" class="mt-5" attr.aria-label="{{ 'supportingDocuments.employment' | translate }}">
+    {{ "supportingDocuments.employment" | translate }}</h2>
+  <p class="info mt-3 mb-0" attr.aria-label="{{ 'supportingDocuments.proofMsgHeader' | translate }}">
+    {{ "supportingDocuments.proofMsgHeader" | translate }}</p>
+  <p class="mb-0" attr.aria-label="{{ 'supportingDocuments.proofMsg' | translate }}">
+    {{ "supportingDocuments.proofMsg" | translate }}</p>
+
+
+
+
+
+  <ng-container>
+    <!-- <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 px-0 mt-3 mb-4">
+      <li>{{company.currentEmployerName}}</li>
+      <li>{{company.currentEmployerAddress}}</li>
+      <li>{{company.currentEmployerPhoneNumber}}</li>
+    </div> -->
+
+    <app-field-error-display [displayError]="empErrormessage == 'maxlength50'" role="alert"
+      errorMsg='{{"supportingDocuments.maxlength50" | translate }}'
+      attr.aria-label="{{ 'supportingDocuments.maxlength50' | translate }}">
+    </app-field-error-display>
+
+    <app-field-error-display [displayError]="empErrormessage == 'maxlength'" role="alert"
+      errorMsg='{{"supportingDocuments.maxlength" | translate }}'
+      attr.aria-label="{{ 'supportingDocuments.maxlength' | translate }}">
+    </app-field-error-display>
+    <app-field-error-display [displayError]="empErrormessage == 'file'" role="alert"
+      errorMsg='{{"supportingDocuments.file" | translate }}'
+      attr.aria-label="{{ 'supportingDocuments.file' | translate }}">
+    </app-field-error-display>
+    <app-field-error-display [displayError]="empErrormessage == 'validation'" role="alert"
+      errorMsg='{{"supportingDocuments.validation" | translate }}'
+      attr.aria-label="{{ 'supportingDocuments.validation' | translate }}">
+    </app-field-error-display>
+    <app-field-error-display [displayError]="empErrormessage == 'name'" role="alert"
+      errorMsg='{{"supportingDocuments.name" | translate }}'
+      attr.aria-label="{{ 'supportingDocuments.name' | translate }}">
+    </app-field-error-display>
+    <app-field-error-display [displayError]="empErrormessage == 'lesssize'" role="alert"
+      errorMsg='{{"supportingDocuments.lesssize" | translate }}'>
+    </app-field-error-display>
+    <app-field-error-display [displayError]="empErrormessage == 'greatersize'" role="alert"
+      errorMsg='{{"supportingDocuments.greatersize" | translate }}'>
+    </app-field-error-display>
+    <app-field-error-display [displayError]="empErrormessage == 'virus'" role="alert"
+      errorMsg='{{"supportingDocuments.virus" | translate }}'
+      attr.aria-label="{{ 'supportingDocuments.virus' | translate }}">
+    </app-field-error-display>
+    <app-field-error-display [displayError]="empErrormessage == 'max'" role="alert"
+      errorMsg='{{"supportingDocuments.max" | translate }}'
+      attr.aria-label="{{ 'supportingDocuments.max' | translate }}">
+    </app-field-error-display>
+
+    <app-field-error-display [displayError]="empErrormessage == 'uploadfileerr'" role="alert"
+      errorMsg='{{"supportingDocuments.uploadfileerr" | translate }}'
+      attr.aria-label="{{ 'supportingDocuments.uploadfileerr' | translate }}">
+    </app-field-error-display>
+    <app-field-error-display [displayError]="empErrormessage == 'virusFileErroremployment'" role="alert"
+      errorMsg='{{"supportingDocuments.uploadfileerrvirus" | translate }}{{ fileNameerrorname }}'
+      attr.aria-label="{{ 'supportingDocuments.uploadfileerrvirus' | translate }}">
+    </app-field-error-display>
+
+    <app-field-error-display role="alert" [displayError]="empErrormessage == 'maxlength' ||
+
+    empErrormessage == 'file' || empErrormessage == 'validation' || empErrormessage == 'name'
+    || empErrormessage == 'lesssize' || empErrormessage == 'greatersize' || empErrormessage == 'virus'
+    || empErrormessage == 'max' || empErrormessage == 'uploadfileerr'
+    " errorMsg='{{fileNameerrorname }}'>
+    </app-field-error-display>
+    <!-- upload virus file error info -->
+    <app-field-error-display [displayError]="empErrormessage == 'virusFileErroremployment'" role="alert"
+      errorMsg='{{"supportingDocuments.uploadfileerrinfo1" | translate }}'
+      attr.aria-label="{{ 'supportingDocuments.uploadfileerrinfo1' | translate }} {{ fileNameerrorname }}">
+    </app-field-error-display>
+    <app-field-error-display [displayError]="empErrormessage == 'virusFileErroremployment'" role="alert"
+      errorMsg='{{"supportingDocuments.uploadfileerrinfo2" | translate }}'
+      attr.aria-label="{{ 'supportingDocuments.uploadfileerrinfo2' | translate }} {{ fileNameerrorname }}">
+    </app-field-error-display>
+    <app-field-error-display [displayError]="empErrormessage == 'virusFileErroremployment'" role="alert"
+      errorMsg='{{"supportingDocuments.uploadfileerrinfo3" | translate }}'
+      attr.aria-label="{{ 'supportingDocuments.uploadfileerrinfo3' | translate }} {{ fileNameerrorname }}">
+    </app-field-error-display>
+    <app-field-error-display [displayError]="empErrormessage == 'virusFileErroremployment'" role="alert"
+      errorMsg='{{"supportingDocuments.uploadfileerrinfo4" | translate }}'
+      attr.aria-label="{{ 'supportingDocuments.uploadfileerrinfo4' | translate }} {{ fileNameerrorname }}">
+    </app-field-error-display>
+    <!-- upload virus file error info end -->
+    <div *ngIf="companyList.length && pastEmploymentInfoId" class="uploadfilecontainer mt-5"
+      [ngClass]="{'uploadfilecontainer_inprogress':employementFilesProgress}" (click)="fileInputEmp.click()"
+      appDragDropFile
+      (filedropped)="uploadFile($event, 'proof', pastEmploymentInfoId, companyList[0].employmentInfoId,fileInputEmp)">
+
+      <span role="button" tabindex="0" class="btn btn-small btn-file btn-wizard info p-0 attach-msg" style="margin-top: -5rem;"
+      attr.aria-label="{{ 'supportingDocuments.attachFiles' | translate }}">
+      {{ "supportingDocuments.attachFiles" | translate }}
+
+      </span>
+
+      <input type="text" style="z-index: -11; position: relative; border: 0px;" id="test" />
+
+      <input hidden type="file"  id="test" [disabled]="employementFilesProgress" [name]="pastEmploymentInfoId"
+      [id]="pastEmploymentInfoId" #fileInputEmp
+      accept=".docx, .jpeg, .jpg, .tiff, .tif, .doc, .pdf, .DOCX, .JPEG, .JPG, .TIFF, .TIF, .DOC, .PDF" title="uploadProofOfEmployment"
+      (change)="uploadFile($event.target.files, 'proof', pastEmploymentInfoId, 0,fileInputEmp)">
+
+    </div>
+
+
+
+
+    <!-- <div class="uploadfilecontainer mt-5" 
+      [ngClass]="{'uploadfilecontainer_inprogress':employementFilesProgress}"
+      (click)="fileInput.click()" appDragDropFile tabindex="{{i +1}}"
+      (filedropped)="uploadFile($event, 'proof', companyList[0].pastEmploymentInfoId, i,fileInput)">
+
+      <span class="btn btn-small btn-file btn-wizard info p-0" style="margin-top: -5rem;"
+        attr.aria-label="{{ 'supportingDocuments.attachFiles' | translate }}">{{ "supportingDocuments.attachFiles" | translate }}</span>
+      <input type="text" style="z-index: -11; position: relative;" id="test{{i}}" />
+      <input hidden type="file" id="test" [disabled]="employementFilesProgress"
+        [name]="companyList[0].pastEmploymentInfoId" [id]="companyList[0].pastEmploymentInfoId" #fileInput
+        accept=".docx, .jpeg, .jpg, .tiff, .tif, .doc, .pdf, .DOCX, .JPEG, .JPG, .TIFF, .TIF, .DOC, .PDF"
+        title="uploadProofOfEmployment"
+        (change)="uploadFile($event.target.files, 'proof', companyList[0].pastEmploymentInfoId, 0,fileInput)">
+    </div> -->
+
+
+
+    <div class="files-list mt-3" *ngFor="let file of empFiles;let i=index">
+      <div class="row justify-content-between mx-2 mt-2">
+        <span>{{file.fileName}} <span class="ml-3">{{file.fileSize | filesize}}</span></span>
+        <button role="button" class="delete-file" (click)="deleteAttachment(i, 'proof',file.documentId)">
+          <span class="btn btn-small btn-file btn-wizard info p-0"
+            attr.aria-label="{{ 'supportingDocuments.remove' | translate }}">{{ "supportingDocuments.remove" | translate }}</span>
+        </button>
+      </div>
+      <p class="info mx-2" attr.aria-label="{{ 'supportingDocuments.uploadProgress' | translate }}">
+        {{ "supportingDocuments.uploadProgress" | translate }} <span class="ml-3">100%</span></p>
+      <!-- It's going to be a reportProgress: true in the HttpRequest -->
+      <mat-progress-bar mode="determinate" value="100"></mat-progress-bar>
+    </div>
+
+    <!-- end drag & drop proof Of employment -->
+
+  </ng-container>
+
+  <div class="d-flex mt-5">
+    <!-- <button class="btn-wizard btn pl-0" type="submit">{{ "supportingDocuments.save" | translate }}</button> -->
+
+    <button role="button" class="btn-wizard btn-bold btn" (click)="gotoPrevious()"><em class="fa fa-angle-left"
+        aria-hidden="true" attr.aria-label="{{ 'supportingDocuments.previous' | translate }}"></em>
+      <b> {{ "supportingDocuments.previous" | translate }}</b><span class="ml-4">|</span></button>
+    <button role="button" class="btn-wizard btn-bold btn" (click)="gotoNext()"
+      attr.aria-label="{{ 'supportingDocuments.next' | translate }}"><b>{{ "supportingDocuments.next" | translate }}
+      </b><em class="fa fa-angle-right" aria-hidden="true"></em></button>
+  </div>
+
+  <p class="d-flex mt-5"
+    attr.aria-label="{{ 'supportingDocuments.supportingDocumentstitle' | translate }} {{ 'supportingDocuments.supportingDocumentsurl' | translate }}">
+    {{"supportingDocuments.supportingDocumentstitle" | translate}} &nbsp; <a class="btn-wizard btn-bold"
+      href="{{'supportingDocuments.supportingDocumentslink' | translate}}" target="_blank">
+      {{ "supportingDocuments.supportingDocumentsurl" | translate}}</a> </p>
+
+  <div class="d-flex mt-3" attr.aria-label="{{ 'supportingDocuments.minimizePersonalInfo' | translate }}">
+    {{ "supportingDocuments.minimizePersonalInfo" | translate }}
+  </div>
+</div>

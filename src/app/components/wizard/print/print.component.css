@@ -1,0 +1,92 @@
+form{
+  width: 35%;
+}
+
+label{
+  font-weight: 700;
+}
+
+input[type=text], input[type=email], input[type=number], select{
+  width: 100%;
+}
+
+
+.info{
+  font-weight: 700;
+}
+
+
+.no-bullets{
+  list-style-type: none;
+}
+
+header{
+position: relative;
+z-index: 5;
+background-color: white;
+overflow: visible;
+}
+
+img{
+max-width: 130px;
+}
+
+ul{
+display: flex;
+}
+
+li{
+margin-left: 40px;
+list-style-type: none;
+}
+
+a{
+text-decoration: none;
+color: #333333;
+}
+
+.header-content{
+display: flex;
+}
+
+
+.feedbackButton {
+  display: block;
+  overflow: hidden;
+  background-color: #D90000;
+  visibility: visible;
+  font-family: Muli, Arial, sans-serif;
+  width: 90px;
+  height: 35px;
+  box-shadow: 2px 2px 2px #767676;
+  border-radius: 5px;
+        float: right;
+        position: fixed;
+    top: 30vh;
+  right: -20px;
+  transform: rotate(270deg);
+}
+.feedbackButton svg {
+  width: 22px;
+  padding-left: 8px;
+        padding-top: 12px;
+  float: left;
+}
+    .feedbackButton:hover{
+        text-decoration: underline white;
+    }
+    .feedbackLink:focus .feedbackButton {
+        text-decoration: underline white;
+        border:1px solid black;
+    }
+    .feedbackLink:focus .feedbackButton:hover {
+        border:0px;
+    }
+.feedbackLabel {
+  line-height: 35px;
+        font-size: 12px;
+  text-align: center;
+  padding-right: 5px;
+  text-decoration: none;
+  color: white;
+}

@@ -1,0 +1,38 @@
+::ng-deep .cdk-overlay-pane{
+    text-align: center !important;
+}
+
+::ng-deep h1{
+    text-align: center !important;
+}
+
+p{
+    font-weight: 700;
+}
+ul.pl-5 li{
+    list-style-type: unset;
+   }
+  
+  .col-xl-4.col-lg-4.col-md-12.col-sm-12.pl-0.has-error {
+      border: 2px solid #D90000;
+      padding-right: 0;
+  }
+  
+  ::ng-deep .mat-icon-button{
+    line-height: 20px !important;
+    color: #333333;
+  }
+  
+  .link-modal {
+    color: #0076BF;
+  }
+  
+  .link-modal:hover {
+    color: #0076BF;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  .btn-wsib{
+    margin:10px;
+  }
+  

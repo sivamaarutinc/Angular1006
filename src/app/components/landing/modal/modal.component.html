@@ -1,0 +1,18 @@
+<main role="main">
+    <h3 role="heading" mat-dialog-title attr.aria-label="{{ 'landingModal.heading' | translate }}">
+        {{ "landingModal.heading" | translate }}</h3>
+
+    <div mat-dialog-content class="landingModal-text">
+        <p attr.aria-label="{{ 'landingModal.NIHLA011' | translate }}" *ngIf="errorCode==='NIHLA011'">
+            {{ "landingModal.NIHLA011" | translate }}</p>
+        <p attr.aria-label="{{ 'landingModal.NIHLA013' | translate }}" *ngIf="errorCode==='NIHLA013'">
+            {{ "landingModal.NIHLA013" | translate }}</p>
+        <p attr.aria-label="{{ 'landingModal.NIHLA001' | translate }}" *ngIf="errorCode==='NIHLA001'">
+            {{ "landingModal.NIHLA001" | translate }}</p>
+        <p attr.aria-label="{{ 'landingModal.NIHLA002' | translate }}" *ngIf="errorCode==='NIHLA002'">
+            {{ "landingModal.NIHLA002" | translate }}</p>
+    </div>
+    <div mat-dialog-actions>
+        <button role="banner" class="btn btn-wsib" (click)="clkok()"
+            attr.aria-label="{{ 'landingModal.close' | translate }}">{{ "landingModal.close" | translate }}</button>
+    </div>

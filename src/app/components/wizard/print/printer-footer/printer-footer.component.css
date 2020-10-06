@@ -1,0 +1,17 @@
+.footer-bar{
+  text-align: left;
+  padding: .5625em 1.25em;
+  margin: 0;
+  font-family: "Muli",Arial,sans-serif;
+  font-size: .875em;
+  font-weight: 300;
+  }
+
+  .footer-bar-paginate{
+  text-align: right;
+  padding: .5625em 1.25em;
+  margin: 0;
+  font-family: "Muli",Arial,sans-serif;
+  font-size: .875em;
+  font-weight: 300;
+  }

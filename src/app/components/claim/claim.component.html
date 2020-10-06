@@ -1,0 +1,203 @@
+<a class="skip-main" href="#main-content">Skip to main content</a>
+<div id="main-content">
+  <app-header></app-header>
+  <div class="content" role="main">
+    <div class="content-margin">
+      <div class="col-xl-12 col-lg-11 col-md-11 col-sm-11 mx-auto">
+        <h1 class="mt-5" attr.aria-label="{{ 'claim.title' | translate }}">{{ "claim.title" | translate }}</h1>
+
+        <p class="info my-5" attr.aria-label="{{ 'claim.fieldsMandatory' | translate }}">
+          {{ "claim.fieldsMandatory" | translate }}</p>
+
+        <app-field-error-display id="commonerrormsgid" *ngIf="iscommonerrormsg" tabindex="0" role="alert" [displayError]="iscommonerrormsg"
+          errorMsg="{{ 'errors.commonerrormsg' | translate }}">
+        </app-field-error-display>
+
+        <h2 attr.aria-label="{{ 'claim.startOrContinueSubmission' | translate }}">
+          {{ "claim.startOrContinueSubmission" | translate }}</h2>
+
+        <p class="mt-4" attr.aria-label="{{ 'claim.continueClaim' | translate }}">
+          {{ "claim.continueClaim" | translate }}</p>
+
+
+
+        <form [formGroup]="continueClaimForm" focusInvalidInput>
+          <fieldset>
+            <label for="continueEmail">{{ "claim.email" | translate }} :</label>
+            <div id="emailid" class="col-xl-4 col-lg-4 col-md-12 col-sm-12 pl-0"
+              [ngClass]="displayFieldCss(continueClaimForm, 'continueEmail')">
+              <input type="email" aria-required="true"
+                attr.aria-invalid="(isFieldTouched(continueClaimForm, 'continueEmail',true))"
+                attr.aria-label="{{ 'claim.email' | translate }}" name="continueEmail" formControlName="continueEmail"
+                maxlength="50" title="continueEmail">
+            </div>
+
+            <app-field-error-display [displayError]="isFieldTouched(continueClaimForm, 'continueEmail',true)"
+              errorMsg="{{ 'errors.required' | translate }} {{ 'claim.email' | translate }}">
+            </app-field-error-display>
+
+            <app-field-error-display [displayError]="isFieldTouched(continueClaimForm, 'continueEmail',false)"
+              errorMsg="{{ 'claim.continueEmail' | translate }}">
+            </app-field-error-display>
+
+            <label class="mt-4 mb-0" for="dateOfBirth">{{ "claim.dateOfBirth" | translate }}
+              :</label><br>
+            <label class="info"
+              attr.aria-label="{{ 'claim.datePlaceHolder' | translate }}">{{ "claim.datePlaceHolder" | translate }}</label>
+
+            <div class="d-flex">
+              <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 pl-0"
+                [ngClass]="displayFieldCss(continueClaimForm, 'dateOfBirth')">
+                <input [matDatepicker]="dateOfBirth" [max]="minYear" formControlName="dateOfBirth" type="text"
+                  style="margin-right: -40px;" title="dateOfBirth" (input)="checkDate($event.target.value)"
+                  (focusout)="focusOutonDate($event.target.value)"
+                  attr.aria-invalid="(isFieldTouched(continueClaimForm, 'dateOfBirth',true))"
+                  attr.aria-label="{{ 'claim.dateOfBirth' | translate }}" name="dateOfBirth">
+                <mat-datepicker-toggle matSuffix [for]="dateOfBirth"></mat-datepicker-toggle>
+                <mat-datepicker #dateOfBirth startView="year"></mat-datepicker>
+              </div>
+            </div>
+            <app-field-error-display
+              [displayError]="isFieldTouched(continueClaimForm, 'dateOfBirth',true)  && !datevalue"
+              errorMsg="{{ 'errors.required' | translate }} {{ 'claim.dateOfBirth' | translate }}">
+            </app-field-error-display>
+
+            <app-field-error-display
+              [displayError]="validdateOfBirth && isFieldTouched(continueClaimForm, 'dateOfBirth',false)"
+              errorMsg="{{ 'errors.invalidDOB' | translate }}">
+            </app-field-error-display>
+
+            <app-field-error-display [displayError]="!validdateOfBirth && datevalue"
+              errorMsg="{{ 'errors.invalidDateFormat' | translate }} {{ 'claim.dateOfBirth' | translate }}">
+            </app-field-error-display>
+
+            <label class="mt-2 mb-0"
+              attr.aria-label="{{ 'claim.referenceNumber' | translate }}">{{ "claim.referenceNumber" | translate }}
+              :</label><br>
+            <label class="hint"
+              attr.aria-label="{{ 'claim.referenceNumberHint' | translate }}">{{ "claim.referenceNumberHint" | translate }}</label>
+            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 pl-0"
+              [ngClass]="displayFieldCss(continueClaimForm, 'referenceNumber')">
+              <input type="text" formControlName="referenceNumber" minlength="8" maxlength="8" title="referenceNumber">
+            </div>
+            <app-field-error-display [displayError]="isFieldTouched(continueClaimForm, 'referenceNumber')"
+              errorMsg="{{ 'claim.referenceNumbererr' | translate }}">
+            </app-field-error-display>
+
+            <div class="mt-3 mb-5">
+              <button class="btn btn-wizard p-0" attr.aria-label="{{ 'claim.startOrResume' | translate }}"
+                (click)="createOrResumeClaim()">{{ "claim.startOrResume" | translate }}</button>
+            </div>
+          </fieldset>
+        </form>
+
+        <fieldset>
+          <h2 attr.aria-label="{{ 'claim.confirmationTitle' | translate }}">{{ "claim.confirmationTitle" | translate }}
+          </h2>
+
+          <p class="info" attr.aria-label="{{ 'claim.hearingLossQuestion' | translate }}">
+            {{ "claim.hearingLossQuestion" | translate }}</p>
+          <ul>
+            <li role="radiogroup" attr.aria-label="{{ 'claim.hearingLossQuestion' | translate }}">
+              <input type="radio" title="is_gradual" name="isCorrectForm" value="gradual" (change)="checkGradual()"
+                id="gradual" attr.aria-label="{{ 'claim.gradualHearingLoss' | translate }}" aria-checked="false"
+                tabindex="0" aria-required="true">
+              {{ "claim.gradualHearingLoss" | translate }}
+            </li>
+            <li attr.aria-label="{{ 'claim.suddenHearingLoss' | translate }}">
+              <input type="radio" name="isCorrectForm" value="sudden" (change)="checkSudden()" title="isCorrectForm"
+                aria-checked="false" tabindex="-1" aria-required="true">
+              {{ "claim.suddenHearingLoss" | translate }}
+            </li>
+          </ul>
+        </fieldset>
+        <ng-container *ngIf="isSudden">
+          <p
+            attr.aria-label="{{ 'claim.Suddenlike' | translate }} {{ 'claim.Suddenlikenext' | translate }} {{ 'claim.Suddenlikelast' | translate }}">
+            {{ "claim.Suddenlike" | translate }}
+            <a href="https://eservices.wsib.on.ca/portal/server.pt/community/eform_6/209" target="_blank">
+              {{ "claim.Suddenlikenext" | translate }}</a>
+            {{ "claim.Suddenlikelast" | translate }}
+          </p>
+        </ng-container>
+
+        <ng-container *ngIf="isGradual">
+
+
+          <!-- <h2 class="mt-5">Please provide your email address and write down your reference number:</h2>
+
+        <p class="info">Your reference number will be sent to the email address you provide.</p>
+
+        <form [formGroup]="newClaimForm">
+          <label>Email:</label>
+          <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 pl-0" [ngClass]="displayFieldCss(newClaimForm, 'email')">
+            <input type="email" formControlName="email" maxlength="50">
+          </div>
+          <app-field-error-display [displayError]="isFieldTouched(newClaimForm, 'email')"
+            errorMsg="Please enter a valid email">
+          </app-field-error-display>
+        </form> -->
+
+          <h2 class="mt-5" attr.aria-label="{{ 'claim.Gradualtitle' | translate }}">
+            {{ "claim.Gradualtitle" | translate }}</h2>
+
+          <p class="mb-n1" attr.aria-label="{{ 'claim.Gradualstap' | translate }}">{{ "claim.Gradualstap" | translate }}
+          </p>
+          <ul class="pl-5">
+
+            <li attr.aria-label="{{ 'claim.Gradualstap1' | translate }}">{{ "claim.Gradualstap1" | translate }} </li>
+            <li attr.aria-label="{{ 'claim.Gradualstap2' | translate }}">{{ "claim.Gradualstap2" | translate }} </li>
+            <li attr.aria-label="{{ 'claim.Gradualstap3' | translate }}">{{ "claim.Gradualstap3" | translate }} </li>
+            <li attr.aria-label="{{ 'claim.Gradualstap4' | translate }}">{{ "claim.Gradualstap4" | translate }} </li>
+            <li attr.aria-label="{{ 'claim.Gradualstap5' | translate }}">{{ "claim.Gradualstap5" | translate }} </li>
+            <li attr.aria-label="{{ 'claim.Gradualstap6' | translate }}">{{ "claim.Gradualstap6" | translate }} <span
+                class="info link-modal" attr.aria-label="{{ 'claim.Gradualstap7' | translate }}" data-toggle="modal"
+                data-target="#moreAboutProof">{{ "claim.Gradualstap7" | translate }}</span></li>
+          </ul>
+
+          <h2 class="mt-1" attr.aria-label="{{ 'claim.Gradualtitle2' | translate }}">
+            {{ "claim.Gradualtitle2" | translate }}</h2>
+          <ul class="pl-5">
+            <li attr.aria-label="{{ 'claim.Gradualstap8' | translate }}">{{ "claim.Gradualstap8" | translate }} <a
+                href="https://www.wsib.ca/sites/default/files/2019-02/0032a_04_11_fs_1.pdf"
+                attr.aria-describedby="{{ 'otherdata.Occupationalpdf' | translate }}"
+                target="_blank">{{ "claim.Gradualstap9" | translate }}</a> {{ "claim.Gradualstap10" | translate }}
+            </li>
+          </ul>
+        </ng-container>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="moreAboutProof" tabindex="-1" aria-labelledby="moreAboutProofLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="my-3">
+          <h4 class="modal-title text-center" id="moreAboutProofLabel"
+            attr.aria-label="{{ 'claim.AboutProoftitle' | translate }}">{{ "claim.AboutProoftitle" | translate }}</h4>
+        </div>
+        <div class="modal-body">
+          <ul class="">
+            <li class="" attr.aria-label="{{ 'claim.AboutProofstep1' | translate }}">
+              {{ "claim.AboutProofstep1" | translate }}</li>
+            <li class="" attr.aria-label="{{ 'claim.AboutProofstep3' | translate }}"><span class="info"
+                attr.aria-label="{{ 'claim.AboutProofstep2' | translate }}">{{ "claim.AboutProofstep2" | translate }}:
+              </span>{{ "claim.AboutProofstep3" | translate }}</li>
+            <li class="" attr.aria-label="{{ 'claim.AboutProofstep4' | translate }}"><span class="info"
+                attr.aria-label="{{ 'claim.Gradualstap5' | translate }}">{{ "claim.Gradualstap5" | translate }}: </span>
+              {{ "claim.AboutProofstep4" | translate }}</li>
+          </ul>
+        </div>
+        <div class="mx-auto my-4">
+          <button type="button" class="btn btn-wsib" data-dismiss="modal"
+            attr.aria-label="{{ 'claim.AboutProofclose' | translate }}">{{ "claim.AboutProofclose" | translate }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end modal here -->
+  <app-footer></app-footer>
+</div>

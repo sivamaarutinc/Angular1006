@@ -1,0 +1,113 @@
+<footer role="contentinfo">
+  <hr class="my-5">
+
+  <div class="content">
+    <div class="content-margin">
+
+      <div class="menu">
+        <ul>
+          <li>
+            <a attr.aria-label="{{ 'footer.links.safetyCheckLink' | translate }}" target="_blank"
+              href="{{ 'footer.links.SafetyCheck' | translate }}">{{ "footer.SafetyCheck" | translate }}</a>
+          </li>
+          <li>
+            <a attr.aria-label="{{ 'footer.links.statisticsLink' | translate }}" target="_blank"
+              href="{{ 'footer.links.statistics' | translate }}">{{ "footer.statistics" | translate }}</a>
+          </li>
+          <li>
+            <a attr.aria-label="{{ 'footer.links.healthSafetyLink' | translate }}" target="_blank"
+              href="{{ 'footer.links.healthAndSafetyIndex' | translate }}">{{ "footer.healthAndSafetyIndex" | translate }}</a>
+          </li>
+          <li>
+            <a attr.aria-label="{{ 'footer.links.careersLink' | translate }}" target="_blank"
+              href="{{ 'footer.links.careers' | translate }}">{{ "footer.careers" | translate }}</a>
+          </li>
+          <li>
+            <a attr.aria-label="{{ 'footer.links.termsOfUseLink' | translate }}" target="_blank"
+              href="{{ 'footer.links.termsOfUse' | translate }}">{{ "footer.termsOfUse" | translate }}</a>
+          </li>
+          <li>
+            <a attr.aria-label="{{ 'footer.links.contactUsLink' | translate }}" target="_blank"
+              href="{{ 'footer.links.contactUs' | translate }}">{{ "footer.contactUs" | translate }}</a>
+          </li>
+        </ul>
+
+        <ul>
+          <li class="menu-item">
+            <a attr.aria-label="{{ 'footer.links.dayOfMourningLink' | translate }}" target="_blank"
+              href="{{ 'footer.links.dayOfMourning' | translate }}">{{ "footer.dayOfMourning" | translate }}</a>
+          </li>
+          <li class="menu-item">
+            <a attr.aria-label="{{ 'footer.links.openDataLink' | translate }}" target="_blank"
+              href="{{ 'footer.links.openData' | translate }}">{{ "footer.openData" | translate }}</a>
+          </li>
+          <li class="menu-item">
+            <a attr.aria-label="{{ 'footer.links.accessibilityLink' | translate }}" target="_blank"
+              href="{{ 'footer.links.accessibility' | translate }}">{{ "footer.accessibility" | translate }}</a>
+          </li>
+          <li class="menu-item">
+            <a attr.aria-label="{{ 'footer.links.privacyLink' | translate }}" target="_blank"
+              href="{{ 'footer.links.privacy' | translate }}">{{ "footer.privacy" | translate }}</a>
+          </li>
+          <li class="menu-item">
+            <a attr.aria-label="{{ 'footer.links.fpCommissionLink' | translate }}" target="_blank"
+              href="{{ 'footer.links.fairPracticesCommission' | translate }}">{{ "footer.fairPracticesCommission" | translate }}</a>
+          </li>
+          <li class="menu-item">
+            <a attr.aria-label="{{ 'footer.links.otherLanguagesLink' | translate }}" target="_blank"
+              href="{{ 'footer.links.otherLanguages' | translate }}">{{ "footer.otherLanguages" | translate }}</a>
+          </li>
+        </ul>
+
+
+
+
+        <div class="mt-2">
+          <p attr.aria-label="{{ 'footer.fatalAccidents' | translate }} {{ 'footer.callUsAt' | translate }}">
+            {{ "footer.fatalAccidents" | translate }}<br>
+            {{ "footer.callUsAt" | translate }}</p>
+
+          <p attr.aria-label="{{ 'footer.contactUs' | translate }} {{ 'footer.contactNumber' | translate }}">
+            {{ "footer.contactUs" | translate }}<br>
+            {{ "footer.contactNumber" | translate }}</p>
+        </div>
+
+      </div>
+
+      <ul class="d-flex justify-content-center mt-5 mb-4">
+        <li>
+          <a href="https://twitter.com/wsib" target="_blank" class="social-icons twitter" name="Twitter"
+            attr.aria-describedby="twitterDesc" aria-label="WSIB Twitter">
+            <span class="fab fa-twitter"></span>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.youtube.com/channel/UCDxA3vgo2WvJOVs6tut9XpQ" target="_blank"
+            class="social-icons youtube" aria-label="WSIB YouTube" aria-describedby="youtubeDesc" name="Youtube">
+            <span class="fab fa-youtube"></span>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.linkedin.com/company/wsib/" target="_blank" class="social-icons linkedin"
+            aria-label="WSIB LinkedIn" aria-describedby="linkedinDesc" name="LinkedIn">
+            <span class="fab fa-linkedin-in"></span>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.instagram.com/wsibontario/?hl=en" target="_blank" class="social-icons instagram"
+            aria-label="WSIB Instagram" aria-describedby="InstagramDesc" name="Instagram">
+            <span class="fab fa-instagram"></span>
+          </a>
+        </li>
+      </ul>
+      <div class="hide-element" id="twitterDesc">{{'otherdata.twitterDesc' | translate}}</div>
+      <div class="hide-element" id="youtubeDesc">{{'otherdata.youtubeDesc' | translate}}</div>
+      <div class="hide-element" id="linkedinDesc">{{'otherdata.linkedinDesc' | translate}}</div>
+      <div class="hide-element" id="InstagramDesc">{{'otherdata.instagramDesc' | translate}}</div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <p style="margin-bottom : 0"> © {{getyear}}, {{ "footer.copyright" | translate }}</p>
+  </div>
+</footer>

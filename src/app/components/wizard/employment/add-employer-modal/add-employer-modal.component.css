@@ -1,0 +1,103 @@
+::ng-deep .modal-backdrop{
+  z-index: 998;
+}
+::ng-deep .modal{
+  z-index: 999;
+}
+.has-error {
+  border: 2px solid #D90000;
+  padding-right: 0;
+}
+.float-left{
+  float: left;
+}
+
+::ng-deep .autocomplete-container {
+    box-shadow: none !important;
+    height:unset !important;
+}
+::ng-deep .autocomplete-container .input-container input {
+  height:34px !important;
+  border: 1px solid #5E6A71 !important;
+}
+
+textarea{
+  border: 1px solid #5E6A71 !important;
+  border-radius: 3px;
+}
+
+
+.bordered-label {
+  -moz-appearance: textfield;
+  -webkit-appearance: textfield;
+  background-color: white;
+  background-color: -moz-field;
+  border: 1px solid  #5E6A71;
+  font: -moz-field;
+  font: -webkit-small-control;
+  margin-top: 10px;
+  padding: 8px 5px;
+  width: 164px;
+  height: 34px;
+  border-radius: 3px;
+  overflow: hidden;
+  line-height: 20px;
+}
+
+::ng-deep  .mat-form-field-appearance-legacy .mat-form-field-underline {
+  height: 0px !important;
+}
+
+::ng-deep  .mat-form-field-appearance-legacy .mat-form-field-underline:focus {
+  height: 0px !important;
+}
+
+::ng-deep .mat-form-field-flex {
+  width: 90% !important;
+}
+
+/* ::ng-deep .tool-hours .mat-form-field-flex{
+  width: 73% !important;
+} */
+
+::ng-deep  .mat-form-field-underline {
+  width: 0 !important;
+}
+
+.bordered-label.tool-name {
+  width: 25em !important;
+}
+
+::ng-deep .tool-name .mat-form-field-infix{
+  width: 23em !important;
+}
+
+.bordered-label.tool-hours{
+  width: 6.3em !important;
+}
+
+::ng-deep .tool-hours .mat-form-field-infix{
+  width: 5.9em !important;
+}
+
+.hour-margin{
+  margin-left: 4.3rem;
+}
+
+.wrap-text{
+  white-space: normal;
+    height: unset;
+}
+
+ mat-option{
+  overflow: unset !important;
+}
+
+.mat-option-text{
+  overflow: unset !important;
+}
+
+::-ms-clear {
+  display: none;
+}
+

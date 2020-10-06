@@ -1,0 +1,8 @@
+.col-xl-4.col-lg-4.col-md-12.col-sm-12.pl-0.has-error { 
+    border: 2px solid #D90000;
+    padding-right: 0;
+}
+
+abbr[data-original-title], abbr[title] {
+    text-decoration: none !important;
+}

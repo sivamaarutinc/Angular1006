@@ -1,0 +1,135 @@
+div.logo-table {
+	width:100%;
+	background: url('../../../assets/images/topshade.png');
+	height: 188px;
+}
+
+.logoWrap {
+	width: 100%;
+	max-width:1230px;
+	margin:0 auto;
+	position: relative;
+	padding-right: 30px !important;
+	padding-left: 30px !important;
+}
+
+.toggle {
+	margin:30px 0 0 0;
+	float:right;
+    z-index: 1001;
+}
+
+.bumpRS {
+  margin-right:40px;
+}
+
+div.logo-div {
+	font-size: 40px;
+	color: #333333;
+	float:left;
+	height:80px;
+	margin:40px 0 0 0;
+	position: absolute;
+  line-height: 83px;
+  font-family: 'Muli Bold', 'Muli Regular', 'Muli';
+  font-style: normal;
+}
+
+a.logoLink {
+  width:150px;
+  height:80px;
+  display:inline-block;
+  text-indent: -1000px;
+  background-image: url('../../../assets/images/wsib-logo-new.png');
+  background-repeat: no-repeat;
+}
+
+a.logoLink:active,
+a.logoLink:focus{
+  outline: 5px auto -webkit-focus-ring-color;
+}
+
+a.nav {
+  font-weight: 700;
+  color: #333333;
+  text-decoration: none;
+  font-family: 'Muli', sans-serif;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+.nav{
+  display: initial !important;
+  color: black;
+}
+
+@media (max-width: 767px) {
+  #logo-table, div.logo-table {
+		background: url('../../../assets/images/topshade.png') bottom;
+    height: 158px;
+  }
+
+  div.logo-div {
+		font-size: 1px;
+		color: #FFF;
+		margin-left: 20px;
+  }
+
+  a.logoLink {
+    width:102px;
+    height:53px;
+    display:inline-block;
+    text-indent: -1000px;
+    background-image: url('../../../assets/images/wsib-logo-new.png');
+    background-repeat: no-repeat;
+    background-size: 102px;
+  }
+}
+
+.mat-raised-button {
+  box-shadow: none;
+}
+
+
+.linkheader {
+  font-family: 'Muli Bold', 'Muli Regular', 'Muli';
+  font-weight: 700;
+  font-style: normal;
+  font-size: 16px;
+  color: #333333;
+}
+
+#langToggleLink:hover, .btn.linkheader:hover {
+  color:#0076BF;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  overflow: hidden;
+  clip: rect(1px,1px,1px,1px);
+  width: 1px;
+  height: 1px;
+  word-wrap: normal;
+}
+
+.visually-hidden.focusable:active, 
+.visually-hidden.focusable:focus {
+  position: static !important;
+  overflow: visible;
+  clip: auto;
+  width: auto;
+  height: auto;
+  outline: 5px auto -webkit-focus-ring-color;
+}
+
+.header-text-online-services {
+  color: #333333; 
+  font-size: 40px; 
+  font-weight: 400; 
+  margin-left: 10px;
+}
+.mat-raised{
+  line-height: 83px !important;
+}

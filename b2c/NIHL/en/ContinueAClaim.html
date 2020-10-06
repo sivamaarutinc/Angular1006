@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title aria-label="You are now viewing the site in English">Submit a claim for work related, noise-induced hearing loss</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="icon" type="image/png" href="b2c_WEB_ROOT_URL/assets/img/wsib-logo-new.png">
+    <link rel="shortcut icon" type="image/png" href="b2c_WEB_ROOT_URL/assets/img/wsib-logo-new.png">
+
+    <!-- <link rel="icon" href="../../assets/img/wsib-logo-new.png" type="image/png" />
+    <link rel="shortcut icon" href="../../assets/img/wsib-logo-new.png" type="image/png" /> -->
+
+    <link rel="stylesheet" href="https://use.typekit.net/slq6rvg.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+      <!-- <link rel="stylesheet" href="b2c_WEB_ROOT_URL/NIHL/style.css">   -->
+      <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <script type="text/javascript">
+
+        // function continueClaim() {
+        //     document.getElementById('continueClaim').style.display = 'block';
+        // }
+
+        function skipMain(){
+            document.getElementById('btnContinueClaim').focus();
+        }
+
+        function newClaim() {
+            // window.open("StartAClaim.html", "_self");
+            window.open("NIHL_WEB_ROOT_URL/auth-newclaim?lang=en", "_self");
+            localStorage.setItem('startNewClaimClicked', 'true');
+        }
+
+        function populateDoB() {
+            var today = new Date();
+            var validYear = today.getFullYear() - 16;
+
+            var year = null;
+            year = document.getElementById('dob_year');
+
+            for (i = validYear; i >= 1900; i--) {
+                var opt = document.createElement('option');
+                opt.appendChild(document.createTextNode(i));
+                opt.value = i;
+                year.appendChild(opt);
+            }
+
+            var month_val = null;
+            month_val = document.getElementById('dob_month').value;
+
+            var select = document.getElementById("dob_day");
+            var length = select.options.length;
+            for (i = length - 1; i >= 0; i--) {
+                select.options[i] = null;
+            }
+
+            day_val = document.getElementById('dob_day');
+
+            if (month_val == "1") {
+                if (year.value % 4 == 0) {
+                    for (i = 1; i <= 29; i++) {
+                        var optDay = document.createElement('option');
+                        optDay.appendChild(document.createTextNode(i));
+                        optDay.value = i;
+                        day_val.appendChild(optDay);
+                    }
+                } else {
+                    for (i = 1; i <= 28; i++) {
+                        var optDay = document.createElement('option');
+                        optDay.appendChild(document.createTextNode(i));
+                        optDay.value = i;
+                        day_val.appendChild(optDay);
+                    }
+                }
+            }
+            else if (month_val == "8" || month_val == "3" || month_val == "5" || month_val == "10") {
+                for (i = 1; i <= 30; i++) {
+                    var optDay = document.createElement('option');
+                    optDay.appendChild(document.createTextNode(i));
+                    optDay.value = i;
+                    day_val.appendChild(optDay);
+                }
+            }
+            else {
+                for (i = 1; i <= 31; i++) {
+                    var optDay = document.createElement('option');
+                    optDay.appendChild(document.createTextNode(i));
+                    optDay.value = i;
+                    day_val.appendChild(optDay);
+                }
+            }
+        }
+
+    </script>
+
+
+</head>
+
+<a class="skip-main" href="#btnContinueClaim" onclick="skipMain()" aria-label="Skip to main content">Skip to main content</a>
+<body onload="populateDoB()" id="main-content">
+    <div class="logo-table" role="banner">
+        <div class="logoWrap">
+            <div class="toggle d-flex">
+                <a id="langToggleLink" href="NIHL_WEB_ROOT_URL/auth-resume?lang=fr" class="nav bumpRS linkActive" aria-label='click to change the language to French'>Français</a>
+                <a href="https://wsib.ca/en/onlineservices" aria-label="Exit" class="nav">Exit</a>
+            </div>
+            <div class="logo-div">
+                <a href="http://www.wsib.ca" target="_blank" aria-label="WSIB Home, opens in new tab" class="logoLink"
+                    title="WSIB Home">WSIB</a> Online services
+            </div>
+        </div>
+    </div>
+
+<div role="main">
+    <div class="content">
+        <div class="content-margin">
+            <div class="col-xl-12 col-lg-11 col-md-11 col-sm-11 mx-auto">
+                <h1 class="mt-5">Submit a claim for work related, noise-induced hearing loss</h1>
+
+                <p class="info my-5">All fields are mandatory, unless marked optional</p>
+
+                <p class="my-5">You can start a new submission or continue working on a form that you have previously
+                    started.</p>
+
+                <div class="d-flex my-5">
+                    <button class="btn btn-wsib mr-5" id="btnNewClaim" onclick="javascript:newClaim();"
+                        aria-label="Start a new claim">Start a new claim</button>
+                    <button class="btn btn-wsib" id="btnContinueClaim" aria-label="Continue a claim" onclick="javascript:continueClaim();">Continue a claim</button>
+                </div>
+
+                <div id="continueClaim" style="display:block">
+                    <h2>Continue a claim</h2>
+
+                    <p class="mt-4">Please enter your email address, date of birth, and reference code to
+                        continue your claim in
+                        progress.</p>
+                </div>
+
+                <!-- <div id="api"></div>   -->
+                <!-- <div id="api" data-name="SelfAsserted"> -->
+                <div id="api" data-name="ContiuneClaimContentDefinition">
+                    <div class="intro">
+                        <p aria-label="Please provide the following details.">Please provide the following details.</p>
+                    </div>
+
+                    <form id="attributeVerification" action="JavaScript:void(0);">
+                        <fieldset>
+                            <div id="passwordEntryMismatch" class="error pageLevel" style="display: none;"
+                            aria-hidden="true" aria-label="The password entry fields do not match. Please enter the same
+                    password in both fields and try again.">The password entry fields do not match. Please
+                            enter the same
+                            password in both fields and try again.</div>
+
+                        <div id="requiredFieldMissing" class="error pageLevel" style="display: none;"
+                            aria-hidden="true" aria-label="A required field is missing. Please fill out all required fields and
+                    try again.">A required field is missing. Please fill out all required fields and
+                            try again.</div>
+
+                        <div id="fieldIncorrect" class="error pageLevel" style="display: none;"
+                            aria-hidden="true"
+                            aria-label="One or more fields are filled out incorrectly. Please check your entries and try again.">
+                            One or more fields are filled out incorrectly. Please check your entries and try
+                            again.
+                        </div>
+                        <div id="claimVerificationServerError" class="error pageLevel" style="display: none;"
+                            aria-hidden="true"></div>
+
+                        <div class="attr mb-4" id="attributeList">
+
+                                <div class="TextBox">
+                                    <div class="attrEntry">
+
+                                        <label class="mb-0 mt-4" for="email">#Email Address:</label>
+
+                                        <div class="error itemLevel error-msg" role="alert"></div>
+
+
+                                        <input id="email" class="textInput" type="email" placeholder="#Email Address:"
+                                            aria-label="#Email Address:"
+                                            title="#Email address that can be used to contact you." aria-required="true"
+                                            maxlength="50">
+
+                                        <a href="javascript:void(0)"
+                                            data-help="#Email address that can be used to contact you."
+                                            class="helpLink tiny">What is this?</a>
+                                    </div>
+                                </div>
+                                <div class="DateTimeDropdown">
+
+                                    <div class="attrEntry">
+                                        <label class="mb-0 mt-4" for="dob">#Date of birth:</label>
+
+                                        <div class="error itemLevel error-msg" role="alert"></div>
+
+                                        <div class="date" id="dob" aria-label="#Date of birth:" required="">
+
+                                            <select class="day" title="Day" aria-label="Day" id="dob_day" default_value="0" aria-required="true">
+                                                <option value="0">1</option>
+                                            </select>
+
+                                            <select onchange="populateDoB()" class="month" title="Month" aria-label="Month" aria-required="true"
+                                                id="dob_month" default_value="0">
+                                                <option value="0">Jan</option>
+                                                <option value="1">Feb</option>
+                                                <option value="2">Mar</option>
+                                                <option value="3">Apr</option>
+                                                <option value="4">May</option>
+                                                <option value="5">Jun</option>
+                                                <option value="6">Jul</option>
+                                                <option value="7">Aug</option>
+                                                <option value="8">Sep</option>
+                                                <option value="9">Oct</option>
+                                                <option value="10">Nov</option>
+                                                <option value="11">Dec</option>
+                                            </select>
+
+                                            <select onchange="populateDoB()" class="year" title="Year" aria-label="Year" aria-required="true"
+                                                id="dob_year" default_value="0">
+                                                <option value="0">1930</option>
+                                            </select>
+
+                                            <a href="javascript:void(0)" data-help="#Date of birth"
+                                                class="helpLink tiny">What is this?</a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="TextBox">
+                                    <div class="attrEntry">
+
+                                        <label class="mb-0 mt-4" for="refNo">Reference code:</label>
+
+                                        <div class="error itemLevel error-msg" role="alert"></div>
+
+
+                                        <input id="refNo" class="textInput" type="text" placeholder="Reference code:"
+                                            aria-label="Reference code:" title="Reference code" aria-required="true"
+                                            maxlength="8">
+
+                                        <a href="javascript:void(0)" data-help="Reference code"
+                                            class="helpLink tiny">What is this?</a>
+                                    </div>
+                                </div>
+
+                        </div>
+                        <div class="buttons">
+                            <button class="btn btn-wsib" id="continue" type="submit" form="attributeVerification"
+                                aria-label="Continue">Continue</button>
+                        </div>
+
+                        <div class="verifying-modal">
+                            <div id="verifying_blurb"></div>
+                        </div>
+
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <hr class="my-5">
+</div>
+
+<div class="content" role="contentinfo">
+    <div class="content-margin">
+        <div class="menu">
+            <ul>
+                <li>
+                    <a href="https://wsib.ca/safetycheck" aria-label="Safety check, opens in new tab" target="_blank" aria-describedby="safety-check">Safety check</a>
+                </li>
+                <li>
+                    <a href="http://www.wsibstatistics.ca/" aria-label="WSIB Statistics: By the numbers link, opens in new tab" target="_blank" aria-describedby="wsibstatistics">WSIB
+                        Statistics: By the numbers</a>
+                </li>
+                <li>
+                    <a href="https://safetycheck.onlineservices.wsib.on.ca/safetycheck/?lang=en" data-drupal-link-system-path="node/26881"
+                        aria-label="Health and Safety Index link, opens in new tab" target="_blank" aria-describedby="safetycheck">Health and Safety Index</a>
+                </li>
+                <li>
+                    <a href="https://www.wsib.ca/en/careers" data-drupal-link-system-path="node/7736"
+                        aria-label="Careers link, opens in new tab" target="_blank" aria-describedby="careers">Careers</a>
+                </li>
+                <li>
+                    <a href="https://www.wsib.ca/en/terms-use" data-drupal-link-system-path="node/3986"
+                        aria-label="Terms of use link, opens in new tab" target="_blank" aria-describedby="terms-use">Terms of use</a>
+                </li>
+                <li>
+                    <a href="https://www.wsib.ca/en/contact-us" data-drupal-link-system-path="node/581"
+                        aria-label="Contact us link, opens in new tab" target="_blank" aria-describedby="contact-us">Contact us</a>
+                </li>
+            </ul>
+
+            <ul>
+                <li class="menu-item">
+                    <a href="http://www.wsibdayofmourning.ca" aria-describedby="wsibdayofmourning" aria-label="Day of Mourning link, opens in new tab" target="_blank">Day of Mourning</a>
+                </li>
+                <li class="menu-item">
+                    <a href="http://www.wsibopendata.ca/" aria-describedby="wsibopendata" aria-label="Open data link, opens in new tab" target="_blank">Open Data</a>
+                </li>
+                <li class="menu-item">
+                    <a href="https://www.wsib.ca/en/accessibility" data-drupal-link-system-path="node/8416"
+                        aria-describedby="accessibility" aria-label="Accessibility link, opens in new tab" target="_blank">Accessibility</a>
+                </li>
+                <li class="menu-item">
+                    <a href="https://www.wsib.ca/en/privacy" data-drupal-link-system-path="node/7336"
+                        aria-describedby="privacy" aria-label="Privacy link, opens in new tab" target="_blank">Privacy</a>
+                </li>
+                <li class="menu-item">
+                    <a href="https://www.wsib.ca/en/fair-practices-commission" data-drupal-link-system-path="node/8286"
+                        aria-describedby="commission" aria-label="Fair practices commission link, opens in new tab" target="_blank">Fair
+                        Practices
+                        Commission</a>
+                </li>
+                <li class="menu-item">
+                    <a href="https://www.wsib.ca/en/other-languages" data-drupal-link-system-path="node/8426"
+                        aria-describedby="other-languages" aria-label="Other languages link, opens in new tab" target="_blank">Other languages</a>
+                </li>
+            </ul>
+
+            <div class="mt-2">
+                <p aria-label="Fatal or catastrophic workplace accidents
+                    Call us 1-800-387-0750">Fatal or catastrophic workplace accidents<br>
+                    Call us 1-800-387-0750</p>
+
+                <p aria-label="Contact us 1-800-387-0750">Contact us<br>
+                    1-800-387-0750</p>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <ul class="social-media-icons">
+                <li><a target="_blank" aria-label="WSIB Twitter, opens in new tab" aria-describedby="twitterDesc" href="https://twitter.com/wsib"
+                        name="Twitter"><em class="icon-social-media-twitter"></em></a></li>
+                <li><a target="_blank" aria-label="WSIB Youtube, opens in new tab" aria-describedby="youtubeDesc"
+                        href="https://www.youtube.com/channel/UCDxA3vgo2WvJOVs6tut9XpQ" name="Youtube"><em
+                            class="icon-social-media-youtube"></em></a></li>
+                <li><a target="_blank" aria-label="WSIB LinkedIn, opens in new tab" aria-describedby="linkedinDesc"
+                        href="http://www.linkedin.com/company/wsib" name="LinkedIn"><em
+                            class="icon-social-media-linkedin"></em></a></li>
+                <li><a target="_blank" aria-label="WSIB Instagram, opens in new tab" aria-describedby="InstagramDesc"
+                        href="https://www.instagram.com/wsibontario/?hl=en" name="Instagram"><em
+                            class="icon-social-media-instagram"></em></a></li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="footer-bar">
+    <p aria-label="© 2020, Workplace Safety and Insurance Board">© 2020, Workplace Safety and Insurance Board</p>
+</div>
+</body>
+
+</html>

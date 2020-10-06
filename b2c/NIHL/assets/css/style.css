@@ -1,0 +1,387 @@
+.mat-raised{
+    line-height: 83px !important;
+}
+
+.hide-element {
+    border: 0;
+    clip: rect(1px, 1px, 1px, 1px);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+
+.error {
+    color: #D90000;
+}
+
+.content{
+    max-width: 1140px;
+    margin-right: auto;
+    margin-left: auto;
+    font-family: 'Muli', 'Sans-Serif';
+    font-weight: normal;
+    font-style: normal;
+    color: #333333;
+  }
+
+#attributeList ul li .helpLink {
+    display: none;
+}
+div.logo-table {
+    width: 100%;
+    background: url('https://login.wsib.ca/assets/b2c/topshade.png');
+    height: 188px;
+}
+
+.with-bullets li {
+    list-style-type: disc;
+}
+
+label {
+    font-weight: 700;
+}
+
+.info {
+    font-weight: 700;
+}
+
+.link-blue-bold{
+    color: #0076BF !important;
+}
+
+.btn-wsib {
+    border-radius: 41px;
+    background: #0076BF;
+    width: 180px;
+    height: 52px;
+    color: #FFFFFF;
+}
+
+.btn-wsib:hover {
+    background: #FFFFFF;
+    border: 2px solid #0076BF;
+    border-radius: 60px;
+    color: #0076BF;
+}
+
+.btn-wsib:focus{
+    outline: 5px auto -webkit-focus-ring-color !important;
+    box-shadow: unset !important;
+}
+
+.buttons button#continue {
+    display: inline-block;
+    margin-bottom: 0;
+    font-family: 'Muli', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 2px solid transparent;
+    border-radius: 41px;
+    color: white;
+    background-color: #0076BF;
+    border-color: #0076BF;
+    margin-right: 20px;
+    width: 180px;
+    height: 52px;
+    overflow-wrap: break-word;
+
+}
+
+.buttons button#continue:hover {
+    background: #FFFFFF;
+    border: 2px solid #0076BF;
+    border-radius: 60px;
+    color: #0076BF;
+}
+
+.hint {
+    font-weight: normal;
+}
+
+
+.logoWrap {
+    width: 100%;
+    max-width: 1230px;
+    margin: 0 auto;
+    position: relative;
+    padding-right: 30px !important;
+    padding-left: 30px !important;
+}
+
+.toggle {
+    margin: 30px 0 0 0;
+    float: right;
+    z-index: 1001;
+}
+
+.bumpRS {
+    margin-right: 40px;
+}
+
+div.logo-div {
+    font-size: 40px;
+    color: #333333;
+    float: left;
+    height: 80px;
+    margin: 40px 0 0 0;
+    position: absolute;
+    line-height: 83px;
+}
+
+a.logoLink {
+    width: 150px;
+    height: 80px;
+    display: inline-block;
+    text-indent: -1000px;
+    background-image: url('https://www.wsib.ca/themes/custom/de_theme/logo.svg');
+    background-repeat: no-repeat;
+}
+
+a.nav {
+    font-weight: 700;
+    color: #333333;
+    text-decoration: none;
+    font-family: 'Muli', sans-serif;
+}
+
+a:visited {
+    /* color: #0076BF; */
+    text-decoration: none;
+}
+
+.link-modal {
+    color: #0076BF;
+}
+
+.link-modal:hover, a.info:hover {
+    color: #0076BF;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.nav {
+    display: initial !important;
+}
+.nav:hover {
+    color: #0076BF
+}
+
+@media (max-width: 767px) {
+
+    #logo-table,
+    div.logo-table {
+        background: url('https://login.wsib.ca/assets/b2c/topshade.png');
+        height: 188px;
+    }
+
+    div.logo-div {
+        font-size: 1px;
+        color: #FFF;
+        margin-left: 20px;
+    }
+
+    a.logoLink {
+        width: 102px;
+        height: 53px;
+        display: inline-block;
+        text-indent: -1000px;
+        background-image: url('b2c_WEB_ROOT_URL/assets/img/wsib-logo-new.png');
+        background-repeat: no-repeat;
+        background-size: 102px;
+    }
+}
+
+.mat-raised-button {
+    box-shadow: none;
+}
+
+
+.menu {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.875em;
+}
+
+ul {
+    padding-left: 0;
+}
+
+li {
+    list-style-type: none;
+    padding: 0.625em 0.625em;
+}
+
+a {
+    color: #333333;
+}
+
+ul li a:hover {
+    color: #333333;
+}
+
+ul li a.social-icons {
+    text-align: center !important;
+    display: block;
+    padding: 1.1em;
+    color: #fff;
+    border-radius: 100%;
+    transition: background-color 0.2s, background 0.2s;
+    -webkit-transition: background-color 0.2s, background 0.2s;
+    margin-left: 1.25em;
+    margin-right: 1.25em;
+    width: 62px;
+    height: 62px;
+}
+
+a.social-icons.twitter {
+    background-color: #1DA1F2;
+    border-color: #1DA1F2;
+}
+
+a.social-icons.youtube {
+    background-color: #f71701;
+    border-color: #f71701;
+}
+
+a.social-icons.linkedin {
+    background-color: #2d76b5;
+    border-color: #2d76b5;
+}
+
+a.social-icons.instagram {
+    background-color: #993399;
+    border-color: #993399;
+}
+
+.menu a {
+    font-weight: 600;
+}
+
+p {
+    font-weight: 300;
+    line-height: 1.5em;
+    margin-top: 0;
+}
+
+.footer-bar {
+    background-color: #00803E;
+    color: #fff;
+    text-align: center;
+    padding: 1.5625em 1.25em;
+    margin: 0;
+    font-family: "Muli", Arial, sans-serif;
+    font-size: .875em;
+    font-weight: 300;
+}
+
+select{
+    width: 73px;
+    padding: 1px 2px;
+}
+
+input[type="email"], input[type="text"] {
+    width: 14.3em;
+}
+
+ul.social-media-icons { width:500px; list-style: outside none none; margin: 20px auto; padding: 0; }
+ul.social-media-icons li { display: inline; }
+[class^="icon-social-media"],
+[class*="icon-social-media"] {
+    /* background-image: url("b2c_WEB_ROOT_URL/assets/img/social-media-icons.png"); */
+    background-image: url("b2c_WEB_ROOT_URL/assets/img/social-media-icons.png");
+    background-repeat: no-repeat;
+    display: inline-block;
+    height: 62px;
+    margin: 2px;
+    vertical-align: text-top;
+    width: 62px;
+    text-indent:-1000px;
+}
+.icon-social-media-twitter {
+    background-position: 0px 0px;
+	margin-right:30px;
+}
+.icon-social-media-youtube {
+    background-position: -70px 0px;
+	margin-right:30px;
+}
+.icon-social-media-linkedin {
+    background-position: -140px 0px;
+	margin-right:30px;
+}
+.icon-social-media-instagram {
+    background-position: -210px 0px;
+}
+.icon-social-media-twitter:hover {
+    background-position: 0px -62px;
+}
+.icon-social-media-youtube:hover {
+    background-position: -70px -62px;
+}
+.icon-social-media-linkedin:hover {
+    background-position: -140px -62px;
+}
+.icon-social-media-instagram:hover {
+    background-position: -210px -62px;
+}
+
+a.skip-main {
+    left: -999px;
+    position: absolute;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    z-index: -999;
+  }
+  
+  
+  a.skip-main:focus, a.skip-main:active {
+    color: #0076BF;
+    background-color: #ffffff;
+    left: -510px;
+    top: auto;
+    width: 30%;
+    height: auto;
+    overflow: auto;
+    margin: 10px 35%;
+    padding: 5px;
+    border-radius: 15px;
+    text-align: center;
+    z-index: 999;
+  }
+
+
+@media (max-width: 1024px) {
+    .menu {
+        margin-left: 3rem !important;
+        margin-right: 3rem !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .menu {
+        display: block;
+        margin-left: 1rem !important;
+        margin-right: 1rem !important;
+    }
+
+    .social-icons {
+        margin-left: 0.25em !important;
+        margin-right: 0.25em !important;
+    }
+}

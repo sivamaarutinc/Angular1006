@@ -1,0 +1,325 @@
+<div class="content">
+  <p class="info mt-3" attr.aria-label="{{ 'personalInformation.allFieldsMandatory' | translate }}">
+    {{ "personalInformation.allFieldsMandatory" | translate }}</p>
+
+      <p id="main-content"
+        attr.aria-label="{{ 'personalInformation.referenceNumber' | translate }} {{ 'personalInformation.saveFileMsg' | translate }}">
+        {{ "personalInformation.referenceNumber" | translate }}
+        <abbr title="{{ 'personalInformation.referenceNumber' | translate }}">{{referenceNumber}}</abbr><br>
+        {{ "personalInformation.saveFileMsg" | translate }}
+      </p>
+
+    <app-field-error-display *ngIf="iscommonerrormsg" id="commonerrormsgid" tabindex="0" role="alert" [displayError]="iscommonerrormsg"
+      errorMsg="{{ 'errors.commonerrormsg' | translate }}">
+    </app-field-error-display>
+
+  <h2 role="heading" attr.aria-label="{{ 'personalInformation.title' | translate }}">
+    {{ "personalInformation.title" | translate }}
+  </h2>
+
+  <form [formGroup]="myInformationForm" focusInvalidInput role="form">
+    <fieldset>
+      <label class="mt-4" for="firstName">{{ "personalInformation.firstName" | translate }}:</label>
+      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 pl-0"
+        [ngClass]="displayFieldCss(myInformationForm, 'firstName')">
+        <input type="text" maxlength="35" formControlName="firstName" (input)="replaceSpaces('firstName')"
+          title="firstName" name="firstName" attr.aria-label="{{ 'personalInformation.firstName' | translate }}"
+          (blur)="trimpaces('firstName')" aria-required="true"
+          attr.aria-invalid="(isFieldTouched(myInformationForm, 'firstName',true))" autofocus>
+      </div>
+      <app-field-error-display [displayError]="isFieldTouched(myInformationForm, 'firstName',true)" role="alert"
+        errorMsg="{{ 'errors.required' | translate }} {{ 'personalInformation.firstName' | translate }}">
+      </app-field-error-display>
+      <app-field-error-display [displayError]="isFieldTouched(myInformationForm, 'firstName',false)" role="alert"
+        errorMsg="{{ 'errors.invalidfirstname' | translate }}">
+      </app-field-error-display>
+
+      <label class="mt-4" for="lastName">{{ "personalInformation.lastName" | translate }}:</label>
+      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 pl-0"
+        [ngClass]="displayFieldCss(myInformationForm, 'lastName')">
+        <input type="text" maxlength="35" formControlName="lastName" (input)="replaceSpaces('lastName')"
+          (blur)="trimpaces('lastName')" name="lastName" title="lastName" aria-required="true"
+          attr.aria-label="{{ 'personalInformation.lastName' | translate }}"
+          attr.aria-invalid="(isFieldTouched(myInformationForm, 'lastName',true)">
+      </div>
+      <app-field-error-display [displayError]="isFieldTouched(myInformationForm, 'lastName',true)" role="alert"
+        errorMsg="{{ 'errors.required' | translate }} {{ 'personalInformation.lastName' | translate }}">
+      </app-field-error-display>
+      <app-field-error-display [displayError]="isFieldTouched(myInformationForm, 'lastName',false)" role="alert"
+        errorMsg="{{ 'errors.invalidlastname' | translate }}">
+      </app-field-error-display>
+
+      <label class="mt-4 mb-0" for="dateOfBirth">{{ "personalInformation.dateOfBirth" | translate }}:</label><br>
+      <label class="info"
+        attr.aria-label="{{ 'personalInformation.datePlaceHolder' | translate }}">{{ "personalInformation.datePlaceHolder" | translate }}</label>
+
+      <div class="d-flex">
+        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 pl-0" [ngClass]="displayFieldCss(myInformationForm, 'dob')">
+          <input [matDatepicker]="dob" [max]="minYear" (input)="checkDate($event.target.value)" formControlName="dob"
+            type="text" style="margin-right: -40px;" title="dateOfBirth" name="dateOfBirth"
+            (focusout)="validateFutureDate($event)" aria-required="true"
+            attr.aria-invalid="(isFieldTouched(myInformationForm, 'dob',true) && !datevalue)"
+            attr.aria-label="{{ 'personalInformation.dateOfBirth' | translate }}">
+          <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
+          <mat-datepicker #dob startView="year" [startAt]="startDate"></mat-datepicker>
+        </div>
+
+      </div>
+      <app-field-error-display [displayError]="isFieldTouched(myInformationForm, 'dob',true) && !datevalue"
+        *ngIf="!futureDateError" role="alert"
+        errorMsg="{{ 'errors.required' | translate }} {{ 'personalInformation.dateOfBirth' | translate }}">
+      </app-field-error-display>
+
+      <app-field-error-display [displayError]="isFieldTouched(myInformationForm, 'dob',false) && validDate"
+        *ngIf="!futureDateError" role="alert" errorMsg="{{ 'errors.invalidDOB' | translate }}">
+      </app-field-error-display>
+
+      <app-field-error-display [displayError]="isFieldTouched(myInformationForm, 'dob') && futureDateError && validDate"
+        role="alert" errorMsg="{{ 'errors.futureDateofBirth' | translate }}">
+      </app-field-error-display>
+
+      <app-field-error-display [displayError]="!validDate && datevalue && isFieldTouched(myInformationForm, 'dob',true)"
+        role="alert"
+        errorMsg="{{ 'errors.invalidDateFormat' | translate }} {{ 'personalInformation.dateOfBirth' | translate }}">
+      </app-field-error-display>
+
+      <label class="mt-4"
+        for="Socialinsurancenumber">{{ "personalInformation.socialInsuranceNumber" | translate }}:</label>
+      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 pl-0" [ngClass]="displayFieldCss(myInformationForm, 'sin')">
+        <input type="text" (keyup)="checkSinPattern($event)" maxlength="9" formControlName="sin"
+          name="Socialinsurancenumber" title="Socialinsurancenumber"
+          attr.aria-label="{{ 'personalInformation.socialInsuranceNumber' | translate }}"
+          attr.aria-invalid="isFieldTouched(myInformationForm, 'sin')">
+      </div>
+      <app-field-error-display [displayError]="isFieldTouched(myInformationForm, 'sin')" role="alert"
+        errorMsg="{{ 'errors.invalidsin' | translate }}">
+      </app-field-error-display>
+
+      <label class="mt-4" for="streetAddress">{{ "personalInformation.streetAddress" | translate }}:</label>
+      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 pl-0"
+        [ngClass]="displayFieldCss(myInformationForm, 'streetAddress')">
+
+        <input type="text" maxlength="250" formControlName="streetAddress" autocorrect="off" autocapitalize="off"
+          spellcheck="off" type="text" class="form-control" #search (input)="replaceSpaces('streetAddress')"
+          title="streetAddress" name="streetAddress"
+          attr.aria-label="{{ 'personalInformation.streetAddress' | translate }}" (blur)="trimpaces('streetAddress')"
+          (keyup.enter)="myinuptapartmentSuite.focus()" aria-required="true"
+          attr.aria-invalid="(isFieldTouched(myInformationForm, 'streetAddress',true))">
+
+        <!-- <input type="text" maxlength="250" formControlName="streetAddress" (onAddressChange)="addressChange($event)"
+          (input)="replaceSpaces('streetAddress')" title="streetAddress" name="streetAddress"
+          attr.aria-label="{{ 'personalInformation.streetAddress' | translate }}" (blur)="trimpaces('streetAddress')"
+          (keyup.enter)="myinuptapartmentSuite.focus()" aria-required="true"
+          attr.aria-invalid="(isFieldTouched(myInformationForm, 'streetAddress',true))" />-->
+      </div>
+      <!-- <app-field-error-display [displayError]="isFieldTouched(myInformationForm, 'streetAddress')"
+        errorMsg="Please enter a valid street address">
+      </app-field-error-display> -->
+
+      <app-field-error-display [displayError]="isFieldTouched(myInformationForm, 'streetAddress',true)" role="alert"
+        errorMsg="{{ 'errors.required' | translate }} {{ 'personalInformation.streetAddress' | translate }}">
+      </app-field-error-display>
+      <app-field-error-display [displayError]="isFieldTouched(myInformationForm, 'streetAddress',false)" role="alert"
+        errorMsg="{{ 'errors.invalidStreetAddress' | translate }}">
+      </app-field-error-display>
+
+      <label class="mt-4" for="apartmentSuite">{{ "personalInformation.apartmentSuite" | translate }}:</label>
+      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 pl-0"
+        [ngClass]="displayFieldCss(myInformationForm, 'apartmentSuite')">
+        <input type="text" #myinuptapartmentSuite maxlength="20" formControlName="apartmentSuite"
+          (input)="replaceSpaces('apartmentSuite')" (blur)="trimpaces('apartmentSuite')" title="apartmentSuite"
+          name="apartmentSuite" attr.aria-label="{{ 'personalInformation.apartmentSuite' | translate }}"
+          attr.aria-invalid="isFieldTouched(myInformationForm, 'apartmentSuite')">
+      </div>
+      <app-field-error-display [displayError]="isFieldTouched(myInformationForm, 'apartmentSuite')" role="alert"
+        errorMsg="{{ 'errors.invalidApartmentSuite' | translate }}">
+      </app-field-error-display>
+
+      <label class="mt-4" for="city">{{ "personalInformation.city" | translate }}:</label>
+      <!-- <label class="mt-4" *ngIf="!isCanadaOrUsa">{{ "personalInformation.city_Optional" | translate }}</label> -->
+      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 pl-0" [ngClass]="displayFieldCss(myInformationForm, 'city')">
+        <input type="text" maxlength="60" formControlName="city" (input)="replaceSpaces('city')"
+          (blur)="trimpaces('city')" title="city" aria-required="true" name="city"
+          attr.aria-label="{{ 'personalInformation.city' |translate }}"
+          attr.aria-invalid="(isFieldTouched(myInformationForm, 'city',true))">
+      </div>
+      <!-- <app-field-error-display [displayError]="isFieldTouched(myInformationForm, 'city')"
+        errorMsg="Please enter a valid city">
+      </app-field-error-display> -->
+
+      <app-field-error-display [displayError]="isFieldTouched(myInformationForm, 'city',true)"
+        errorMsg="{{ 'errors.required' | translate }} {{ 'personalInformation.city' | translate }}" role="alert">
+      </app-field-error-display>
+      <app-field-error-display [displayError]="isFieldTouched(myInformationForm, 'city',false)" role="alert"
+        errorMsg="{{ 'errors.invalidCity' | translate }}">
+      </app-field-error-display>
+
+      <label class="mt-4" *ngIf="isCanadaOrUsa"
+        for="provinceState">{{ "personalInformation.provinceState" | translate }}:</label>
+      <label class="mt-4" *ngIf="!isCanadaOrUsa"
+        for="provinceState">{{ "personalInformation.provinceState_Optional" | translate }}:</label>
+      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 pl-0" *ngIf="isCanadaOrUsa"
+        [ngClass]="displayFieldCss(myInformationForm, 'provinceState')">
+        <select formControlName="provinceState" title="provinceState" name="provinceState"
+          attr.aria-label="{{ 'personalInformation.provinceState' | translate }}"
+          aria-invalid="(isFieldTouched(myInformationForm, 'provinceState',true))">
+          <option *ngFor="let province of provinceList" [ngValue]="province.id">{{province.provinceName}}
+          </option>
+        </select>
+      </div>
+      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 pl-0" *ngIf="!isCanadaOrUsa">
+        <input type="text" maxlength="60" formControlName="provinceState" (input)="replaceSpaces('provinceState')"
+          (blur)="trimpaces('provinceState')" title="provinceState" name="provinceState"
+          attr.aria-label="{{ 'personalInformation.provinceState_Optional' | translate }}"
+          aria-invalid="isFieldTouched(myInformationForm, 'provinceState',true)">
+      </div>
+      <!-- <app-field-error-display [displayError]="isFieldTouched(myInformationForm, 'provinceState')"
+        errorMsg="Please enter a valid province or state">
+      </app-field-error-display> -->
+
+      <app-field-error-display [displayError]="isFieldTouched(myInformationForm, 'provinceState',true)" role="alert"
+        errorMsg="{{ 'errors.required' | translate }} {{ 'personalInformation.provinceState' | translate }}">
+      </app-field-error-display>
+      <app-field-error-display [displayError]="isFieldTouched(myInformationForm, 'provinceState',false)" role="alert"
+        errorMsg="{{ 'errors.invalidProvinceState' | translate }}">
+      </app-field-error-display>
+
+      <label class="mt-4" for="postalCode">{{ "personalInformation.postalCode" | translate }}:</label>
+      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 pl-0"
+        [ngClass]="displayFieldCss(myInformationForm, 'postalCode')">
+        <input type="text" maxlength="25" formControlName="postalCode" title="postalCode" aria-required="true"
+          name="postalCode" attr.aria-label="{{ 'personalInformation.postalCode' | translate }}">
+          <!-- aria-invalid="(isFieldTouched(myInformationForm, 'postalCode',true))"> -->
+      </div>
+      <!-- <app-field-error-display [displayError]="isFieldTouched(myInformationForm, 'postalCode')"
+        errorMsg="Please enter a valid street postal code">
+      </app-field-error-display> -->
+      <app-field-error-display [displayError]="isFieldTouched(myInformationForm, 'postalCode',true)" role="alert"
+        errorMsg="{{ 'errors.required' | translate }} {{ 'personalInformation.postalCode' | translate }}">
+      </app-field-error-display>
+      <app-field-error-display [displayError]="isFieldTouched(myInformationForm, 'postalCode',false)" role="alert"
+        errorMsg="{{ 'errors.invalidPostalCode' | translate }}">
+      </app-field-error-display>
+
+      <label class="mt-4" for="country">{{ "personalInformation.country" | translate }}:</label>
+      <!-- <select formControlName="country" (change)=checkCountry()>
+        <option *ngFor="let country of countryList" [ngValue]="country.id">{{country.countryName}}</option>
+      </select> -->
+      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 pl-0" [ngClass]="displayFieldCss(myInformationForm, 'country')">
+        <select formControlName="country" (change)=Countrychange() title="country" aria-required="true" name="country"
+          attr.aria-label="{{ 'personalInformation.country' | translate }}"
+          aria-invalid="isFieldTouched(myInformationForm, 'country')">
+          <option *ngFor="let country of countryList" [ngValue]="country.id">{{country.countryName}}</option>
+        </select>
+      </div>
+
+      <!-- <app-field-error-display [displayError]="isFieldTouched(myInformationForm, 'country')"
+        errorMsg="Please enter a valid country">
+      </app-field-error-display> -->
+
+      <app-field-error-display [displayError]="isFieldTouched(myInformationForm, 'country')" role="alert"
+        errorMsg="{{ 'errors.required' | translate }} {{ 'personalInformation.country' | translate }}">
+      </app-field-error-display>
+
+      <label class="mt-4" for="phone1">{{ "personalInformation.primaryTelephoneNumber" | translate }}:</label>
+      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 pl-0" [ngClass]="displayFieldCss(myInformationForm, 'phone1')">
+        <!-- <input type="text" formControlName="phone1" maxlength="10" id="phone1" value="inputValue" /> -->
+        <app-intl-tel-input [cssClass]="'custom'" [enableAutoCountrySelect]="false" [enablePlaceholder]="true"
+          [searchCountryFlag]="true" [selectFirstCountry]="false" [maxLength]="15" [phoneValidation]="true"
+          [inputId]="'phone1'" name="phone1" [selectedCountryISO]="this.myInformationForm.get('country')?.value"
+          formControlName="phone1" title="phone1" aria-required="true"
+          attr.aria-label="{{ 'personalInformation.primaryTelephoneNumber' | translate }}"
+          aria-invalid="(isFieldTouched(myInformationForm, 'phone1',true))">
+        </app-intl-tel-input>
+      </div>
+      <!-- <app-field-error-display [displayError]="isFieldTouched(myInformationForm, 'phone1')"
+        errorMsg="Please enter a valid phone number">
+      </app-field-error-display> -->
+
+      <app-field-error-display [displayError]="isFieldTouched(myInformationForm, 'phone1',true)" role="alert"
+        errorMsg="{{ 'errors.required' | translate }} {{ 'personalInformation.primaryTelephoneNumber' | translate }}">
+      </app-field-error-display>
+      <app-field-error-display [displayError]="isFieldTouched(myInformationForm, 'phone1',false)" role="alert"
+        errorMsg="{{ 'errors.invalidPhone' | translate }}">
+      </app-field-error-display>
+
+      <label class="mt-4" for="phone2">{{ "personalInformation.secondaryTelephoneNumber" | translate }}:</label>
+      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 pl-0" [ngClass]="displayFieldCss(myInformationForm, 'phone2')">
+        <!-- <input type="text" formControlName="phone2" maxlength="10" /> -->
+        <app-intl-tel-input [cssClass]="'custom'" [enableAutoCountrySelect]="false" [enablePlaceholder]="true"
+          [searchCountryFlag]="true" [selectFirstCountry]="false" [maxLength]="15" [phoneValidation]="true"
+          [inputId]="'phone2'" name="phone2" [selectedCountryISO]="this.myInformationForm.get('country')?.value"
+          formControlName="phone2" title="phone2"
+          attr.aria-label="{{ 'personalInformation.secondaryTelephoneNumber' | translate }}"
+          aria-invalid="isFieldTouched(myInformationForm, 'phone2')">
+        </app-intl-tel-input>
+      </div>
+      <!-- <app-field-error-display [displayError]="isFieldTouched(myInformationForm, 'phone2')"
+        errorMsg="Please enter a valid phone number">
+      </app-field-error-display> -->
+
+      <app-field-error-display [displayError]="isFieldTouched(myInformationForm, 'phone2')"
+        errorMsg="{{ 'errors.invalidPhone' | translate }}" role="alert">
+      </app-field-error-display>
+
+
+      <label class="mt-4" for="LanguagePreference">{{ "personalInformation.languagePreference" | translate }}:</label>
+      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 pl-0"
+        [ngClass]="displayFieldCss(myInformationForm, 'languagePref')">
+        <select formControlName="languagePref" (change)=checkLanguage() title="LanguagePreference"
+          attr.aria-label="{{ 'personalInformation.languagePreference' | translate }}" aria-required="true"
+          aria-invalid="isFieldTouched(myInformationForm, 'languagePref')">
+          <option *ngFor="let language of languageList" [ngValue]="language.id">{{language.languageName}}</option>
+        </select>
+      </div>
+      <!-- <app-field-error-display [displayError]="isFieldTouched(myInformationForm, 'languagePref')"
+        errorMsg="Please enter a valid language">
+      </app-field-error-display> -->
+
+      <app-field-error-display [displayError]="isFieldTouched(myInformationForm, 'languagePref')" role="alert"
+        errorMsg="{{ 'errors.required' | translate }} {{ 'personalInformation.languagePreference' | translate }}">
+      </app-field-error-display>
+
+      <ng-container *ngIf="isOtherLanguage">
+        <label class="mt-4"
+          for="yourLanguagePreference">{{ "personalInformation.yourLanguagePreference" | translate }}:</label>
+        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 pl-0"
+          [ngClass]="displayFieldCss(myInformationForm, 'otherLanguage')">
+          <select formControlName="otherLanguage" title="otherLanguage" title="otherLanguage"
+            aria-invalid="(isFieldTouched(myInformationForm, 'otherLanguage',true))"
+            attr.aria-label="{{ 'personalInformation.yourLanguagePreference' | translate }}" aria-required="true">
+            <option *ngFor="let language of otherLanguageList" [ngValue]="language.id">{{language.languageName}}
+            </option>
+          </select>
+          <!-- <input type="text" maxlength="25" formControlName="otherLanguage"> -->
+        </div>
+        <!-- <app-field-error-display [displayError]="isFieldTouched(myInformationForm, 'otherLanguage')"
+          errorMsg="Please enter a valid language">
+        </app-field-error-display> -->
+
+        <app-field-error-display [displayError]="isFieldTouched(myInformationForm, 'otherLanguage',true)" role="alert"
+          errorMsg="{{ 'errors.required' | translate }} {{ 'personalInformation.yourLanguagePreference' | translate }}">
+        </app-field-error-display>
+        <app-field-error-display [displayError]="isFieldTouched(myInformationForm, 'otherLanguage',false)" role="alert"
+          errorMsg="{{ 'errors.invalidLanguage' | translate }}">
+        </app-field-error-display>
+
+
+      </ng-container>
+
+      <div class="d-flex mt-5">
+        <button class="btn-wizard btn btn-bold pl-0" role="button"
+          attr.aria-label="{{ 'personalInformation.save' |translate }}"
+          (click)="addOrUpdatePersonalInfo(true,false,false)"><b>{{ "personalInformation.save" | translate }}</b></button>
+        <!-- <button class="btn-wizard btn" matStepperPrevious (click)="addOrUpdatePersonalInfo()"><i class="fa fa-angle-left"
+            aria-hidden="true"></i>
+          {{ "personalInformation.previous" | translate }} <span class="ml-4">|</span></button> -->
+
+        <button class="btn-wizard btn btn-bold" role="button"
+          attr.aria-label="{{ 'personalInformation.next' |translate }}"
+          (click)="addOrUpdatePersonalInfo(false,false,true)"><b>{{ "personalInformation.next" | translate }} </b> <em
+            class="fa fa-angle-right"></em></button>
+      </div>
+    </fieldset>
+  </form>
+</div>

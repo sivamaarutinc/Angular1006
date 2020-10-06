@@ -1,0 +1,16 @@
+.hint {
+    font-weight: 700;
+}
+
+.red-text {
+    color: #D90000;
+}
+.has-error { 
+    border: 2px solid #D90000;
+    padding-right: 0;
+}
+
+legend{
+    font-weight: 700 !important; 
+    font-size: inherit !important;
+  }

@@ -1,0 +1,12 @@
+{
+  "/nihl/*": {
+    "target": "http://52.188.25.57",
+    "secure": false,
+    "logLevel": "debug"
+  },
+  "/scan": {
+    "target": "http://52.224.25.193",
+    "secure": false,
+    "logLevel": "debug"
+  }
+}

@@ -1,0 +1,210 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+*{
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  font-family: 'Muli', 'Sans-Serif';
+}
+
+.content{
+  max-width: 1140px;
+  margin-right: auto;
+  margin-left: auto;
+  font-family: 'Muli', 'Sans-Serif';
+  font-weight: normal;
+  font-style: normal;
+  color: #333333;
+}
+
+.content-margin{
+  max-width: 1060px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+a{
+  color: #0076BF;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+a:hover{
+  color: #0076BF;
+  text-decoration: underline;
+}
+
+input[type=text]:active, input[type=tel]:active, input[type=email]:active, input[type=number]:active, select:active, textarea:active,
+input[type=text]:focus, input[type=tel]:focus, input[type=email]:focus, input[type=number]:focus, select:focus, textarea:focus
+{
+  outline: 5px auto -webkit-focus-ring-color;
+}
+
+input[type=text], input[type=email], input[type=number]{
+border: 1px solid #5E6A71;
+border-radius: 3px;
+opacity: 1;
+height: 34px;
+padding-left: 5px;
+width: 100%;
+}
+
+select, textarea{
+  width: 100%;
+}
+
+input[type = radio]{
+  width: 10px;
+}
+
+input[type = radio]:active,
+input[type = radio]:focus{
+  outline: 5px auto -webkit-focus-ring-color;
+}
+
+select{
+  border: 1px solid #5E6A71;
+  border-radius: 3px;
+  opacity: 1;
+  height: 34px;
+}
+
+textarea{
+  height: 120px;
+}
+
+h1{
+  font-size: 37px;
+  font-weight: normal;
+  text-align: left;
+}
+
+h2{
+  font-size: 27px;
+  font-weight: bold;
+}
+
+h3{
+  font-size: 21px;
+  font-weight: bold;
+}
+
+.btn-wizard.btn-bold{
+  font-weight: bold;
+}
+
+.btn-wizard{
+  color: #0076BF;
+}
+
+.btn-wizard:active,
+.btn-wizard:focus{
+  outline: 5px auto -webkit-focus-ring-color;
+}
+
+.btn-wizard:hover{
+  text-decoration: underline;
+  color: #0076BF;
+}
+
+.btn:focus {
+  box-shadow: unset !important;
+}
+
+.table-header-set{
+  color: #ffffff;
+  background-color: #003359;
+  /* width: 241px; */
+  vertical-align: middle !important;
+}
+
+table.table.table-striped td{
+  vertical-align: middle !important;
+}
+
+li{
+  list-style-type: none;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #FFFFFF !important;
+  border-bottom:  1px solid #dee2e6;
+}
+.table-striped tbody tr:nth-of-type(even) {
+  background-color: #F6F8FA !important;
+  border-bottom:  1px solid #dee2e6;
+}
+
+.btn-wsib{
+  border-radius: 41px ;
+  background: #0076BF ;
+  width: 180px ;
+  height: 52px ;
+  color: #FFFFFF;
+}
+
+.btn-wsib:active,
+.btn-wsib:focus{
+    outline: 5px auto -webkit-focus-ring-color;
+}
+
+.btn-wsib:hover{
+  background: #FFFFFF;
+  border: 2px solid #0076BF;
+  border-radius: 60px;
+  color: #0076BF;
+}
+
+.info{
+  font-weight: 700;
+}
+
+label{
+  font-weight: 700;
+}
+
+.hint{
+  font-weight: normal;
+}
+/* 
+#toast-container > div {
+  width: 600px;
+} */
+
+.swal2-footer {
+  justify-content: center !important;
+  margin: 0 !important;
+  padding: 1em 0 0 !important;
+  border-top:none !important;
+  color: #fff !important;
+  font-size: 1em !important;
+}
+
+.toast-container .ngx-toastr {
+  position: relative;
+  overflow: hidden;
+  margin: 0 0 6px;
+  padding: 15px 15px 15px 50px;
+  width: 300px;
+  border-radius: 15px !important;
+  background-position: 15px center;
+  background-repeat: no-repeat;
+  background-size: 24px;
+  box-shadow: 0 0 12px #999;
+  color:red !important;
+}
+.toast-error {
+  background-color: white !important;
+}
+
+.hide-element {
+  border: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}

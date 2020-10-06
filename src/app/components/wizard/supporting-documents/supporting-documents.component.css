@@ -1,0 +1,68 @@
+.btn-file {
+  position: relative;
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+.btn-file>input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  font-size: 23px;
+  cursor: pointer;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  direction: ltr;
+}
+
+
+/* drag & drop styles */
+
+.uploadfilecontainer {
+  background-image: url(src/assets/images/fa-cloud-upload.svg);
+  background-repeat: no-repeat;
+  background-size: 64px;
+  background-position: center;
+  height: 200px;
+  width: 80%;
+  border: 1px dashed #333333;
+  border-radius: 0px;
+}
+.uploadfilecontainer_inprogress{
+  background-image: url(src/assets/images/loading.gif);
+}
+
+
+.uploadfilecontainer:hover {
+  cursor: pointer;
+  background-color: #F6F8FA !important;
+  opacity: 0.8;
+}
+
+.files-list {
+  width: 80%;
+  background: #F6F8FA;
+  height: 96px;
+  padding: 5px;
+}
+
+.files-list .delete-file {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+.files-list .delete-file img{
+  width:30px;
+}
+
+/* drag & drop styles */
+.Mulifontstyle {
+  font-family: 'Muli';
+}
+
+.attach-msg:focus {
+  border: 1.5px solid #767676;
+}

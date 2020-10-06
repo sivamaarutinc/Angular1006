@@ -1,0 +1,82 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nihlweb
+  namespace: default
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 3000
+  selector:
+    svc: nihlweb-service
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nihlweb-service
+  namespace: default
+  labels:
+    svc: nihlweb-service
+spec:
+  selector:
+    matchLabels:
+      svc: nihlweb-service
+  replicas: 2
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        svc: nihlweb-service
+    spec:
+      containers:
+      - name: nihlweb-service
+        image: nihlacr01.azurecr.io/nihlwebapp:3.1.4
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 3000
+          name: httpport
+        env:
+          - name: ENV
+            value: dev
+          - name: PORT
+            value: "3000"
+          - name: APIURL
+            value: "http://nihlclaiminfo"
+          - name: SCAN_API_URL
+            value: "http://clamav-rest.clamav.svc.cluster.local"
+          - name: FRONTEND_URL
+            value: "http://52.224.34.181"
+          - name: AUTHORITY_START
+            value: "https://wsibdev1.b2clogin.com/wsibdev1.onmicrosoft.com/B2C_1A_NIHL_start_submission/v2.0"
+          - name: AUTHORITY_CONTINUE
+            value: "https://wsibdev1.b2clogin.com/wsibdev1.onmicrosoft.com/B2C_1A_NIHL_continue_submission/v2.0"
+          - name: CLIENT_ID
+            value: "c8cfd969-74ab-4e54-ae1a-6abf793d75fb"
+          - name: REDIRECT_URI
+            value: "https://dev.nihl.wsib.ca/auth-callback"
+          - name: REDIRECT_RESUME_URI
+            value: "https://dev.nihl.wsib.ca/auth-resume-callback"
+          - name: POST_LOGOUT_URI
+            value: "https://dev.nihl.wsib.ca/en/nihl/logout"
+          - name: SCOPE
+            value: "openid offline_access https://wsibdev1.onmicrosoft.com/nihlapi/apiaccess"
+          - name: TIMEOUT
+            value: "14"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          periodSeconds: 60
+          failureThreshold: 3
+          initialDelaySeconds: 90
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          periodSeconds: 60
+          failureThreshold: 3
+          initialDelaySeconds: 90
+---
