@@ -59,7 +59,7 @@ export class AppComponent {
       setTimeout(() => {
         if (data.apiUrl)
           //set language for /fr and continue
-
+console.log(this.route.url)
           if(this.route.url.startsWith('/auth-resume')){
             this.route.navigate(['induced-hearing-loss-form-resume']);
           }else if(this.route.url.startsWith('/auth-newclaim')){
@@ -69,6 +69,11 @@ export class AppComponent {
           }else if(this.route.url =='/fr'){
             this.route.navigate(['induced-hearing-loss-form']);
           }
+          // else if(this.route.url =='/landing'){
+          //   this.route.navigate(['landing']);
+          // }else if(this.route.url =='/time-out'){
+          //   this.route.navigate(['time-out']);
+          // }
       }, 500);
     })
 
